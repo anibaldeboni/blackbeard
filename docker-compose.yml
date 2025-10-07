@@ -1,0 +1,225 @@
+name: media-stack
+services:
+  ## Default credentials of qBittorrent - Username: admin password: adminadmin ##
+  ## Change password after install from UI --> Tools --> Options --> WebUI ##
+  qbittorrent:
+    container_name: qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:5.1.2
+
+    networks: # Comment this line if vpn is enabled
+      - jollyroger # Comment this line if vpn is enabled
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - WEBUI_PORT=5080
+    volumes:
+      - qbittorrent-config:/config
+      - torrent-downloads:/downloads
+
+    ports:
+      - 5080:5080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  radarr:
+    container_name: radarr
+    image: lscr.io/linuxserver/radarr:5.27.5
+    networks:
+      - jollyroger # Comment this line if VPN is enabled
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+    ports:
+      - 7878:7878
+    volumes:
+      - radarr-config:/config
+      - torrent-downloads:/downloads
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:4.0.15
+    container_name: sonarr
+    networks:
+      - jollyroger # Comment this line if VPN is enabled
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+    volumes:
+      - sonarr-config:/config
+      - torrent-downloads:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  prowlarr:
+    container_name: prowlarr
+    image: linuxserver/prowlarr:2.0.5
+
+    networks: # Comment this line if vpn is enabled
+      - jollyroger # Comment this line if vpn is enabled
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+    volumes:
+      - prowlarr-config:/config
+
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:2.7.3
+    container_name: jellyseerr
+    networks:
+      - jollyroger
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+    volumes:
+      - jellyseerr-config:/app/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+
+  jellyfin:
+    image: linuxserver/jellyfin:10.10.7
+    container_name: jellyfin
+    networks:
+      - jollyroger
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+    volumes:
+      - jellyfin-config:/config
+      - torrent-downloads:/data
+    devices:
+      - /dev/video0:/dev/video0 # Mount GPU device
+      - /dev/video1:/dev/video1
+      - /dev/video2:/dev/video2
+    ports:
+      - 8096:8096
+      - 7359:7359/udp
+      - 8920:8920
+    restart: unless-stopped
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    networks:
+      - jollyroger
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    volumes:
+      - jackett-config:/config
+      - torrent-downloads:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+  flaresolverr:
+    # DockerHub mirror flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    networks:
+      - jollyroger
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=America/Sao_Paulo
+    ports:
+      - "${PORT:-8191}:8191"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27.1-alpine
+    container_name: nginx
+    networks:
+      - jollyroger
+    volumes:
+      # - nginx-config:/etc/nginx
+      - /home/orangepi/.config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx-logs:/var/log/nginx
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+
+volumes:
+  torrent-downloads:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /media/STORAGE/torrents
+  radarr-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/radarr
+  sonarr-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/sonarr
+  prowlarr-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/prowlarr
+  jellyfin-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/jellyfin
+  qbittorrent-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/qbittorrent
+  jellyseerr-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/jellyseerr
+  jackett-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/jackett
+  nginx-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/nginx
+  nginx-logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/nginx/logs
+
+networks:
+  jollyroger:
+    external: true
