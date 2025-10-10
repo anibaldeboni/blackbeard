@@ -45,7 +45,7 @@ services:
     image: linuxserver/sonarr:4.0.15
     container_name: sonarr
     networks:
-      - jollyroger # Comment this line if VPN is enabled
+      - jollyroger
 
     environment:
       - PUID=1000
@@ -150,12 +150,27 @@ services:
     networks:
       - jollyroger
     volumes:
-      # - nginx-config:/etc/nginx
-      - /home/orangepi/.config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx-config:/etc/nginx/nginx.conf:ro
       - nginx-logs:/var/log/nginx
     ports:
       - 80:80
       - 443:443
+    restart: unless-stopped
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    networks:
+      - jollyroger
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+    volumes:
+      - bazarr-config:/config
+      # - movies-downloads:/movies #optional
+      # - tv-downloads:/tv #optional
+    ports:
+      - 6767:6767
     restart: unless-stopped
 
 volumes:
@@ -183,6 +198,24 @@ volumes:
       type: none
       o: bind
       device: /home/orangepi/.config/prowlarr
+  bazarr-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/.config/bazarr
+  movies-downloads:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /media/STORAGE/torrents/movies
+  tv-downloads:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /media/STORAGE/torrents/tvshows
   jellyfin-config:
     driver: local
     driver_opts:
@@ -212,7 +245,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/nginx
+      device: /home/orangepi/.config/nginx/nginx.conf
   nginx-logs:
     driver: local
     driver_opts:
