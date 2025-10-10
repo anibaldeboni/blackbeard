@@ -167,8 +167,7 @@ services:
       - TZ=America/Sao_Paulo
     volumes:
       - bazarr-config:/config
-      # - movies-downloads:/movies #optional
-      # - tv-downloads:/tv #optional
+      - torrent-downloads:/media-library
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -204,18 +203,6 @@ volumes:
       type: none
       o: bind
       device: /home/orangepi/.config/bazarr
-  movies-downloads:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /media/STORAGE/torrents/movies
-  tv-downloads:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /media/STORAGE/torrents/tvshows
   jellyfin-config:
     driver: local
     driver_opts:
