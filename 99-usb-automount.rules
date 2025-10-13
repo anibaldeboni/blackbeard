@@ -1,1 +1,9 @@
-ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z][0-9]", ENV{ID_FS_LABEL_ENC}=="", ENV{ID_FS_UUID_ENC}!="", ENV{UDISKS_FILESYSTEM_SHARED}="1", RUN{program}+="/usr/bin/systemd-mount --no-block --discover --options=nofail,umask=000 /dev/%k /media/%E{ID_FS_UUID_ENC}"
+# Automount USB devices
+# Place this file at /etc/udev/rules.d/99-usb-automount.rules
+# Uses device label if avaible
+ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z]*", ENV{ID_FS_LABEL_ENC}!="", RUN{program}+="/usr/bin/systemd-mount --no-block /dev/%k /media/%E{ID_FS_LABEL_ENC}", GOTO="automount_end"
+
+# Fallback to use device UUID as mount point
+ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z]*", ENV{ID_FS_UUID_ENC}!="", RUN{program}+="/usr/bin/systemd-mount --no-block /dev/%k /media/%E{ID_FS_UUID_ENC}"
+
+LABEL="automount_end"
