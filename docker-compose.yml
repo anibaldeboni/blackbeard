@@ -99,23 +99,6 @@ services:
       - 7359:7359/udp
       - 8920:8920
     restart: unless-stopped
-  jackett:
-    image: lscr.io/linuxserver/jackett:latest
-    container_name: jackett
-    networks:
-      - jollyroger
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
-      - AUTO_UPDATE=true #optional
-      - RUN_OPTS= #optional
-    volumes:
-      - jackett-config:/config
-      - torrent-downloads:/downloads
-    ports:
-      - 9117:9117
-    restart: unless-stopped
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
@@ -206,12 +189,6 @@ volumes:
       type: none
       o: bind
       device: /home/orangepi/.config/jellyseerr
-  jackett-config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/orangepi/.config/jackett
   nginx-logs:
     driver: local
     driver_opts:
