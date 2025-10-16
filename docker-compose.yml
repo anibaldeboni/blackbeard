@@ -113,7 +113,7 @@ services:
       - "${PORT:-8191}:8191"
     restart: unless-stopped
   nginx:
-    image: nginx:1.27.1-alpine
+    image: nginx:1.29.2-alpine
     container_name: nginx
     networks:
       - jollyroger
