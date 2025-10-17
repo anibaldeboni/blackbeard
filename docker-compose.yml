@@ -118,7 +118,7 @@ services:
     networks:
       - jollyroger
     volumes:
-      - /home/orangepi/.config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - $HOME/.config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - nginx-logs:/var/log/nginx
     ports:
       - 80:80
@@ -152,49 +152,49 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/radarr
+      device: $HOME/.config/radarr
   sonarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/sonarr
+      device: $HOME/.config/sonarr
   prowlarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/prowlarr
+      device: $HOME/.config/prowlarr
   bazarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/bazarr
+      device: $HOME/.config/bazarr
   jellyfin-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/jellyfin
+      device: $HOME/.config/jellyfin
   qbittorrent-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/qbittorrent
+      device: $HOME/.config/qbittorrent
   jellyseerr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/jellyseerr
+      device: $HOME/.config/jellyseerr
   nginx-logs:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/nginx/logs
+      device: $HOME/.config/nginx/logs
 
 networks:
   jollyroger:
