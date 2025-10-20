@@ -1,0 +1,127 @@
+{"Protocol":0,"Id":"fc411d54bc52d8b583d39e7316dbd823","Path":"/data/movies/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv","EncoderPath":null,"EncoderProtocol":null,"Type":0,"Container":"mkv","Size":4761463691,"Name":"Redline.2009.1080p.BluRay.x264-nikt0","IsRemote":false,"ETag":"e3f509033c337c60ad1ad08866524872","RunTimeTicks":61686080000,"ReadAtNativeFramerate":false,"IgnoreDts":false,"IgnoreIndex":false,"GenPtsInput":false,"SupportsTranscoding":true,"SupportsDirectStream":true,"SupportsDirectPlay":true,"IsInfiniteStream":false,"UseMostCompatibleTranscodingProfile":false,"RequiresOpening":false,"OpenToken":null,"RequiresClosing":false,"LiveStreamId":null,"BufferMs":null,"RequiresLooping":false,"SupportsProbing":true,"VideoType":0,"IsoType":null,"Video3DFormat":null,"MediaStreams":[{"Codec":"h264","CodecTag":null,"Language":"eng","ColorRange":null,"ColorSpace":"bt709","ColorTransfer":"bt709","ColorPrimaries":"bt709","DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/1000","CodecTimeBase":null,"Title":null,"VideoRange":1,"VideoRangeType":1,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":null,"LocalizedDefault":null,"LocalizedForced":null,"LocalizedExternal":null,"LocalizedHearingImpaired":null,"DisplayTitle":"1080p H264 SDR","NalLengthSize":"4","IsInterlaced":false,"IsAVC":true,"ChannelLayout":null,"BitRate":6175089,"BitDepth":8,"RefFrames":1,"PacketLength":null,"Channels":null,"SampleRate":null,"IsDefault":true,"IsForced":false,"IsHearingImpaired":false,"Height":1080,"Width":1920,"AverageFrameRate":23.976025,"RealFrameRate":23.976025,"ReferenceFrameRate":23.976025,"Profile":"High","Type":1,"AspectRatio":"16:9","Index":0,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Path":null,"PixelFormat":"yuv420p","Level":40,"IsAnamorphic":false},{"Codec":"ac3","CodecTag":null,"Language":"eng","ColorRange":null,"ColorSpace":null,"ColorTransfer":null,"ColorPrimaries":null,"DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/1000","CodecTimeBase":null,"Title":"Surround","VideoRange":0,"VideoRangeType":0,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":null,"LocalizedDefault":"Padr\u00E3o","LocalizedForced":null,"LocalizedExternal":"Externo","LocalizedHearingImpaired":null,"DisplayTitle":"Surround - English - Dolby Digital - 5.1 - Padr\u00E3o","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":"5.1","BitRate":448000,"BitDepth":null,"RefFrames":null,"PacketLength":null,"Channels":6,"SampleRate":48000,"IsDefault":true,"IsForced":false,"IsHearingImpaired":false,"Height":null,"Width":null,"AverageFrameRate":null,"RealFrameRate":null,"ReferenceFrameRate":null,"Profile":null,"Type":0,"AspectRatio":null,"Index":1,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Path":null,"PixelFormat":null,"Level":0,"IsAnamorphic":null},{"Codec":"PGSSUB","CodecTag":null,"Language":"eng","ColorRange":null,"ColorSpace":null,"ColorTransfer":null,"ColorPrimaries":null,"DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/1000","CodecTimeBase":null,"Title":null,"VideoRange":0,"VideoRangeType":0,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":"Indefinido","LocalizedDefault":"Padr\u00E3o","LocalizedForced":"For\u00E7ado","LocalizedExternal":"Externo","LocalizedHearingImpaired":"Defici\u00EAncia Auditiva","DisplayTitle":"English - PGSSUB","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":null,"BitRate":null,"BitDepth":null,"RefFrames":null,"PacketLength":null,"Channels":null,"SampleRate":null,"IsDefault":false,"IsForced":false,"IsHearingImpaired":false,"Height":1080,"Width":1920,"AverageFrameRate":null,"RealFrameRate":null,"ReferenceFrameRate":null,"Profile":null,"Type":2,"AspectRatio":null,"Index":2,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":true,"Path":null,"PixelFormat":null,"Level":0,"IsAnamorphic":null}],"MediaAttachments":[],"Formats":[],"Bitrate":6623089,"FallbackMaxStreamingBitrate":null,"Timestamp":null,"RequiredHttpHeaders":{},"TranscodingUrl":null,"TranscodingSubProtocol":0,"TranscodingContainer":null,"AnalyzeDurationMs":null,"DefaultAudioStreamIndex":null,"DefaultSubtitleStreamIndex":null,"HasSegments":false}
+
+/usr/lib/jellyfin-ffmpeg/ffmpeg -analyzeduration 200M -probesize 1G  -canvas_size 1920x1080 -i file:"/data/movies/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv" -map_metadata -1 -map_chapters -1 -threads 0 -map 0:0 -map 0:1 -map -0:0 -codec:v:0 libx264 -preset veryfast -crf 23 -maxrate 6175089 -bufsize 12350178 -profile:v:0 high -level 40 -x264opts:0 subme=0:me_range=16:rc_lookahead=10:me=hex:open_gop=0 -force_key_frames:0 "expr:gte(t,n_forced*3)" -sc_threshold:v:0 0 -filter_complex "[0:2]scale,scale=1920:1080:fast_bilinear[sub];[0:0]setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709,scale=trunc(min(max(iw\,ih*a)\,min(1920\,1080*a))/2)*2:trunc(min(max(iw/a\,ih)\,min(1920/a\,1080))/2)*2,format=yuv420p[main];[main][sub]overlay=eof_action=pass:repeatlast=0" -start_at_zero -codec:a:0 libfdk_aac -ac 1 -ab 128000 -copyts -avoid_negative_ts disabled -max_muxing_queue_size 2048 -f hls -max_delay 5000000 -hls_time 3 -hls_segment_type fmp4 -hls_fmp4_init_filename "252e960ec86656ec33e9eaeacbfb629d-1.mp4" -start_number 0 -hls_segment_filename "/config/cache/transcodes/252e960ec86656ec33e9eaeacbfb629d%d.mp4" -hls_playlist_type vod -hls_list_size 0 -y "/config/cache/transcodes/252e960ec86656ec33e9eaeacbfb629d.m3u8"
+
+
+ffmpeg version 7.1.2-Jellyfin Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 13 (Ubuntu 13.3.0-6ubuntu2~24.04)
+  configuration: --prefix=/usr/lib/jellyfin-ffmpeg --target-os=linux --extra-version=Jellyfin --disable-doc --disable-ffplay --disable-static --disable-libxcb --disable-sdl2 --disable-xlib --enable-lto=auto --enable-gpl --enable-version3 --enable-shared --enable-gmp --enable-gnutls --enable-chromaprint --enable-opencl --enable-libdrm --enable-libxml2 --enable-libass --enable-libfreetype --enable-libfribidi --enable-libfontconfig --enable-libharfbuzz --enable-libbluray --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libopenmpt --enable-libdav1d --enable-libsvtav1 --enable-libwebp --enable-libvpx --enable-libx264 --enable-libx265 --enable-libzvbi --enable-libzimg --enable-libfdk-aac --arch=arm64 --cross-prefix=/usr/bin/aarch64-linux-gnu- --toolchain=hardened --enable-cross-compile --enable-rkmpp --enable-rkrga --enable-ffnvcodec --enable-cuda --enable-cuda-llvm --enable-cuvid --enable-nvdec --enable-nvenc
+  libavutil      59. 39.100 / 59. 39.100
+  libavcodec     61. 19.101 / 61. 19.101
+  libavformat    61.  7.100 / 61.  7.100
+  libavdevice    61.  3.100 / 61.  3.100
+  libavfilter    10.  4.100 / 10.  4.100
+  libswscale      8.  3.100 /  8.  3.100
+  libswresample   5.  3.100 /  5.  3.100
+  libpostproc    58.  3.100 / 58.  3.100
+Input #0, matroska,webm, from 'file:/data/movies/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv':
+  Metadata:
+    title           : Redline.2009.1080p.BluRay.x264-nikt0
+    CREATION_TIME   : 2021-03-28T21:25:25Z
+    ENCODER         : Lavf57.7.2
+  Duration: 01:42:48.61, start: 0.000000, bitrate: 6175 kb/s
+  Stream #0:0(eng): Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn (default)
+      Metadata:
+        BPS-eng         : 5756439
+        DURATION-eng    : 01:42:08.122000000
+        NUMBER_OF_FRAMES-eng: 146928
+        NUMBER_OF_BYTES-eng: 4409520315
+        _STATISTICS_WRITING_APP-eng: mkvmerge v47.0.0 ('Black Flag') 64-bit
+        _STATISTICS_WRITING_DATE_UTC-eng: 2021-03-29 22:01:35
+        _STATISTICS_TAGS-eng: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+  Stream #0:1(eng): Audio: ac3, 48000 Hz, 5.1(side), fltp, 448 kb/s (default)
+      Metadata:
+        title           : Surround
+        BPS-eng         : 448000
+        DURATION-eng    : 01:42:48.608000000
+        NUMBER_OF_FRAMES-eng: 192769
+        NUMBER_OF_BYTES-eng: 345442048
+        _STATISTICS_WRITING_APP-eng: mkvmerge v47.0.0 ('Black Flag') 64-bit
+        _STATISTICS_WRITING_DATE_UTC-eng: 2021-03-29 22:01:35
+        _STATISTICS_TAGS-eng: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+  Stream #0:2(eng): Subtitle: hdmv_pgs_subtitle (pgssub), 1920x1080
+      Metadata:
+        BPS-eng         : 28539
+        DURATION-eng    : 01:37:12.494000000
+        NUMBER_OF_FRAMES-eng: 1946
+        NUMBER_OF_BYTES-eng: 20806872
+        _STATISTICS_WRITING_APP-eng: mkvmerge v47.0.0 ('Black Flag') 64-bit
+        _STATISTICS_WRITING_DATE_UTC-eng: 2021-03-29 22:01:35
+        _STATISTICS_TAGS-eng: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+Stream mapping:
+  Stream #0:0 (h264) -> setparams:default
+  Stream #0:2 (pgssub) -> scale:default
+  overlay:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (ac3 (native) -> aac (libfdk_aac))
+Press [q] to stop, [?] for help
+[libx264 @ 0xaaaaed616330] using SAR=1/1
+[libx264 @ 0xaaaaed616330] using cpu capabilities: ARMv8 NEON
+[libx264 @ 0xaaaaed616330] profile High, level 4.0, 4:2:0, 8-bit
+[libx264 @ 0xaaaaed616330] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=23 scenecut=0 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 vbv_maxrate=6175 vbv_bufsize=12350 crf_max=0.0 nal_hrd=none filler=0 ip_ratio=1.40 aq=1:1.00
+[hls @ 0xaaaaeda4c610] Opening '/config/cache/transcodes/252e960ec86656ec33e9eaeacbfb629d-1.mp4' for writing
+Output #0, hls, to '/config/cache/transcodes/252e960ec86656ec33e9eaeacbfb629d.m3u8':
+  Metadata:
+    encoder         : Lavf61.7.100
+  Stream #0:0: Video: h264, yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 23.98 fps, 24k tbn
+      Metadata:
+        encoder         : Lavc61.19.101 libx264
+      Side data:
+        cpb: bitrate max/min/avg: 6175000/0/0 buffer size: 12350000 vbv_delay: N/A
+  Stream #0:1: Audio: aac, 48000 Hz, mono, s16, 128 kb/s (default)
+      Metadata:
+        encoder         : Lavc61.19.101 libfdk_aac
+      Side data:
+        cpb: bitrate max/min/avg: 128000/128000/128000 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=0.0 size=N/A time=N/A bitrate=N/A speed=N/A    
+frame=    0 fps=0.0 q=0.0 size=N/A time=N/A bitrate=N/A speed=N/A    
+frame=    2 fps=1.3 q=28.0 size=N/A time=00:00:00.00 bitrate=N/A speed=   0x    
+frame=   11 fps=5.5 q=28.0 size=N/A time=00:00:00.00 bitrate=N/A speed=   0x    
+frame=   17 fps=6.8 q=28.0 size=N/A time=00:00:00.25 bitrate=N/A speed=0.0995x    
+frame=   22 fps=7.3 q=28.0 size=N/A time=00:00:00.45 bitrate=N/A speed=0.152x    
+frame=   28 fps=7.9 q=28.0 size=N/A time=00:00:00.70 bitrate=N/A speed=0.201x    
+frame=   32 fps=7.9 q=28.0 size=N/A time=00:00:00.87 bitrate=N/A speed=0.217x    
+frame=   39 fps=8.6 q=28.0 size=N/A time=00:00:01.16 bitrate=N/A speed=0.258x    
+frame=   43 fps=8.6 q=28.0 size=N/A time=00:00:01.33 bitrate=N/A speed=0.265x    
+frame=   47 fps=8.5 q=28.0 size=N/A time=00:00:01.50 bitrate=N/A speed=0.272x    
+frame=   51 fps=8.5 q=28.0 size=N/A time=00:00:01.66 bitrate=N/A speed=0.277x    
+frame=   56 fps=8.6 q=28.0 size=N/A time=00:00:01.87 bitrate=N/A speed=0.287x    
+frame=   61 fps=8.7 q=28.0 size=N/A time=00:00:02.12 bitrate=N/A speed=0.303x    
+frame=   67 fps=8.9 q=28.0 size=N/A time=00:00:02.33 bitrate=N/A speed=0.309x    
+frame=   71 fps=8.8 q=28.0 size=N/A time=00:00:02.50 bitrate=N/A speed=0.311x    
+[hls @ 0xaaaaeda4c610] Opening '/config/cache/transcodes/252e960ec86656ec33e9eaeacbfb629d0.mp4' for writing
+frame=   77 fps=9.0 q=28.0 size=N/A time=00:00:02.75 bitrate=N/A speed=0.322x    
+frame=   82 fps=9.1 q=28.0 size=N/A time=00:00:02.96 bitrate=N/A speed=0.327x    
+frame=   87 fps=9.1 q=28.0 size=N/A time=00:00:03.16 bitrate=N/A speed=0.332x    
+frame=   92 fps=9.2 q=28.0 size=N/A time=00:00:03.37 bitrate=N/A speed=0.336x    
+frame=   99 fps=9.4 q=28.0 size=N/A time=00:00:03.67 bitrate=N/A speed=0.348x    
+frame=  103 fps=9.3 q=28.0 size=N/A time=00:00:03.83 bitrate=N/A speed=0.347x    
+frame=  110 fps=9.5 q=28.0 size=N/A time=00:00:04.12 bitrate=N/A speed=0.357x    
+frame=  114 fps=9.5 q=28.0 size=N/A time=00:00:04.29 bitrate=N/A speed=0.356x    
+frame=  119 fps=9.5 q=28.0 size=N/A time=00:00:04.50 bitrate=N/A speed=0.359x    
+frame=  125 fps=9.6 q=28.0 size=N/A time=00:00:04.75 bitrate=N/A speed=0.364x    
+frame=  131 fps=9.7 q=28.0 size=N/A time=00:00:05.00 bitrate=N/A speed=0.369x    
+frame=  136 fps=9.7 q=28.0 size=N/A time=00:00:05.21 bitrate=N/A speed=0.371x    
+frame=  142 fps=9.7 q=28.0 size=N/A time=00:00:05.46 bitrate=N/A speed=0.375x    
+[hls @ 0xaaaaeda4c610] Opening '/config/cache/transcodes/252e960ec86656ec33e9eaeacbfb629d1.mp4' for writing
+frame=  147 fps=9.8 q=28.0 size=N/A time=00:00:05.67 bitrate=N/A speed=0.376x    
+
+[q] command received. Exiting.
+
+[hls @ 0xaaaaeda4c610] Opening '/config/cache/transcodes/252e960ec86656ec33e9eaeacbfb629d2.mp4' for writing
+[out#0/hls @ 0xaaaaedc73f90] video:1999KiB audio:127KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=  190 fps= 11 q=-1.0 Lsize=N/A time=00:00:07.46 bitrate=N/A speed=0.43x    
+[libx264 @ 0xaaaaed616330] frame I:3     Avg QP:11.97  size: 36281
+[libx264 @ 0xaaaaed616330] frame P:68    Avg QP:17.40  size: 17739
+[libx264 @ 0xaaaaed616330] frame B:119   Avg QP:20.28  size:  6142
+[libx264 @ 0xaaaaed616330] consecutive B-frames: 12.1%  8.4% 14.2% 65.3%
+[libx264 @ 0xaaaaed616330] mb I  I16..4: 80.2% 12.8%  7.0%
+[libx264 @ 0xaaaaed616330] mb P  I16..4: 17.6%  8.3%  1.3%  P16..4:  7.1%  3.2%  0.8%  0.0%  0.0%    skip:61.8%
+[libx264 @ 0xaaaaed616330] mb B  I16..4:  2.8%  1.4%  0.0%  B16..8: 10.3%  2.8%  0.1%  direct: 5.3%  skip:77.3%  L0:45.1% L1:44.3% BI:10.6%
+[libx264 @ 0xaaaaed616330] 8x8 transform intra:28.8% inter:16.5%
+[libx264 @ 0xaaaaed616330] coded y,uvDC,uvAC intra: 22.2% 35.7% 13.1% inter: 1.9% 6.5% 0.3%
+[libx264 @ 0xaaaaed616330] i16 v,h,dc,p: 64% 20% 11%  5%
+[libx264 @ 0xaaaaed616330] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 13% 17% 39%  4%  8%  4%  6%  4%  5%
+[libx264 @ 0xaaaaed616330] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 19% 24% 27%  3%  7%  3%  6%  4%  7%
+[libx264 @ 0xaaaaed616330] i8c dc,h,v,p: 52% 24% 20%  4%
+[libx264 @ 0xaaaaed616330] Weighted P-Frames: Y:1.5% UV:0.0%
+[libx264 @ 0xaaaaed616330] kb/s:2065.48

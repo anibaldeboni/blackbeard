@@ -1,0 +1,728 @@
+(N) 2025-10-06T18:52:18 - qBittorrent v5.1.2 started. Process ID: 151
+(N) 2025-10-06T18:52:18 - Using config directory: /config/qBittorrent
+(N) 2025-10-06T18:52:18 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-06T18:52:18 - Peer ID: "-qB5120-"
+(I) 2025-10-06T18:52:18 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-06T18:52:18 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-06T18:52:18 - Local Peer Discovery support: ON
+(I) 2025-10-06T18:52:18 - Peer Exchange (PeX) support: ON
+(I) 2025-10-06T18:52:18 - Anonymous mode: OFF
+(I) 2025-10-06T18:52:18 - Encryption support: ON
+(I) 2025-10-06T18:52:18 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-06T18:52:18 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-06T18:52:18 - Successfully listening on IP. IP: "172.20.0.5". Port: "TCP/6881"
+(I) 2025-10-06T18:52:18 - Successfully listening on IP. IP: "172.20.0.5". Port: "UTP/6881"
+(I) 2025-10-06T18:52:18 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-06T18:52:18 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(W) 2025-10-06T18:52:18 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-10-06T18:52:19 - Using built-in WebUI.
+(W) 2025-10-06T18:52:19 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-10-06T18:52:19 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-06T18:52:19 - Detected external IP. IP: "187.180.164.85"
+(I) 2025-10-06T18:52:20 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Wed Oct 1 01:26:02 2025.
+(I) 2025-10-06T18:52:20 - Successfully updated IP geolocation database.
+(W) 2025-10-06T18:53:29 - WebAPI login failure. Reason: invalid credentials, attempt count: 1, IP: ::ffff:172.20.0.1, username: admin
+(W) 2025-10-06T18:53:34 - WebAPI login failure. Reason: invalid credentials, attempt count: 2, IP: ::ffff:172.20.0.1, username: admin
+(N) 2025-10-06T18:54:55 - qBittorrent termination initiated
+(N) 2025-10-06T18:54:55 - Saving resume data completed.
+(N) 2025-10-06T18:54:55 - BitTorrent session successfully finished.
+(N) 2025-10-06T18:54:55 - qBittorrent is now ready to exit
+(N) 2025-10-06T18:55:12 - qBittorrent v5.1.2 started. Process ID: 146
+(N) 2025-10-06T18:55:12 - Using config directory: /config/qBittorrent
+(N) 2025-10-06T18:55:12 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-06T18:55:12 - Peer ID: "-qB5120-"
+(I) 2025-10-06T18:55:12 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-06T18:55:12 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-06T18:55:12 - Local Peer Discovery support: ON
+(I) 2025-10-06T18:55:12 - Peer Exchange (PeX) support: ON
+(I) 2025-10-06T18:55:12 - Anonymous mode: OFF
+(I) 2025-10-06T18:55:12 - Encryption support: ON
+(I) 2025-10-06T18:55:12 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-06T18:55:12 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-06T18:55:12 - Successfully listening on IP. IP: "172.20.0.6". Port: "TCP/6881"
+(I) 2025-10-06T18:55:12 - Successfully listening on IP. IP: "172.20.0.6". Port: "UTP/6881"
+(I) 2025-10-06T18:55:12 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-06T18:55:12 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-10-06T18:55:12 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Wed Oct 1 01:26:02 2025.
+(N) 2025-10-06T18:55:13 - Using built-in WebUI.
+(W) 2025-10-06T18:55:13 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-10-06T18:55:13 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-06T18:55:13 - Detected external IP. IP: "187.180.164.85"
+(W) 2025-10-06T18:55:31 - WebAPI login failure. Reason: invalid credentials, attempt count: 1, IP: ::ffff:172.20.0.1, username: admin
+(W) 2025-10-06T18:55:47 - WebAPI login failure. Reason: invalid credentials, attempt count: 2, IP: ::ffff:172.20.0.1, username: admin
+(W) 2025-10-06T18:55:56 - WebAPI login failure. Reason: invalid credentials, attempt count: 3, IP: ::ffff:172.20.0.1, username: admin
+(N) 2025-10-06T18:56:32 - WebAPI login success. IP: ::ffff:172.20.0.1
+(N) 2025-10-06T18:57:58 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-06T19:37:14 - WebAPI login success. IP: ::ffff:172.20.0.2
+(N) 2025-10-06T20:55:56 - WebAPI login success. IP: ::ffff:172.20.0.4
+(N) 2025-10-06T21:05:50 - Added new torrent. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]"
+(N) 2025-10-06T21:08:28 - Torrent download finished. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]"
+(N) 2025-10-06T21:12:53 - qBittorrent termination initiated
+(N) 2025-10-06T21:12:54 - Saving resume data completed.
+(N) 2025-10-06T21:12:56 - BitTorrent session successfully finished.
+(N) 2025-10-06T21:12:56 - qBittorrent is now ready to exit
+(N) 2025-10-07T13:14:46 - qBittorrent v5.1.2 started. Process ID: 151
+(N) 2025-10-07T13:14:46 - Using config directory: /config/qBittorrent
+(N) 2025-10-07T13:14:46 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-07T13:14:46 - Peer ID: "-qB5120-"
+(I) 2025-10-07T13:14:46 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-07T13:14:46 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-07T13:14:46 - Local Peer Discovery support: ON
+(I) 2025-10-07T13:14:46 - Peer Exchange (PeX) support: ON
+(I) 2025-10-07T13:14:46 - Anonymous mode: OFF
+(I) 2025-10-07T13:14:46 - Encryption support: ON
+(I) 2025-10-07T13:14:47 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-07T13:14:47 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-07T13:14:47 - Successfully listening on IP. IP: "172.20.0.5". Port: "TCP/6881"
+(I) 2025-10-07T13:14:47 - Successfully listening on IP. IP: "172.20.0.5". Port: "UTP/6881"
+(I) 2025-10-07T13:14:47 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-07T13:14:47 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-07T13:14:47 - Restored torrent. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]"
+(I) 2025-10-07T13:14:47 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Wed Oct 1 01:26:02 2025.
+(N) 2025-10-07T13:14:47 - Using built-in WebUI.
+(N) 2025-10-07T13:14:47 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-07T13:14:47 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-07T13:14:47 - Detected external IP. IP: "187.180.164.85"
+(N) 2025-10-07T13:15:13 - WebAPI login success. IP: ::ffff:172.20.0.4
+(N) 2025-10-07T13:17:23 - WebAPI login success. IP: ::ffff:172.20.0.1
+(N) 2025-10-07T13:28:39 - WebUI Set location: moving "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]", from "/downloads" to "/downloads/tvshows"
+(N) 2025-10-07T13:28:39 - Enqueued torrent move. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]". Source: "/downloads". Destination: "/downloads/tvshows"
+(N) 2025-10-07T13:28:39 - Start moving torrent. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]". Destination: "/downloads/tvshows"
+(N) 2025-10-07T13:28:39 - Moved torrent successfully. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]". Destination: "/downloads/tvshows"
+(N) 2025-10-07T13:36:05 - WebAPI login success. IP: ::ffff:172.20.0.6
+(N) 2025-10-07T14:06:59 - qBittorrent termination initiated
+(N) 2025-10-07T14:06:59 - Saving resume data completed.
+(N) 2025-10-07T14:07:01 - BitTorrent session successfully finished.
+(N) 2025-10-07T14:07:01 - qBittorrent is now ready to exit
+(N) 2025-10-07T11:07:28 - qBittorrent v5.1.2 started. Process ID: 151
+(N) 2025-10-07T11:07:28 - Using config directory: /config/qBittorrent
+(N) 2025-10-07T11:07:28 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-07T11:07:28 - Peer ID: "-qB5120-"
+(I) 2025-10-07T11:07:28 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-07T11:07:28 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-07T11:07:28 - Local Peer Discovery support: ON
+(I) 2025-10-07T11:07:28 - Peer Exchange (PeX) support: ON
+(I) 2025-10-07T11:07:28 - Anonymous mode: OFF
+(I) 2025-10-07T11:07:28 - Encryption support: ON
+(I) 2025-10-07T11:07:28 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-07T11:07:28 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-07T11:07:28 - Successfully listening on IP. IP: "172.20.0.2". Port: "TCP/6881"
+(I) 2025-10-07T11:07:28 - Successfully listening on IP. IP: "172.20.0.2". Port: "UTP/6881"
+(I) 2025-10-07T11:07:28 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-07T11:07:28 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-07T11:07:28 - Restored torrent. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]"
+(I) 2025-10-07T11:07:28 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-07T11:07:28 - Using built-in WebUI.
+(N) 2025-10-07T11:07:28 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-07T11:07:28 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-07T11:07:30 - Detected external IP. IP: "187.180.164.85"
+(N) 2025-10-07T11:08:27 - WebAPI login success. IP: ::ffff:172.20.0.3
+(N) 2025-10-07T11:08:28 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-07T11:43:53 - WebAPI login success. IP: ::ffff:172.20.0.1
+(N) 2025-10-07T11:45:23 - Added new torrent. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(N) 2025-10-07T11:49:50 - Torrent removed. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(N) 2025-10-07T11:50:19 - Added new torrent. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(N) 2025-10-07T11:52:16 - Torrent content removed. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(N) 2025-10-07T11:53:57 - Torrent removed. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]"
+(N) 2025-10-07T11:54:26 - WebUI Set location: moving "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)", from "/downloads" to "/downloads/tvshows"
+(N) 2025-10-07T11:54:26 - Enqueued torrent move. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)". Source: "/downloads". Destination: "/downloads/tvshows"
+(N) 2025-10-07T11:54:26 - Start moving torrent. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)". Destination: "/downloads/tvshows"
+(N) 2025-10-07T11:58:23 - Torrent content removed. Torrent: "The.Studio.2025.S01E05.1080p.HEVC.x265-MeGusta[EZTVx.to].mkv[eztvx.to]"
+(N) 2025-10-07T12:02:10 - Moved torrent successfully. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)". Destination: "/downloads/tvshows"
+(N) 2025-10-07T12:34:59 - Torrent download finished. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(N) 2025-10-07T13:47:31 - qBittorrent termination initiated
+(N) 2025-10-07T13:47:31 - Saving resume data completed.
+(N) 2025-10-07T13:47:33 - BitTorrent session successfully finished.
+(N) 2025-10-07T13:47:33 - qBittorrent is now ready to exit
+(N) 2025-10-07T13:48:40 - qBittorrent v5.1.2 started. Process ID: 149
+(N) 2025-10-07T13:48:40 - Using config directory: /config/qBittorrent
+(N) 2025-10-07T13:48:40 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-07T13:48:40 - Peer ID: "-qB5120-"
+(I) 2025-10-07T13:48:40 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-07T13:48:40 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-07T13:48:40 - Local Peer Discovery support: ON
+(I) 2025-10-07T13:48:40 - Peer Exchange (PeX) support: ON
+(I) 2025-10-07T13:48:40 - Anonymous mode: OFF
+(I) 2025-10-07T13:48:40 - Encryption support: ON
+(I) 2025-10-07T13:48:40 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-07T13:48:40 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-07T13:48:40 - Successfully listening on IP. IP: "172.20.0.6". Port: "TCP/6881"
+(I) 2025-10-07T13:48:40 - Successfully listening on IP. IP: "172.20.0.6". Port: "UTP/6881"
+(I) 2025-10-07T13:48:40 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-07T13:48:40 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-07T13:48:40 - Restored torrent. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(I) 2025-10-07T13:48:40 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-07T13:48:41 - Using built-in WebUI.
+(N) 2025-10-07T13:48:41 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-07T13:48:41 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-07T13:48:41 - Detected external IP. IP: "187.180.164.85"
+(N) 2025-10-07T13:49:42 - WebAPI login success. IP: ::ffff:172.20.0.3
+(N) 2025-10-07T13:49:47 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-07T13:59:38 - qBittorrent termination initiated
+(N) 2025-10-07T13:59:38 - Saving resume data completed.
+(N) 2025-10-07T13:59:40 - BitTorrent session successfully finished.
+(N) 2025-10-07T13:59:40 - qBittorrent is now ready to exit
+(N) 2025-10-07T13:59:53 - qBittorrent v5.1.2 started. Process ID: 148
+(N) 2025-10-07T13:59:53 - Using config directory: /config/qBittorrent
+(N) 2025-10-07T13:59:53 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-07T13:59:54 - Peer ID: "-qB5120-"
+(I) 2025-10-07T13:59:54 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-07T13:59:54 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-07T13:59:54 - Local Peer Discovery support: ON
+(I) 2025-10-07T13:59:54 - Peer Exchange (PeX) support: ON
+(I) 2025-10-07T13:59:54 - Anonymous mode: OFF
+(I) 2025-10-07T13:59:54 - Encryption support: ON
+(I) 2025-10-07T13:59:54 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-07T13:59:54 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-07T13:59:54 - Successfully listening on IP. IP: "172.20.0.7". Port: "TCP/6881"
+(I) 2025-10-07T13:59:54 - Successfully listening on IP. IP: "172.20.0.7". Port: "UTP/6881"
+(I) 2025-10-07T13:59:54 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-07T13:59:54 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-07T13:59:54 - Restored torrent. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(I) 2025-10-07T13:59:54 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-07T13:59:54 - Using built-in WebUI.
+(N) 2025-10-07T13:59:54 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-07T13:59:54 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-07T13:59:54 - Detected external IP. IP: "187.180.164.85"
+(N) 2025-10-07T14:00:49 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-07T14:01:03 - WebAPI login success. IP: ::ffff:172.20.0.10
+(N) 2025-10-07T14:06:48 - qBittorrent termination initiated
+(N) 2025-10-07T14:06:48 - Saving resume data completed.
+(N) 2025-10-07T14:06:50 - BitTorrent session successfully finished.
+(N) 2025-10-07T14:06:50 - qBittorrent is now ready to exit
+(N) 2025-10-07T14:07:01 - qBittorrent v5.1.2 started. Process ID: 148
+(N) 2025-10-07T14:07:01 - Using config directory: /config/qBittorrent
+(N) 2025-10-07T14:07:01 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-07T14:07:01 - Peer ID: "-qB5120-"
+(I) 2025-10-07T14:07:01 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-07T14:07:01 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-07T14:07:01 - Local Peer Discovery support: ON
+(I) 2025-10-07T14:07:01 - Peer Exchange (PeX) support: ON
+(I) 2025-10-07T14:07:01 - Anonymous mode: OFF
+(I) 2025-10-07T14:07:01 - Encryption support: ON
+(I) 2025-10-07T14:07:01 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-07T14:07:01 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-07T14:07:01 - Successfully listening on IP. IP: "172.20.0.3". Port: "TCP/6881"
+(I) 2025-10-07T14:07:01 - Successfully listening on IP. IP: "172.20.0.3". Port: "UTP/6881"
+(I) 2025-10-07T14:07:01 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-07T14:07:01 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-07T14:07:01 - Restored torrent. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(I) 2025-10-07T14:07:01 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-07T14:07:01 - Using built-in WebUI.
+(N) 2025-10-07T14:07:01 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-07T14:07:01 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-07T14:07:02 - Detected external IP. IP: "187.180.164.85"
+(N) 2025-10-07T14:07:50 - qBittorrent termination initiated
+(N) 2025-10-07T14:07:50 - Saving resume data completed.
+(N) 2025-10-07T14:07:53 - BitTorrent session successfully finished.
+(N) 2025-10-07T14:07:53 - qBittorrent is now ready to exit
+(N) 2025-10-07T14:08:12 - qBittorrent v5.1.2 started. Process ID: 150
+(N) 2025-10-07T14:08:12 - Using config directory: /config/qBittorrent
+(N) 2025-10-07T14:08:12 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-07T14:08:12 - Peer ID: "-qB5120-"
+(I) 2025-10-07T14:08:12 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-07T14:08:12 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-07T14:08:12 - Local Peer Discovery support: ON
+(I) 2025-10-07T14:08:12 - Peer Exchange (PeX) support: ON
+(I) 2025-10-07T14:08:12 - Anonymous mode: OFF
+(I) 2025-10-07T14:08:12 - Encryption support: ON
+(I) 2025-10-07T14:08:12 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-07T14:08:12 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-07T14:08:12 - Successfully listening on IP. IP: "172.20.0.8". Port: "TCP/6881"
+(I) 2025-10-07T14:08:12 - Successfully listening on IP. IP: "172.20.0.8". Port: "UTP/6881"
+(I) 2025-10-07T14:08:12 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-07T14:08:12 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-07T14:08:12 - Restored torrent. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(I) 2025-10-07T14:08:12 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-07T14:08:12 - Using built-in WebUI.
+(N) 2025-10-07T14:08:12 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-07T14:08:12 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-07T14:08:13 - Detected external IP. IP: "187.180.164.85"
+(N) 2025-10-07T14:09:06 - WebAPI login success. IP: ::ffff:172.20.0.2
+(N) 2025-10-07T14:09:06 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-07T14:49:09 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-07T14:50:22 - WebAPI login success. IP: ::ffff:172.20.0.2
+(N) 2025-10-07T15:38:51 - qBittorrent termination initiated
+(N) 2025-10-07T15:38:51 - Saving resume data completed.
+(N) 2025-10-07T15:38:55 - BitTorrent session successfully finished.
+(N) 2025-10-07T15:38:55 - qBittorrent is now ready to exit
+(N) 2025-10-09T09:18:03 - qBittorrent v5.1.2 started. Process ID: 146
+(N) 2025-10-09T09:18:03 - Using config directory: /config/qBittorrent
+(N) 2025-10-09T09:18:03 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-09T09:18:03 - Peer ID: "-qB5120-"
+(I) 2025-10-09T09:18:03 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-09T09:18:03 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-09T09:18:03 - Local Peer Discovery support: ON
+(I) 2025-10-09T09:18:03 - Peer Exchange (PeX) support: ON
+(I) 2025-10-09T09:18:03 - Anonymous mode: OFF
+(I) 2025-10-09T09:18:03 - Encryption support: ON
+(I) 2025-10-09T09:18:03 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-09T09:18:03 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-09T09:18:03 - Successfully listening on IP. IP: "172.20.0.3". Port: "TCP/6881"
+(I) 2025-10-09T09:18:03 - Successfully listening on IP. IP: "172.20.0.3". Port: "UTP/6881"
+(I) 2025-10-09T09:18:03 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-09T09:18:03 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-09T09:18:03 - Restored torrent. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(I) 2025-10-09T09:18:03 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-09T09:18:03 - Using built-in WebUI.
+(N) 2025-10-09T09:18:03 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-09T09:18:03 - WebUI: Now listening on IP: *, port: 5080
+(W) 2025-10-09T09:18:03 - Failed to restore torrent. Files were probably moved or storage isn't accessible. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)". Reason: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence) fast resume rejected. file_stat(/downloads/tvshows/The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)/The Studio (2025) - S01E01 - The Promotion (1080p ATVP WEB-DL x265 Silence).mkv): mismatching file size"
+(I) 2025-10-09T09:18:03 - Detected external IP. IP: "187.180.164.85"
+(N) 2025-10-09T09:19:00 - WebAPI login success. IP: ::ffff:172.20.0.2
+(N) 2025-10-09T09:19:02 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-09T09:44:38 - WebAPI login success. IP: ::ffff:172.20.0.10
+(N) 2025-10-09T09:46:58 - Torrent removed. Torrent: "The Studio (2025) S01 (1080p ATVP WEB-DL x265 10bit EAC3 5.1 Silence)"
+(N) 2025-10-09T10:17:02 - WebAPI login success. IP: ::ffff:172.20.0.2
+(N) 2025-10-09T10:18:01 - qBittorrent termination initiated
+(N) 2025-10-09T10:18:01 - Saving resume data completed.
+(N) 2025-10-09T10:18:01 - BitTorrent session successfully finished.
+(N) 2025-10-09T10:18:01 - qBittorrent is now ready to exit
+(N) 2025-10-09T10:20:15 - qBittorrent v5.1.2 started. Process ID: 147
+(N) 2025-10-09T10:20:15 - Using config directory: /config/qBittorrent
+(N) 2025-10-09T10:20:15 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-09T10:20:15 - Peer ID: "-qB5120-"
+(I) 2025-10-09T10:20:15 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-09T10:20:15 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-09T10:20:15 - Local Peer Discovery support: ON
+(I) 2025-10-09T10:20:15 - Peer Exchange (PeX) support: ON
+(I) 2025-10-09T10:20:15 - Anonymous mode: OFF
+(I) 2025-10-09T10:20:15 - Encryption support: ON
+(I) 2025-10-09T10:20:15 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-09T10:20:15 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-09T10:20:15 - Successfully listening on IP. IP: "172.20.0.8". Port: "TCP/6881"
+(I) 2025-10-09T10:20:15 - Successfully listening on IP. IP: "172.20.0.8". Port: "UTP/6881"
+(I) 2025-10-09T10:20:15 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-09T10:20:15 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-10-09T10:20:15 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-09T10:20:16 - Using built-in WebUI.
+(N) 2025-10-09T10:20:16 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-09T10:20:16 - WebUI: Now listening on IP: *, port: 5080
+(W) 2025-10-09T10:20:21 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-10-09T10:21:34 - WebAPI login success. IP: ::ffff:172.20.0.4
+(N) 2025-10-09T10:21:37 - WebAPI login success. IP: ::ffff:172.20.0.9
+(N) 2025-10-09T10:28:43 - qBittorrent termination initiated
+(N) 2025-10-09T10:28:43 - Saving resume data completed.
+(N) 2025-10-09T10:28:43 - BitTorrent session successfully finished.
+(N) 2025-10-09T10:28:43 - qBittorrent is now ready to exit
+(N) 2025-10-09T14:19:05 - qBittorrent v5.1.2 started. Process ID: 146
+(N) 2025-10-09T14:19:05 - Using config directory: /config/qBittorrent
+(N) 2025-10-09T14:19:05 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-09T14:19:06 - Peer ID: "-qB5120-"
+(I) 2025-10-09T14:19:06 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-09T14:19:06 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-09T14:19:06 - Local Peer Discovery support: ON
+(I) 2025-10-09T14:19:06 - Peer Exchange (PeX) support: ON
+(I) 2025-10-09T14:19:06 - Anonymous mode: OFF
+(I) 2025-10-09T14:19:06 - Encryption support: ON
+(I) 2025-10-09T14:19:06 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-09T14:19:06 - Using built-in WebUI.
+(N) 2025-10-09T14:19:06 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-09T14:19:06 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-09T14:19:06 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-09T14:19:06 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-09T14:19:06 - Successfully listening on IP. IP: "172.20.0.5". Port: "TCP/6881"
+(I) 2025-10-09T14:19:06 - Successfully listening on IP. IP: "172.20.0.5". Port: "UTP/6881"
+(I) 2025-10-09T14:19:06 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-09T14:19:06 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-10-09T14:19:06 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-09T14:20:01 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-09T14:20:12 - WebAPI login success. IP: ::ffff:172.20.0.8
+(W) 2025-10-09T14:20:54 - WebAPI login failure. Reason: invalid credentials, attempt count: 1, IP: ::ffff:172.20.0.6, username: admin
+(N) 2025-10-09T14:20:58 - WebAPI login success. IP: ::ffff:172.20.0.6
+(N) 2025-10-09T14:25:19 - Added new torrent. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix"
+(N) 2025-10-09T14:30:18 - Added new torrent. Torrent: "Ballerina.2025.1080p.Bluray.10Bit.DDP7.1.x265-NeoNoir"
+(N) 2025-10-09T14:31:07 - Torrent removed. Torrent: "Ballerina.2025.1080p.Bluray.10Bit.DDP7.1.x265-NeoNoir"
+(N) 2025-10-09T15:07:31 - Added new torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(N) 2025-10-09T15:15:41 - Torrent download finished. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix"
+(N) 2025-10-09T16:21:31 - Torrent download finished. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(N) 2025-10-09T17:23:02 - Added new torrent. Torrent: "Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab"
+(W) 2025-10-09T17:23:06 - File error alert. Torrent: "Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab". File: "/downloads/www.UIndex.org    -    Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab/Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab.mkv". Reason: "www.UIndex.org    -    Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab file_truncate (/downloads/www.UIndex.org    -    Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab/Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab.mkv) error: File too large"
+(N) 2025-10-09T17:25:10 - Torrent removed. Torrent: "Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab"
+(N) 2025-10-09T17:25:10 - Torrent content removed. Torrent: "Redline 2009 1080p BluRay DD5 1 Hi10P x264-Chotab"
+(N) 2025-10-09T17:29:44 - Added new torrent. Torrent: "Redline 2009 1080p BluRay x264-OFT"
+(N) 2025-10-09T17:45:51 - Torrent removed. Torrent: "Redline 2009 1080p BluRay x264-OFT"
+(N) 2025-10-09T17:47:40 - Added new torrent. Torrent: "Redline (2009).720p.H264.ita.jpn.Ac3-5.1.sub.ita.eng-MIRCrew"
+(N) 2025-10-09T18:13:53 - Torrent removed. Torrent: "Redline (2009).720p.H264.ita.jpn.Ac3-5.1.sub.ita.eng-MIRCrew"
+(N) 2025-10-09T18:14:32 - Added new torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(W) 2025-10-09T18:14:39 - File error alert. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". File: "/downloads/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv". Reason: "Redline.2009.1080p.BluRay.x264-nikt0 file_truncate (/downloads/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv) error: File too large"
+(W) 2025-10-09T18:18:50 - File error alert. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". File: "/downloads/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv". Reason: "Redline.2009.1080p.BluRay.x264-nikt0 file_truncate (/downloads/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv) error: File too large"
+(N) 2025-10-09T18:25:27 - Torrent removed. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-09T18:25:27 - Torrent content removed. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-09T18:26:12 - Added new torrent. Torrent: "Redline 2009 1080p BluRay REMUX"
+(W) 2025-10-09T18:26:15 - File error alert. Torrent: "Redline 2009 1080p BluRay REMUX". File: "/downloads/Redline 2009 1080p BluRay REMUX/Redline ITBD Remux.mkv". Reason: "Redline 2009 1080p BluRay REMUX file_truncate (/downloads/Redline 2009 1080p BluRay REMUX/Redline ITBD Remux.mkv) error: File too large"
+(N) 2025-10-09T18:28:16 - Torrent removed. Torrent: "Redline 2009 1080p BluRay REMUX"
+(N) 2025-10-09T18:28:16 - Torrent content removed. Torrent: "Redline 2009 1080p BluRay REMUX"
+(N) 2025-10-09T18:32:24 - Added new torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(W) 2025-10-09T18:32:32 - File error alert. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". File: "/downloads/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv". Reason: "Redline.2009.1080p.BluRay.x264-nikt0 file_truncate (/downloads/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.mkv) error: File too large"
+(N) 2025-10-09T18:42:29 - qBittorrent termination initiated
+(N) 2025-10-09T18:42:30 - Saving resume data completed.
+(N) 2025-10-09T18:42:32 - BitTorrent session successfully finished.
+(N) 2025-10-09T18:42:32 - qBittorrent is now ready to exit
+(N) 2025-10-10T09:17:46 - qBittorrent v5.1.2 started. Process ID: 147
+(N) 2025-10-10T09:17:46 - Using config directory: /config/qBittorrent
+(N) 2025-10-10T09:17:47 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-10T09:17:47 - Peer ID: "-qB5120-"
+(I) 2025-10-10T09:17:47 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-10T09:17:47 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-10T09:17:47 - Local Peer Discovery support: ON
+(I) 2025-10-10T09:17:47 - Peer Exchange (PeX) support: ON
+(I) 2025-10-10T09:17:47 - Anonymous mode: OFF
+(I) 2025-10-10T09:17:47 - Encryption support: ON
+(I) 2025-10-10T09:17:47 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-10T09:17:47 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-10T09:17:47 - Successfully listening on IP. IP: "172.20.0.3". Port: "TCP/6881"
+(I) 2025-10-10T09:17:47 - Successfully listening on IP. IP: "172.20.0.3". Port: "UTP/6881"
+(I) 2025-10-10T09:17:47 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-10T09:17:47 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-10T09:17:47 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-10T09:17:47 - Restored torrent. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix"
+(N) 2025-10-10T09:17:47 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(I) 2025-10-10T09:17:47 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-10T09:17:47 - Using built-in WebUI.
+(N) 2025-10-10T09:17:47 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-10T09:17:47 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-10T09:17:47 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-10T09:18:14 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-10T09:18:50 - WebAPI login success. IP: ::ffff:172.20.0.10
+(N) 2025-10-10T09:18:59 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-10T09:59:10 - Torrent download finished. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(I) 2025-10-10T11:13:38 - Found Python executable. Name: "python3". Version: "3.12.11"
+(I) 2025-10-10T11:15:43 - Plugin "eztv" is outdated, updating to version 1.22
+(I) 2025-10-10T11:15:43 - Plugin "jackett" is outdated, updating to version 4.7
+(I) 2025-10-10T11:15:43 - Plugin "limetorrents" is outdated, updating to version 4.14
+(I) 2025-10-10T11:15:43 - Plugin "piratebay" is outdated, updating to version 3.9
+(I) 2025-10-10T11:15:43 - Plugin "solidtorrents" is outdated, updating to version 2.8
+(I) 2025-10-10T11:15:43 - Plugin "torlock" is outdated, updating to version 2.28
+(I) 2025-10-10T11:15:43 - Plugin "torrentproject" is outdated, updating to version 1.9
+(I) 2025-10-10T11:15:43 - Plugin "torrentscsv" is outdated, updating to version 1.8
+(I) 2025-10-10T11:15:43 - Updating 8 plugins
+(I) 2025-10-10T11:15:43 - Updating plugin solidtorrents
+(I) 2025-10-10T11:15:43 - Updating plugin torlock
+(I) 2025-10-10T11:15:43 - Updating plugin torrentproject
+(I) 2025-10-10T11:15:43 - Updating plugin limetorrents
+(I) 2025-10-10T11:15:43 - Updating plugin jackett
+(I) 2025-10-10T11:15:43 - Updating plugin torrentscsv
+(I) 2025-10-10T11:15:43 - Updating plugin piratebay
+(I) 2025-10-10T11:15:43 - Updating plugin eztv
+(N) 2025-10-10T11:51:05 - Added new torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-10T11:53:52 - Downloading torrent... Source: "https://www.limetorrents.lol/Felidae-1994-DVDRip-English-torrent-198548.html"
+(W) 2025-10-10T11:53:53 - Failed to add torrent. Source: "https://www.limetorrents.lol/Felidae-1994-DVDRip-English-torrent-198548.html". Reason: "expected value (list, dict, int or string) in bencoded string [bdecode:4]"
+(N) 2025-10-10T11:55:46 - Downloading torrent... Source: "https://www.limetorrents.lol/Felidae-1994-DVDRip-English-torrent-198548.html"
+(W) 2025-10-10T11:55:46 - Failed to add torrent. Source: "https://www.limetorrents.lol/Felidae-1994-DVDRip-English-torrent-198548.html". Reason: "expected value (list, dict, int or string) in bencoded string [bdecode:4]"
+(N) 2025-10-10T12:01:46 - Torrent download finished. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(I) 2025-10-10T12:04:28 - Encryption support: FORCED
+(N) 2025-10-10T14:15:22 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-10T14:16:22 - WebUI Set location: moving "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R", from "/downloads" to "/downloads/data"
+(N) 2025-10-10T14:16:22 - Enqueued torrent move. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Source: "/downloads". Destination: "/downloads/data"
+(N) 2025-10-10T14:16:22 - Start moving torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Destination: "/downloads/data"
+(N) 2025-10-10T14:16:22 - Moved torrent successfully. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Destination: "/downloads/data"
+(N) 2025-10-10T14:16:44 - WebUI Set location: moving "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv", from "/downloads" to "/downloads/data"
+(N) 2025-10-10T14:16:44 - Enqueued torrent move. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Source: "/downloads". Destination: "/downloads/data"
+(N) 2025-10-10T14:16:44 - Start moving torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Destination: "/downloads/data"
+(N) 2025-10-10T14:16:44 - Moved torrent successfully. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Destination: "/downloads/data"
+(N) 2025-10-10T14:16:59 - WebUI Set location: moving "Redline.2009.1080p.BluRay.x264-nikt0", from "/downloads" to "/downloads/data"
+(N) 2025-10-10T14:16:59 - Enqueued torrent move. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". Source: "/downloads". Destination: "/downloads/data"
+(N) 2025-10-10T14:16:59 - Start moving torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". Destination: "/downloads/data"
+(N) 2025-10-10T14:16:59 - Moved torrent successfully. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". Destination: "/downloads/data"
+(N) 2025-10-10T14:17:14 - WebUI Set location: moving "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix", from "/downloads" to "/downloads/data"
+(N) 2025-10-10T14:17:14 - Enqueued torrent move. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix". Source: "/downloads". Destination: "/downloads/data"
+(N) 2025-10-10T14:17:14 - Start moving torrent. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix". Destination: "/downloads/data"
+(N) 2025-10-10T14:17:15 - Moved torrent successfully. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix". Destination: "/downloads/data"
+(N) 2025-10-10T16:38:28 - qBittorrent termination initiated
+(N) 2025-10-10T16:38:28 - Saving resume data completed.
+(N) 2025-10-10T16:38:30 - BitTorrent session successfully finished.
+(N) 2025-10-10T16:38:30 - qBittorrent is now ready to exit
+(N) 2025-10-10T17:16:36 - qBittorrent v5.1.2 started. Process ID: 147
+(N) 2025-10-10T17:16:36 - Using config directory: /config/qBittorrent
+(N) 2025-10-10T17:16:36 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-10T17:16:36 - Peer ID: "-qB5120-"
+(I) 2025-10-10T17:16:36 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-10T17:16:36 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-10T17:16:36 - Local Peer Discovery support: ON
+(I) 2025-10-10T17:16:36 - Peer Exchange (PeX) support: ON
+(I) 2025-10-10T17:16:36 - Anonymous mode: OFF
+(I) 2025-10-10T17:16:36 - Encryption support: FORCED
+(I) 2025-10-10T17:16:36 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-10T17:16:36 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-10T17:16:36 - Successfully listening on IP. IP: "172.20.0.2". Port: "TCP/6881"
+(I) 2025-10-10T17:16:36 - Successfully listening on IP. IP: "172.20.0.2". Port: "UTP/6881"
+(I) 2025-10-10T17:16:36 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-10T17:16:36 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-10T17:16:36 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-10T17:16:36 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-10T17:16:36 - Restored torrent. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix"
+(N) 2025-10-10T17:16:36 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(W) 2025-10-10T17:16:36 - Failed to restore torrent. Files were probably moved or storage isn't accessible. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Reason: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv fast resume rejected. file_stat(/downloads/data/Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv): mismatching file size"
+(W) 2025-10-10T17:16:36 - Failed to restore torrent. Files were probably moved or storage isn't accessible. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". Reason: "Redline.2009.1080p.BluRay.x264-nikt0 fast resume rejected. file_stat(/downloads/data/Redline.2009.1080p.BluRay.x264-nikt0/Redline.2009.1080p.BluRay.x264-nikt0.fanart.jpg): mismatching file size"
+(W) 2025-10-10T17:16:36 - Failed to restore torrent. Files were probably moved or storage isn't accessible. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix". Reason: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix fast resume rejected. file_stat(/downloads/data/MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix/MobLand.S01E01.Stick.or.Twist.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix.mkv): mismatching file size"
+(I) 2025-10-10T17:16:36 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-10T17:16:37 - Using built-in WebUI.
+(N) 2025-10-10T17:16:37 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-10T17:16:37 - WebUI: Now listening on IP: *, port: 5080
+(W) 2025-10-10T17:16:37 - Failed to restore torrent. Files were probably moved or storage isn't accessible. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Reason: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R fast resume rejected. file_stat(/downloads/data/Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R/Dept.Q.S01E09.Episode.9.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv): mismatching file size"
+(I) 2025-10-10T17:16:37 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-10T17:17:43 - WebAPI login success. IP: ::ffff:172.20.0.4
+(N) 2025-10-10T17:17:44 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-10T17:21:42 - WebAPI login success. IP: ::ffff:172.20.0.11
+(N) 2025-10-10T17:26:36 - Torrent removed. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix"
+(N) 2025-10-10T17:26:36 - Torrent content removed. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix"
+(N) 2025-10-10T17:27:00 - Added new torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-10T17:54:19 - WebAPI login success. IP: ::ffff:172.20.0.11
+(N) 2025-10-10T18:01:02 - qBittorrent termination initiated
+(N) 2025-10-10T18:01:03 - Saving resume data completed.
+(N) 2025-10-10T18:01:06 - BitTorrent session successfully finished.
+(N) 2025-10-10T18:01:06 - qBittorrent is now ready to exit
+(N) 2025-10-10T18:22:16 - qBittorrent v5.1.2 started. Process ID: 146
+(N) 2025-10-10T18:22:16 - Using config directory: /config/qBittorrent
+(N) 2025-10-10T18:22:16 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-10T18:22:16 - Peer ID: "-qB5120-"
+(I) 2025-10-10T18:22:16 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-10T18:22:16 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-10T18:22:16 - Local Peer Discovery support: ON
+(I) 2025-10-10T18:22:16 - Peer Exchange (PeX) support: ON
+(I) 2025-10-10T18:22:16 - Anonymous mode: OFF
+(I) 2025-10-10T18:22:16 - Encryption support: FORCED
+(I) 2025-10-10T18:22:16 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-10T18:22:16 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-10T18:22:16 - Successfully listening on IP. IP: "172.20.0.4". Port: "TCP/6881"
+(I) 2025-10-10T18:22:16 - Successfully listening on IP. IP: "172.20.0.4". Port: "UTP/6881"
+(I) 2025-10-10T18:22:16 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-10T18:22:16 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-10T18:22:16 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-10T18:22:16 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-10T18:22:16 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(N) 2025-10-10T18:22:16 - Restored torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(I) 2025-10-10T18:22:16 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-10T18:22:16 - Using built-in WebUI.
+(N) 2025-10-10T18:22:16 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-10T18:22:16 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-10T18:22:17 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-10T18:23:33 - WebAPI login success. IP: ::ffff:172.20.0.1
+(N) 2025-10-10T18:23:50 - WebAPI login success. IP: ::ffff:172.20.0.2
+(N) 2025-10-10T18:23:58 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-10T18:30:05 - Torrent download finished. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-10T18:31:16 - Torrent download finished. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-10T18:40:39 - WebUI Set location: moving "Redline.2009.1080p.BluRay.x264-nikt0", from "/downloads/data" to "/downloads/movies"
+(N) 2025-10-10T18:40:39 - Enqueued torrent move. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". Source: "/downloads/data". Destination: "/downloads/movies"
+(N) 2025-10-10T18:40:39 - Start moving torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". Destination: "/downloads/movies"
+(N) 2025-10-10T18:40:39 - Moved torrent successfully. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0". Destination: "/downloads/movies"
+(N) 2025-10-10T18:40:55 - WebUI Set location: moving "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv", from "/downloads/data" to "/downloads/movies"
+(N) 2025-10-10T18:40:55 - Enqueued torrent move. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Source: "/downloads/data". Destination: "/downloads/movies"
+(N) 2025-10-10T18:40:55 - Start moving torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Destination: "/downloads/movies"
+(N) 2025-10-10T18:40:55 - Moved torrent successfully. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Destination: "/downloads/movies"
+(N) 2025-10-10T18:41:28 - Torrent download finished. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-10T18:44:19 - WebUI Set location: moving "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]", from "/downloads/data" to "/downloads/tvshows"
+(N) 2025-10-10T18:44:19 - Enqueued torrent move. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]". Source: "/downloads/data". Destination: "/downloads/tvshows"
+(N) 2025-10-10T18:44:19 - Start moving torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]". Destination: "/downloads/tvshows"
+(N) 2025-10-10T18:44:19 - Moved torrent successfully. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]". Destination: "/downloads/tvshows"
+(N) 2025-10-10T18:44:34 - WebUI Set location: moving "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R", from "/downloads/data" to "/downloads/tvshows"
+(N) 2025-10-10T18:44:34 - Enqueued torrent move. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Source: "/downloads/data". Destination: "/downloads/tvshows"
+(N) 2025-10-10T18:44:34 - Start moving torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Destination: "/downloads/tvshows"
+(N) 2025-10-10T18:44:34 - Moved torrent successfully. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Destination: "/downloads/tvshows"
+(N) 2025-10-10T18:48:53 - WebUI Set location: moving "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv", from "/downloads/movies" to "/downloads/movies/Compulsion (2009)"
+(N) 2025-10-10T18:48:53 - Enqueued torrent move. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Source: "/downloads/movies". Destination: "/downloads/movies/Compulsion (2009)"
+(N) 2025-10-10T18:48:53 - Start moving torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Destination: "/downloads/movies/Compulsion (2009)"
+(N) 2025-10-10T18:48:53 - Moved torrent successfully. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv". Destination: "/downloads/movies/Compulsion (2009)"
+(N) 2025-10-10T19:02:55 - Torrent download finished. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(N) 2025-10-10T19:25:12 - WebUI Set location: moving "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]", from "/downloads/tvshows" to "/downloads/data"
+(N) 2025-10-10T19:25:12 - Enqueued torrent move. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]". Source: "/downloads/tvshows". Destination: "/downloads/data"
+(N) 2025-10-10T19:25:12 - Start moving torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]". Destination: "/downloads/data"
+(N) 2025-10-10T19:25:12 - Moved torrent successfully. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]". Destination: "/downloads/data"
+(N) 2025-10-10T19:25:41 - WebUI Set location: moving "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R", from "/downloads/tvshows" to "/downloads/data"
+(N) 2025-10-10T19:25:41 - Enqueued torrent move. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Source: "/downloads/tvshows". Destination: "/downloads/data"
+(N) 2025-10-10T19:25:41 - Start moving torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Destination: "/downloads/data"
+(N) 2025-10-10T19:25:41 - Moved torrent successfully. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Destination: "/downloads/data"
+(N) 2025-10-11T08:04:01 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-13T07:56:24 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-13T09:16:03 - WebAPI login success. IP: ::ffff:172.20.0.1
+(N) 2025-10-13T09:25:30 - qBittorrent termination initiated
+(N) 2025-10-13T09:25:30 - Saving resume data completed.
+(N) 2025-10-13T09:25:33 - BitTorrent session successfully finished.
+(N) 2025-10-13T09:25:33 - qBittorrent is now ready to exit
+(N) 2025-10-13T13:51:52 - qBittorrent v5.1.2 started. Process ID: 146
+(N) 2025-10-13T13:51:52 - Using config directory: /config/qBittorrent
+(N) 2025-10-13T13:51:52 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-13T13:51:53 - Peer ID: "-qB5120-"
+(I) 2025-10-13T13:51:53 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-13T13:51:53 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-13T13:51:53 - Local Peer Discovery support: ON
+(I) 2025-10-13T13:51:53 - Peer Exchange (PeX) support: ON
+(I) 2025-10-13T13:51:53 - Anonymous mode: OFF
+(I) 2025-10-13T13:51:53 - Encryption support: FORCED
+(I) 2025-10-13T13:51:53 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-13T13:51:53 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-13T13:51:53 - Successfully listening on IP. IP: "172.20.0.3". Port: "TCP/6881"
+(I) 2025-10-13T13:51:53 - Successfully listening on IP. IP: "172.20.0.3". Port: "UTP/6881"
+(I) 2025-10-13T13:51:53 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-13T13:51:53 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-13T13:51:53 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-13T13:51:53 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-13T13:51:53 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(N) 2025-10-13T13:51:53 - Restored torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(I) 2025-10-13T13:51:53 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-13T13:51:53 - Using built-in WebUI.
+(N) 2025-10-13T13:51:53 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-13T13:51:53 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-13T13:51:53 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-13T13:53:00 - WebAPI login success. IP: ::ffff:172.20.0.6
+(N) 2025-10-13T13:53:04 - WebAPI login success. IP: ::ffff:172.20.0.10
+(N) 2025-10-13T14:18:07 - Added new torrent. Torrent: "Midsommar 2019 Directors Cut 1080p BluRay REMUX AVC DTS-HD MA 5."
+(N) 2025-10-13T14:41:24 - WebAPI login success. IP: ::ffff:172.20.0.11
+(N) 2025-10-13T15:05:00 - qBittorrent termination initiated
+(N) 2025-10-13T15:05:01 - Saving resume data completed.
+(N) 2025-10-13T15:05:03 - BitTorrent session successfully finished.
+(N) 2025-10-13T15:05:03 - qBittorrent is now ready to exit
+(N) 2025-10-16T09:38:28 - qBittorrent v5.1.2 started. Process ID: 143
+(N) 2025-10-16T09:38:28 - Using config directory: /config/qBittorrent
+(N) 2025-10-16T09:38:28 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-16T09:38:28 - Peer ID: "-qB5120-"
+(I) 2025-10-16T09:38:28 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-16T09:38:28 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-16T09:38:28 - Local Peer Discovery support: ON
+(I) 2025-10-16T09:38:28 - Peer Exchange (PeX) support: ON
+(I) 2025-10-16T09:38:28 - Anonymous mode: OFF
+(I) 2025-10-16T09:38:28 - Encryption support: FORCED
+(I) 2025-10-16T09:38:28 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-16T09:38:28 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-16T09:38:28 - Successfully listening on IP. IP: "172.20.0.2". Port: "TCP/6881"
+(I) 2025-10-16T09:38:28 - Successfully listening on IP. IP: "172.20.0.2". Port: "UTP/6881"
+(I) 2025-10-16T09:38:28 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-16T09:38:28 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-16T09:38:28 - Restored torrent. Torrent: "Midsommar 2019 Directors Cut 1080p BluRay REMUX AVC DTS-HD MA 5."
+(N) 2025-10-16T09:38:28 - Restored torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-16T09:38:28 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-16T09:38:28 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-16T09:38:28 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(I) 2025-10-16T09:38:28 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-16T09:38:28 - Using built-in WebUI.
+(N) 2025-10-16T09:38:28 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-16T09:38:28 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-16T09:38:29 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-16T09:39:36 - WebAPI login success. IP: ::ffff:172.20.0.4
+(N) 2025-10-16T09:39:43 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-16T11:12:59 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-16T13:50:58 - WebAPI login success. IP: ::ffff:172.20.0.4
+(N) 2025-10-16T13:57:45 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-16T14:08:12 - qBittorrent termination initiated
+(N) 2025-10-16T14:08:12 - Saving resume data completed.
+(N) 2025-10-16T14:08:14 - BitTorrent session successfully finished.
+(N) 2025-10-16T14:08:14 - qBittorrent is now ready to exit
+(N) 2025-10-16T14:08:21 - qBittorrent v5.1.2 started. Process ID: 149
+(N) 2025-10-16T14:08:21 - Using config directory: /config/qBittorrent
+(N) 2025-10-16T14:08:21 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-16T14:08:21 - Peer ID: "-qB5120-"
+(I) 2025-10-16T14:08:21 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-16T14:08:21 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-16T14:08:21 - Local Peer Discovery support: ON
+(I) 2025-10-16T14:08:21 - Peer Exchange (PeX) support: ON
+(I) 2025-10-16T14:08:21 - Anonymous mode: OFF
+(I) 2025-10-16T14:08:21 - Encryption support: FORCED
+(I) 2025-10-16T14:08:21 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-16T14:08:21 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-16T14:08:21 - Successfully listening on IP. IP: "172.20.0.2". Port: "TCP/6881"
+(I) 2025-10-16T14:08:21 - Successfully listening on IP. IP: "172.20.0.2". Port: "UTP/6881"
+(I) 2025-10-16T14:08:21 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-16T14:08:21 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-16T14:08:21 - Restored torrent. Torrent: "Midsommar 2019 Directors Cut 1080p BluRay REMUX AVC DTS-HD MA 5."
+(N) 2025-10-16T14:08:21 - Restored torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-16T14:08:21 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-16T14:08:21 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-16T14:08:21 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(I) 2025-10-16T14:08:21 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-16T14:08:21 - Using built-in WebUI.
+(N) 2025-10-16T14:08:21 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-16T14:08:21 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-16T14:08:21 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-16T14:08:42 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-16T14:09:26 - WebAPI login success. IP: ::ffff:172.20.0.4
+(N) 2025-10-16T14:35:48 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:43:25 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:52:35 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:52:40 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:52:45 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:52:50 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:52:55 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:01 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:05 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:10 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:15 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:20 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:25 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:30 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:35 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:40 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:45 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T14:53:50 - WebAPI login success. IP: ::ffff:172.20.0.12
+(N) 2025-10-16T15:06:22 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-16T15:30:36 - Torrent download finished. Torrent: "Midsommar 2019 Directors Cut 1080p BluRay REMUX AVC DTS-HD MA 5."
+(N) 2025-10-16T16:10:37 - qBittorrent termination initiated
+(N) 2025-10-16T16:10:38 - Saving resume data completed.
+(N) 2025-10-16T16:10:39 - BitTorrent session successfully finished.
+(N) 2025-10-16T16:10:40 - qBittorrent is now ready to exit
+(N) 2025-10-20T08:01:49 - qBittorrent v5.1.2 started. Process ID: 146
+(N) 2025-10-20T08:01:49 - Using config directory: /config/qBittorrent
+(N) 2025-10-20T08:01:49 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-20T08:01:49 - Peer ID: "-qB5120-"
+(I) 2025-10-20T08:01:49 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-20T08:01:49 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-20T08:01:49 - Local Peer Discovery support: ON
+(I) 2025-10-20T08:01:49 - Peer Exchange (PeX) support: ON
+(I) 2025-10-20T08:01:49 - Anonymous mode: OFF
+(I) 2025-10-20T08:01:49 - Encryption support: FORCED
+(I) 2025-10-20T08:01:49 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-20T08:01:49 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-20T08:01:49 - Successfully listening on IP. IP: "172.20.0.2". Port: "TCP/6881"
+(I) 2025-10-20T08:01:49 - Successfully listening on IP. IP: "172.20.0.2". Port: "UTP/6881"
+(I) 2025-10-20T08:01:49 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-20T08:01:49 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-20T08:01:49 - Restored torrent. Torrent: "Midsommar 2019 Directors Cut 1080p BluRay REMUX AVC DTS-HD MA 5."
+(N) 2025-10-20T08:01:49 - Restored torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-20T08:01:49 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-20T08:01:49 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-20T08:01:49 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(I) 2025-10-20T08:01:49 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-20T08:01:49 - Using built-in WebUI.
+(N) 2025-10-20T08:01:49 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-20T08:01:49 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-20T08:01:49 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-20T08:02:47 - WebAPI login success. IP: ::ffff:172.20.0.6
+(N) 2025-10-20T08:02:56 - WebAPI login success. IP: ::ffff:172.20.0.5
+(N) 2025-10-20T08:03:31 - qBittorrent termination initiated
+(N) 2025-10-20T08:03:31 - Saving resume data completed.
+(N) 2025-10-20T08:03:33 - BitTorrent session successfully finished.
+(N) 2025-10-20T08:03:33 - qBittorrent is now ready to exit
+(N) 2025-10-20T09:50:48 - qBittorrent v5.1.2 started. Process ID: 150
+(N) 2025-10-20T09:50:48 - Using config directory: /config/qBittorrent
+(N) 2025-10-20T09:50:48 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-20T09:50:48 - Peer ID: "-qB5120-"
+(I) 2025-10-20T09:50:48 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-20T09:50:48 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-20T09:50:48 - Local Peer Discovery support: ON
+(I) 2025-10-20T09:50:48 - Peer Exchange (PeX) support: ON
+(I) 2025-10-20T09:50:48 - Anonymous mode: OFF
+(I) 2025-10-20T09:50:48 - Encryption support: FORCED
+(I) 2025-10-20T09:50:48 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-20T09:50:48 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-20T09:50:48 - Successfully listening on IP. IP: "172.20.0.7". Port: "TCP/6881"
+(I) 2025-10-20T09:50:48 - Successfully listening on IP. IP: "172.20.0.7". Port: "UTP/6881"
+(I) 2025-10-20T09:50:48 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-20T09:50:48 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-20T09:50:48 - Restored torrent. Torrent: "Midsommar 2019 Directors Cut 1080p BluRay REMUX AVC DTS-HD MA 5."
+(N) 2025-10-20T09:50:48 - Restored torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-20T09:50:48 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-20T09:50:48 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-20T09:50:48 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(I) 2025-10-20T09:50:49 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-20T09:50:49 - Using built-in WebUI.
+(N) 2025-10-20T09:50:49 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-20T09:50:49 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-20T09:50:49 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-20T09:51:49 - WebAPI login success. IP: ::ffff:172.20.0.9
+(N) 2025-10-20T09:51:56 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-20T09:51:56 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-20T10:13:02 - WebAPI login success. IP: ::ffff:172.20.0.10
+(N) 2025-10-20T10:39:56 - qBittorrent termination initiated
+(N) 2025-10-20T10:39:56 - Saving resume data completed.
+(N) 2025-10-20T10:39:58 - BitTorrent session successfully finished.
+(N) 2025-10-20T10:39:58 - qBittorrent is now ready to exit

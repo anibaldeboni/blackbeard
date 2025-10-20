@@ -1,0 +1,60 @@
+---
+id: betor
+name: Catálogo Betor
+description: Agregador de agregadores ;)
+language: pt-BR
+type: public
+encoding: UTF-8
+links:
+- https://catalogo-betor.dgls.me/
+
+caps:
+  categories:
+    movie: Movies
+    tv: TV
+  modes:
+    search: [q]
+    tv-search: [q, imdbid]
+    movie-search: [q, imdbid]
+
+search:
+  paths:
+    - path: "{{ if .Query.Keywords }}/search/{{ else }}/{{ end }}{{ if .Query.IMDBID }}imdb/{{ .Query.IMDBID }}/{{ else }}{{ end }}"
+      inputs:
+        q: "{{ .Keywords }}"
+  rows:
+    selector: "[data-torrent]"
+  fields:
+    _torrent_name:
+      attribute: data-torrent-name
+    _languages_tags:
+      attribute: data-torrent-languages
+      filters:
+        - name: replace
+          args: ["en", "english"]
+        - name: replace
+          args: ["pt-BR", "brazilian"]
+        - name: replace
+          args: ["pt", "portuguese"]
+    category:
+      attribute: data-item-type
+    title:
+      text: "{{ .Result._torrent_name }}{{ if .Result._languages_tags }} [{{ .Result._languages_tags }}]{{ else }}{{ end }}"
+    details:
+      attribute: data-provider-url
+    magnet:
+      attribute: data-torrent-magnet-uri
+    imdbid:
+      attribute: data-item-imdb-id
+    tmdbid:
+      attribute: data-item-tmdb-id
+    date:
+      attribute: data-torrent-inserted-at
+    size:
+      attribute: data-torrent-size
+    seeders:
+      attribute: data-torrent-num-seeds
+    leechers:
+      attribute: data-torrent-num-peers
+
+# json engine n/a
