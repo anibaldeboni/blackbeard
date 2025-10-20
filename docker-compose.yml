@@ -118,7 +118,7 @@ services:
     networks:
       - jollyroger
     volumes:
-      - $(pwd)/config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${PWD}/config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - nginx-logs:/var/log/nginx
     ports:
       - 80:80
@@ -152,49 +152,49 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: $(pwd)/config/radarr
+      device: ${PWD}/config/radarr
   sonarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: $(pwd)/config/sonarr
+      device: ${PWD}/config/sonarr
   prowlarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: $(pwd)/config/prowlarr
+      device: ${PWD}/config/prowlarr
   bazarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: $(pwd)/config/bazarr
+      device: ${PWD}/config/bazarr
   jellyfin-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: $(pwd)/config/jellyfin
+      device: ${PWD}/config/jellyfin
   qbittorrent-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: $(pwd)/config/qbittorrent
+      device: ${PWD}/config/qbittorrent
   jellyseerr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: $(pwd)/config/jellyseerr
+      device: ${PWD}/config/jellyseerr
   nginx-logs:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: $(pwd)/config/nginx/logs
+      device: ${PWD}/config/nginx/logs
 
 networks:
   jollyroger:
