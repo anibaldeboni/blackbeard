@@ -2565,3 +2565,36 @@ container.With(rules => rules.WithCaptureContainerDisposeStackTrace())"
 2025-10-20 10:27:24.6|Info|RssSyncService|RSS Sync Completed. Reports found: 309, Reports grabbed: 0
 2025-10-20 10:39:56.6|Info|Microsoft.Hosting.Lifetime|Application is shutting down...
 2025-10-20 10:39:57.0|Info|ConsoleApp|Exiting main.
+2025-10-20 11:01:12.6|Info|Bootstrap|Starting Sonarr - /app/sonarr/bin/Sonarr - Version 4.0.15.2941
+2025-10-20 11:01:15.5|Info|AppFolderInfo|Data directory is being overridden to [/config]
+2025-10-20 11:01:16.2|Info|AppFolderInfo|Data directory is being overridden to [/config]
+2025-10-20 11:01:26.5|Info|AppFolderInfo|Data directory is being overridden to [/config]
+2025-10-20 11:01:30.9|Info|MigrationController|*** Migrating data source=/config/sonarr.db;cache size=-20000;datetimekind=Utc;journal mode=Wal;pooling=True;version=3;busytimeout=100 ***
+2025-10-20 11:01:33.3|Info|FluentMigrator.Runner.MigrationRunner|DatabaseEngineVersionCheck migrating
+2025-10-20 11:01:33.8|Info|FluentMigrator.Runner.MigrationRunner|PerformDBOperation 
+2025-10-20 11:01:33.8|Info|NzbDrone.Core.Datastore.Migration.Framework.NzbDroneSQLiteProcessor|Performing DB Operation
+2025-10-20 11:01:35.1|Info|DatabaseEngineVersionCheck|SQLite 3.49.2
+2025-10-20 11:01:35.1|Info|FluentMigrator.Runner.MigrationRunner|=> 1.2514469s
+2025-10-20 11:01:35.1|Info|FluentMigrator.Runner.MigrationRunner|DatabaseEngineVersionCheck migrated
+2025-10-20 11:01:35.1|Info|FluentMigrator.Runner.MigrationRunner|=> 1.2855594s
+2025-10-20 11:01:36.0|Info|MigrationController|*** Migrating data source=/config/logs.db;cache size=-20000;datetimekind=Utc;journal mode=Wal;pooling=True;version=3;busytimeout=100 ***
+2025-10-20 11:01:36.2|Info|FluentMigrator.Runner.MigrationRunner|DatabaseEngineVersionCheck migrating
+2025-10-20 11:01:36.2|Info|FluentMigrator.Runner.MigrationRunner|PerformDBOperation 
+2025-10-20 11:01:36.2|Info|NzbDrone.Core.Datastore.Migration.Framework.NzbDroneSQLiteProcessor|Performing DB Operation
+2025-10-20 11:01:36.2|Info|DatabaseEngineVersionCheck|SQLite 3.49.2
+2025-10-20 11:01:36.2|Info|FluentMigrator.Runner.MigrationRunner|=> 0.0164995s
+2025-10-20 11:01:36.2|Info|FluentMigrator.Runner.MigrationRunner|DatabaseEngineVersionCheck migrated
+2025-10-20 11:01:36.2|Info|FluentMigrator.Runner.MigrationRunner|=> 0.0198501s
+2025-10-20 11:01:48.3|Info|Microsoft.Hosting.Lifetime|Now listening on: http://[::]:8989
+2025-10-20 11:01:56.2|Info|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2025-10-20 11:01:56.2|Info|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2025-10-20 11:01:56.2|Info|Microsoft.Hosting.Lifetime|Content root path: /app/sonarr/bin
+2025-10-20 11:02:00.2|Info|ManagedHttpDispatcher|IPv4 is available: True, IPv6 will be disabled
+2025-10-20 11:02:25.1|Info|RssSyncService|Starting RSS Sync
+2025-10-20 11:03:07.4|Warn|Torznab|Indexer BitSearch (Prowlarr) rss sync didn't cover the period between 10/20/2025 13:19:41 and 10/20/2025 14:02:05 UTC. Search may be required.
+2025-10-20 11:03:47.7|Warn|HttpClient|HTTP Error - Res: HTTP/1.1 [GET] http://prowlarr:9696/prowlarr/10/api?t=tvsearch&cat=5000,5040,5030,5070&extended=1&apikey=(removed)&offset=0&limit=100: 429.TooManyRequests (142 bytes)
+<?xml version="1.0" encoding="UTF-8"?>
+<error code="429" description="Indexer is disabled till 10/20/2025 11:04:47 due to recent failures." />
+2025-10-20 11:03:48.0|Warn|Torznab|API Request Limit reached for 1337x (Prowlarr). Disabled for 00:00:59
+2025-10-20 11:03:48.2|Info|DownloadDecisionMaker|Processing 286 releases
+2025-10-20 11:04:07.9|Info|RssSyncService|RSS Sync Completed. Reports found: 286, Reports grabbed: 0

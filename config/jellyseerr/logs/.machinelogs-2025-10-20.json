@@ -148,3 +148,29 @@
 {"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T13:37:00.054Z"}
 {"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T13:38:00.056Z"}
 {"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T13:39:00.050Z"}
+{"level":"info","message":"Commit Tag: $GIT_SHA","timestamp":"2025-10-20T14:01:47.653Z"}
+{"level":"info","message":"Starting Jellyseerr version 2.7.3","timestamp":"2025-10-20T14:01:54.169Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0001_migrate_hostname.js'...","timestamp":"2025-10-20T14:02:06.156Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0002_migrate_apitokens.js'...","timestamp":"2025-10-20T14:02:06.198Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0003_emby_media_server_type.js'...","timestamp":"2025-10-20T14:02:06.241Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0004_migrate_region_setting.js'...","timestamp":"2025-10-20T14:02:06.256Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0005_migrate_network_settings.js'...","timestamp":"2025-10-20T14:02:06.275Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0006_remove_lunasea.js'...","timestamp":"2025-10-20T14:02:06.287Z"}
+{"label":"Notifications","level":"info","message":"Registered notification agents","timestamp":"2025-10-20T14:02:06.382Z"}
+{"label":"Jobs","level":"info","message":"Scheduled jobs loaded","timestamp":"2025-10-20T14:02:07.277Z"}
+{"label":"Server","level":"info","message":"Server ready on port 5055","timestamp":"2025-10-20T14:02:11.174Z"}
+{"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T14:03:00.250Z"}
+{"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T14:04:00.222Z"}
+{"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T14:05:00.036Z"}
+{"label":"Jobs","level":"info","message":"Starting scheduled job: Jellyfin Recently Added Scan","timestamp":"2025-10-20T14:05:00.070Z"}
+{"label":"Jellyfin Sync","level":"info","message":"Jellyfin Sync Starting","sessionId":"5d6b8962-f099-49cc-a2f1-c2b79a617c4d","timestamp":"2025-10-20T14:05:00.075Z"}
+{"label":"Jellyfin Sync","level":"info","message":"Beginning to process recently added for library: Filmes","timestamp":"2025-10-20T14:05:00.132Z"}
+{"label":"Jellyfin Sync","level":"debug","message":"Title already exists and no new media types found Compulsion","timestamp":"2025-10-20T14:05:03.955Z"}
+{"label":"Jellyfin Sync","level":"debug","message":"Title already exists and no new media types found Redline","timestamp":"2025-10-20T14:05:04.015Z"}
+{"label":"Jellyfin Sync","level":"debug","message":"Title already exists and no new media types found Midsommar","timestamp":"2025-10-20T14:05:04.066Z"}
+{"label":"Jellyfin Sync","level":"info","message":"Beginning to process recently added for library: Séries","timestamp":"2025-10-20T14:05:08.070Z"}
+{"label":"Jellyfin Sync","level":"debug","message":"Updating existing title: MobLand","timestamp":"2025-10-20T14:05:08.743Z"}
+{"label":"Jellyfin Sync","level":"info","message":"Recently Added Scan Complete","timestamp":"2025-10-20T14:05:12.747Z"}
+{"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T14:06:00.104Z"}
+{"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T14:07:00.070Z"}
+{"label":"Jobs","level":"debug","message":"Starting scheduled job: Download Sync","timestamp":"2025-10-20T14:08:00.070Z"}

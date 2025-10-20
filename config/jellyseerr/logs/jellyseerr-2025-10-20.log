@@ -148,3 +148,29 @@
 2025-10-20T13:37:00.054Z [debug][Jobs]: Starting scheduled job: Download Sync 
 2025-10-20T13:38:00.056Z [debug][Jobs]: Starting scheduled job: Download Sync 
 2025-10-20T13:39:00.050Z [debug][Jobs]: Starting scheduled job: Download Sync 
+2025-10-20T14:01:47.653Z [info]: Commit Tag: $GIT_SHA 
+2025-10-20T14:01:54.169Z [info]: Starting Jellyseerr version 2.7.3 
+2025-10-20T14:02:06.156Z [debug][Settings Migrator]: Checking migration '0001_migrate_hostname.js'... 
+2025-10-20T14:02:06.198Z [debug][Settings Migrator]: Checking migration '0002_migrate_apitokens.js'... 
+2025-10-20T14:02:06.241Z [debug][Settings Migrator]: Checking migration '0003_emby_media_server_type.js'... 
+2025-10-20T14:02:06.256Z [debug][Settings Migrator]: Checking migration '0004_migrate_region_setting.js'... 
+2025-10-20T14:02:06.275Z [debug][Settings Migrator]: Checking migration '0005_migrate_network_settings.js'... 
+2025-10-20T14:02:06.287Z [debug][Settings Migrator]: Checking migration '0006_remove_lunasea.js'... 
+2025-10-20T14:02:06.382Z [info][Notifications]: Registered notification agents 
+2025-10-20T14:02:07.277Z [info][Jobs]: Scheduled jobs loaded 
+2025-10-20T14:02:11.174Z [info][Server]: Server ready on port 5055 
+2025-10-20T14:03:00.250Z [debug][Jobs]: Starting scheduled job: Download Sync 
+2025-10-20T14:04:00.222Z [debug][Jobs]: Starting scheduled job: Download Sync 
+2025-10-20T14:05:00.036Z [debug][Jobs]: Starting scheduled job: Download Sync 
+2025-10-20T14:05:00.070Z [info][Jobs]: Starting scheduled job: Jellyfin Recently Added Scan 
+2025-10-20T14:05:00.075Z [info][Jellyfin Sync]: Jellyfin Sync Starting {"sessionId":"5d6b8962-f099-49cc-a2f1-c2b79a617c4d"}
+2025-10-20T14:05:00.132Z [info][Jellyfin Sync]: Beginning to process recently added for library: Filmes 
+2025-10-20T14:05:03.955Z [debug][Jellyfin Sync]: Title already exists and no new media types found Compulsion 
+2025-10-20T14:05:04.015Z [debug][Jellyfin Sync]: Title already exists and no new media types found Redline 
+2025-10-20T14:05:04.066Z [debug][Jellyfin Sync]: Title already exists and no new media types found Midsommar 
+2025-10-20T14:05:08.070Z [info][Jellyfin Sync]: Beginning to process recently added for library: Séries 
+2025-10-20T14:05:08.743Z [debug][Jellyfin Sync]: Updating existing title: MobLand 
+2025-10-20T14:05:12.747Z [info][Jellyfin Sync]: Recently Added Scan Complete 
+2025-10-20T14:06:00.104Z [debug][Jobs]: Starting scheduled job: Download Sync 
+2025-10-20T14:07:00.070Z [debug][Jobs]: Starting scheduled job: Download Sync 
+2025-10-20T14:08:00.070Z [debug][Jobs]: Starting scheduled job: Download Sync 

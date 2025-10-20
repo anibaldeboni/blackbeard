@@ -3088,3 +3088,37 @@
 2025-10-20 10:26:30.2|Info|RssSyncService|RSS Sync Completed. Reports found: 311, Reports grabbed: 0
 2025-10-20 10:39:56.6|Info|Microsoft.Hosting.Lifetime|Application is shutting down...
 2025-10-20 10:39:57.4|Info|ConsoleApp|Exiting main.
+2025-10-20 11:01:11.3|Info|Bootstrap|Starting Radarr - /app/radarr/bin/Radarr - Version 5.27.5.10198
+2025-10-20 11:01:14.7|Info|AppFolderInfo|Data directory is being overridden to [/config]
+2025-10-20 11:01:15.1|Info|AppFolderInfo|Data directory is being overridden to [/config]
+2025-10-20 11:01:27.3|Info|AppFolderInfo|Data directory is being overridden to [/config]
+2025-10-20 11:01:31.8|Info|MigrationController|*** Migrating data source=/config/radarr.db;cache size=-20000;datetimekind=Utc;journal mode=Wal;pooling=True;version=3;busytimeout=100 ***
+2025-10-20 11:01:33.9|Info|FluentMigrator.Runner.MigrationRunner|DatabaseEngineVersionCheck migrating
+2025-10-20 11:01:34.4|Info|FluentMigrator.Runner.MigrationRunner|PerformDBOperation 
+2025-10-20 11:01:34.4|Info|NzbDrone.Core.Datastore.Migration.Framework.NzbDroneSQLiteProcessor|Performing DB Operation
+2025-10-20 11:01:35.4|Info|DatabaseEngineVersionCheck|SQLite 3.49.2
+2025-10-20 11:01:35.4|Info|FluentMigrator.Runner.MigrationRunner|=> 0.9902363s
+2025-10-20 11:01:35.4|Info|FluentMigrator.Runner.MigrationRunner|DatabaseEngineVersionCheck migrated
+2025-10-20 11:01:35.5|Info|FluentMigrator.Runner.MigrationRunner|=> 1.0309325s
+2025-10-20 11:01:36.3|Info|MigrationController|*** Migrating data source=/config/logs.db;cache size=-20000;datetimekind=Utc;journal mode=Wal;pooling=True;version=3;busytimeout=100 ***
+2025-10-20 11:01:36.5|Info|FluentMigrator.Runner.MigrationRunner|DatabaseEngineVersionCheck migrating
+2025-10-20 11:01:36.5|Info|FluentMigrator.Runner.MigrationRunner|PerformDBOperation 
+2025-10-20 11:01:36.5|Info|NzbDrone.Core.Datastore.Migration.Framework.NzbDroneSQLiteProcessor|Performing DB Operation
+2025-10-20 11:01:36.7|Info|DatabaseEngineVersionCheck|SQLite 3.49.2
+2025-10-20 11:01:36.7|Info|FluentMigrator.Runner.MigrationRunner|=> 0.1390779s
+2025-10-20 11:01:36.7|Info|FluentMigrator.Runner.MigrationRunner|DatabaseEngineVersionCheck migrated
+2025-10-20 11:01:36.7|Info|FluentMigrator.Runner.MigrationRunner|=> 0.1415348s
+2025-10-20 11:01:46.4|Info|Microsoft.Hosting.Lifetime|Now listening on: http://[::]:7878
+2025-10-20 11:01:53.6|Info|CommandExecutor|Starting 2 threads for tasks.
+2025-10-20 11:01:55.3|Info|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2025-10-20 11:01:55.3|Info|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2025-10-20 11:01:55.3|Info|Microsoft.Hosting.Lifetime|Content root path: /app/radarr/bin
+2025-10-20 11:01:57.4|Info|ManagedHttpDispatcher|IPv4 is available: True, IPv6 will be disabled
+2025-10-20 11:02:25.4|Info|RssSyncService|Starting RSS Sync
+2025-10-20 11:03:07.4|Warn|Torznab|Indexer BitSearch (Prowlarr) rss sync didn't cover the period between 10/20/2025 13:23:46 and 10/20/2025 14:02:05 UTC. Search may be required.
+2025-10-20 11:03:47.5|Warn|HttpClient|HTTP Error - Res: HTTP/1.1 [GET] http://prowlarr:9696/prowlarr/10/api?t=movie&cat=2000,2070,2030,2010,2040,2060,2045&extended=1&apikey=(removed)&offset=0&limit=100: 429.TooManyRequests (142 bytes)
+<?xml version="1.0" encoding="UTF-8"?>
+<error code="429" description="Indexer is disabled till 10/20/2025 11:04:47 due to recent failures." />
+2025-10-20 11:03:47.9|Warn|Torznab|API Request Limit reached for 1337x (Prowlarr). Disabled for 00:00:59
+2025-10-20 11:03:48.1|Info|DownloadDecisionMaker|Processing 286 releases
+2025-10-20 11:04:09.0|Info|RssSyncService|RSS Sync Completed. Reports found: 286, Reports grabbed: 0
