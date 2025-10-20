@@ -120,19 +120,10 @@ services:
     volumes:
       - ${PWD}/config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - nginx-logs:/var/log/nginx
-      - ${PWD}/config/certbot/www/:/var/www/certbot/:ro
     ports:
       - 80:80
       - 443:443
     restart: unless-stopped
-  certbot:
-    container_name: certbot
-    networks:
-      - jollyroger
-    image: certbot/certbot:latest
-    volumes:
-      - ${PWD}/config/certbot/www/:/var/www/certbot/:rw
-      - ${PWD}/config/certbot/conf/:/etc/letsencrypt/:rw
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
