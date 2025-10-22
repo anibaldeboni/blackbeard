@@ -91,9 +91,7 @@ services:
       - jellyfin-config:/config
       - torrent-downloads:/data
     devices:
-      - /dev/video0:/dev/video0 # Mount GPU device
-      - /dev/video1:/dev/video1
-      - /dev/video2:/dev/video2
+      - /dev/dri:/dev/dri # mount gpu devices for hardware acceleration
     ports:
       - 8096:8096
       - 7359:7359/udp
