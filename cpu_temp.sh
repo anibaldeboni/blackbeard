@@ -25,9 +25,8 @@ get_temperature() {
 monitor_temperature() {
     local interval=${1:-2}  # Default: 2 seconds
 
-    echo "Monitoring temperature (Ctrl+C to stop)..."
-    echo "Interval: ${interval}s"
-    echo "=========================="
+    echo "Monitoring temperature every ${interval}s (Ctrl+C to stop)"
+    echo ""
     
     while true; do
         local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
@@ -43,7 +42,6 @@ show_help() {
     echo "Options:"
     echo "  -h, --help     Show this help"
     echo "  -m, --monitor  Monitor continuously"
-    echo "  -o, --once     Read only once (default)"
     echo ""
     echo "Examples:"
     echo "  $0                   # Read temperature once"
