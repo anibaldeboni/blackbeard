@@ -92,6 +92,9 @@ services:
       - torrent-downloads:/data
     devices:
       - /dev/dri:/dev/dri # mount gpu devices for hardware acceleration
+    group_add:
+      - "44" # video group
+      - "105" # render group
     ports:
       - 8096:8096
       - 7359:7359/udp
