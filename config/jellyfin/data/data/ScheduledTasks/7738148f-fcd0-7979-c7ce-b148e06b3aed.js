@@ -1,1 +1,0 @@
-{"StartTimeUtc":"2025-10-13T09:37:54.6219767Z","EndTimeUtc":"2025-10-13T09:38:14.7832765Z","Status":"Completed","Name":"Escanear a Biblioteca de M\u00EDdia","Key":"RefreshLibrary","Id":"7738148ffcd07979c7ceb148e06b3aed"}

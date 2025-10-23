@@ -7,10 +7,16 @@
   "applicationTitle": "Jellyseerr",
   "applicationUrl": "",
   "cacheImages": false,
-  "defaultPermissions": 32,
+  "defaultPermissions": 277872816,
   "defaultQuotas": {
-   "movie": {},
-   "tv": {}
+   "movie": {
+    "quotaLimit": 0,
+    "quotaDays": 7
+   },
+   "tv": {
+    "quotaLimit": 0,
+    "quotaDays": 7
+   }
   },
   "hideAvailable": false,
   "hideBlacklisted": false,

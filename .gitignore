@@ -3,5 +3,7 @@
 **/cache/
 **/data/
 **/MediaCover/
+**/Backups/
 **/BT_backup/
 .DS_Store
+logs.*

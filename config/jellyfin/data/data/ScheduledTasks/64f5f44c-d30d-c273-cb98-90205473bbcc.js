@@ -1,1 +1,0 @@
-{"StartTimeUtc":"2025-10-13T06:00:00.0057698Z","EndTimeUtc":"2025-10-13T06:00:00.0273912Z","Status":"Completed","Name":"Gerar imagens Trickplay","Key":"RefreshTrickplayImages","Id":"64f5f44cd30dc273cb9890205473bbcc"}

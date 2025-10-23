@@ -5,3 +5,176 @@
 (N) 2025-10-20T11:02:04 - WebAPI login success. IP: ::ffff:172.20.0.2
 (N) 2025-10-20T11:02:08 - WebAPI login success. IP: ::ffff:172.20.0.4
 (N) 2025-10-20T11:04:47 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-20T16:30:55 - Added new torrent. Torrent: "[bitsearch.to] The.End.of.the.Fucking.World.S01.REPACK.1080p.NF.WEBRip.DDP5.1.x264.Hun-boOk"
+(N) 2025-10-20T16:31:14 - Added new torrent. Torrent: "Godless.S01.S01.COMPLETE.1080p.WEBRip.6CH.x265.HEVC-PSA"
+(N) 2025-10-20T16:36:36 - Added new torrent. Torrent: "The.Secret.Life.Of.Walter.Mitty.2013.1080p.WEB-DL.H264-PublicHD"
+(N) 2025-10-20T16:45:48 - Torrent download finished. Torrent: "The.Secret.Life.Of.Walter.Mitty.2013.1080p.WEB-DL.H264-PublicHD"
+(N) 2025-10-20T16:51:29 - Added new torrent. Torrent: "[bitsearch.to] www.UIndex.org    -    The Mule 2018 1080p AMZN WEB-DL DDP5 1 H 264-GPRS"
+(N) 2025-10-20T16:53:15 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-20T17:40:12 - Torrent download finished. Torrent: "Godless.S01.S01.COMPLETE.1080p.WEBRip.6CH.x265.HEVC-PSA"
+(N) 2025-10-20T18:22:22 - Torrent download finished. Torrent: "[bitsearch.to] www.UIndex.org    -    The Mule 2018 1080p AMZN WEB-DL DDP5 1 H 264-GPRS"
+(N) 2025-10-20T20:33:29 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-21T07:58:39 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-21T09:32:02 - Added new torrent. Torrent: "[bitsearch.to] www.UIndex.org    -    War Dogs 2016 1080p AMZN WEB-DL DDP5 1 H 264-GPRS"
+(N) 2025-10-21T09:39:30 - Added new torrent. Torrent: "[bitsearch.to] Searching for Sugar Man (2012, 1080p).mkv"
+(N) 2025-10-21T09:49:56 - Added new torrent. Torrent: "Primal Fear 1996 1080p ATVP WEB-DL DD 5 1 H 264-PiRaTeS"
+(N) 2025-10-21T09:50:32 - Added new torrent. Torrent: "[bitsearch.to] Train to Busan (2016) 1080p x265 ita eng kor ac3 sub ita eng - MIRCrew.mkv"
+(N) 2025-10-21T10:09:41 - Torrent download finished. Torrent: "[bitsearch.to] Train to Busan (2016) 1080p x265 ita eng kor ac3 sub ita eng - MIRCrew.mkv"
+(N) 2025-10-21T10:09:43 - Added new torrent. Torrent: "Perfect Days (2023) FullHD 1080p.H264 Ita Jap AC3 5.1 Sub Ita Eng - realDMDJ DDL_Ita"
+(I) 2025-10-21T10:19:25 - Found Python executable. Name: "python3". Version: "3.12.12"
+(N) 2025-10-21T10:25:41 - Torrent removed. Torrent: "[bitsearch.to] Searching for Sugar Man (2012, 1080p).mkv"
+(N) 2025-10-21T10:25:51 - Torrent removed. Torrent: "Primal Fear 1996 1080p ATVP WEB-DL DD 5 1 H 264-PiRaTeS"
+(N) 2025-10-21T10:26:45 - Downloading torrent... Source: "https://torrentproject.cc/t3-4879550/Searching-for-Sugar-Man-2012-1080p-BluRay-x265-HEVC-10bit-AAC-5-1-Silence-QxR-torrent.html"
+(W) 2025-10-21T10:26:46 - Failed to add torrent. Source: "https://torrentproject.cc/t3-4879550/Searching-for-Sugar-Man-2012-1080p-BluRay-x265-HEVC-10bit-AAC-5-1-Silence-QxR-torrent.html". Reason: "expected value (list, dict, int or string) in bencoded string [bdecode:4]"
+(N) 2025-10-21T10:28:28 - Added new torrent. Torrent: "Primal Fear 1996 1080p ATVP WEB-DL DD 5 1 H 264-PiRaTeS"
+(N) 2025-10-21T10:31:46 - Added new torrent. Torrent: "Searching for Sugar Man (2012) (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) [QxR]"
+(N) 2025-10-21T10:41:08 - Torrent download finished. Torrent: "Perfect Days (2023) FullHD 1080p.H264 Ita Jap AC3 5.1 Sub Ita Eng - realDMDJ DDL_Ita"
+(N) 2025-10-21T10:54:27 - Downloading torrent... Source: "https://torrentproject.cc/t3-3161203/Cure-1997-BluRay-1080p-YTS-YIFY-torrent.html"
+(W) 2025-10-21T10:54:28 - Failed to add torrent. Source: "https://torrentproject.cc/t3-3161203/Cure-1997-BluRay-1080p-YTS-YIFY-torrent.html". Reason: "expected value (list, dict, int or string) in bencoded string [bdecode:4]"
+(N) 2025-10-21T10:57:04 - Added new torrent. Torrent: "Cure.1997.iNTERNAL.BDRip.x264-MANiC"
+(N) 2025-10-21T10:59:02 - Torrent removed. Torrent: "Searching for Sugar Man (2012) (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) [QxR]"
+(N) 2025-10-21T10:59:18 - Added new torrent. Torrent: "Searching.for.Sugar.Man.2012.1080p.BluRay.X264-7SinS [PublicHD]"
+(N) 2025-10-21T11:01:37 - Added new torrent. Torrent: "Felidae 1994 DVDRip English"
+(N) 2025-10-21T11:02:29 - Torrent removed. Torrent: "Primal Fear 1996 1080p ATVP WEB-DL DD 5 1 H 264-PiRaTeS"
+(N) 2025-10-21T11:02:35 - Torrent download finished. Torrent: "Cure.1997.iNTERNAL.BDRip.x264-MANiC"
+(N) 2025-10-21T11:02:43 - Added new torrent. Torrent: "Primal Fear 1996 Remastered 1080p BluRay HEVC x265 5.1 BONE"
+(N) 2025-10-21T11:04:17 - Added new torrent. Torrent: "Come.And.See.1985.1080p.BluRay.x264.EAC3-SARTRE"
+(N) 2025-10-21T11:06:55 - Torrent removed. Torrent: "Felidae 1994 DVDRip English"
+(N) 2025-10-21T11:07:41 - Added new torrent. Torrent: "Felidae (1994) GERMAN DUAL 576p DVD AI AV1 Opus + Extras [RAV1NE]"
+(N) 2025-10-21T11:08:01 - Torrent download finished. Torrent: "Primal Fear 1996 Remastered 1080p BluRay HEVC x265 5.1 BONE"
+(N) 2025-10-21T11:13:47 - Torrent download finished. Torrent: "Felidae (1994) GERMAN DUAL 576p DVD AI AV1 Opus + Extras [RAV1NE]"
+(N) 2025-10-21T13:17:00 - Torrent download finished. Torrent: "[bitsearch.to] www.UIndex.org    -    War Dogs 2016 1080p AMZN WEB-DL DDP5 1 H 264-GPRS"
+(N) 2025-10-21T13:37:29 - Torrent download finished. Torrent: "Come.And.See.1985.1080p.BluRay.x264.EAC3-SARTRE"
+(N) 2025-10-21T13:52:39 - Torrent download finished. Torrent: "Searching.for.Sugar.Man.2012.1080p.BluRay.X264-7SinS [PublicHD]"
+(N) 2025-10-21T16:26:16 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-21T16:30:37 - Torrent removed. Torrent: "[bitsearch.to] The.End.of.the.Fucking.World.S01.REPACK.1080p.NF.WEBRip.DDP5.1.x264.Hun-boOk"
+(N) 2025-10-21T16:30:40 - Torrent content removed. Torrent: "[bitsearch.to] The.End.of.the.Fucking.World.S01.REPACK.1080p.NF.WEBRip.DDP5.1.x264.Hun-boOk"
+(N) 2025-10-21T16:30:57 - Added new torrent. Torrent: "The End of the Fucking World (S01)(2017)(Complete)(FHD)(1080p)(x264)(WebDL)(Multi 5 Lang)(MultiSUB) PHDTeam"
+(N) 2025-10-21T16:35:06 - Torrent removed. Torrent: "The End of the Fucking World (S01)(2017)(Complete)(FHD)(1080p)(x264)(WebDL)(Multi 5 Lang)(MultiSUB) PHDTeam"
+(N) 2025-10-21T16:35:06 - Torrent content removed. Torrent: "The End of the Fucking World (S01)(2017)(Complete)(FHD)(1080p)(x264)(WebDL)(Multi 5 Lang)(MultiSUB) PHDTeam"
+(N) 2025-10-21T16:35:19 - Added new torrent. Torrent: "The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265."
+(N) 2025-10-21T16:38:28 - Torrent download finished. Torrent: "The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265."
+(N) 2025-10-21T16:43:29 - Added new torrent. Torrent: "Unknown Number The High School Catfish (2025) (1080p) [WEBRip] [5.1] [YTS MX]"
+(N) 2025-10-21T16:45:32 - Torrent download finished. Torrent: "Unknown Number The High School Catfish (2025) (1080p) [WEBRip] [5.1] [YTS MX]"
+(N) 2025-10-21T17:15:00 - qBittorrent termination initiated
+(N) 2025-10-21T17:15:00 - Saving resume data completed.
+(N) 2025-10-21T17:15:02 - BitTorrent session successfully finished.
+(N) 2025-10-21T17:15:02 - qBittorrent is now ready to exit
+(N) 2025-10-21T17:15:21 - qBittorrent v5.1.2 started. Process ID: 148
+(N) 2025-10-21T17:15:21 - Using config directory: /config/qBittorrent
+(N) 2025-10-21T17:15:21 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-21T17:15:22 - Peer ID: "-qB5120-"
+(I) 2025-10-21T17:15:22 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-21T17:15:22 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-21T17:15:22 - Local Peer Discovery support: ON
+(I) 2025-10-21T17:15:22 - Peer Exchange (PeX) support: ON
+(I) 2025-10-21T17:15:22 - Anonymous mode: OFF
+(I) 2025-10-21T17:15:22 - Encryption support: FORCED
+(I) 2025-10-21T17:15:22 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-21T17:15:22 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-21T17:15:22 - Successfully listening on IP. IP: "172.20.0.10". Port: "TCP/6881"
+(I) 2025-10-21T17:15:22 - Successfully listening on IP. IP: "172.20.0.10". Port: "UTP/6881"
+(I) 2025-10-21T17:15:22 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-21T17:15:22 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Unknown Number The High School Catfish (2025) (1080p) [WEBRip] [5.1] [YTS MX]"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Felidae (1994) GERMAN DUAL 576p DVD AI AV1 Opus + Extras [RAV1NE]"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Cure.1997.iNTERNAL.BDRip.x264-MANiC"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Godless.S01.S01.COMPLETE.1080p.WEBRip.6CH.x265.HEVC-PSA"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Primal Fear 1996 Remastered 1080p BluRay HEVC x265 5.1 BONE"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "The.Secret.Life.Of.Walter.Mitty.2013.1080p.WEB-DL.H264-PublicHD"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Midsommar 2019 Directors Cut 1080p BluRay REMUX AVC DTS-HD MA 5."
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "[bitsearch.to] www.UIndex.org    -    War Dogs 2016 1080p AMZN WEB-DL DDP5 1 H 264-GPRS"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Come.And.See.1985.1080p.BluRay.x264.EAC3-SARTRE"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Perfect Days (2023) FullHD 1080p.H264 Ita Jap AC3 5.1 Sub Ita Eng - realDMDJ DDL_Ita"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Searching.for.Sugar.Man.2012.1080p.BluRay.X264-7SinS [PublicHD]"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265."
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "[bitsearch.to] www.UIndex.org    -    The Mule 2018 1080p AMZN WEB-DL DDP5 1 H 264-GPRS"
+(N) 2025-10-21T17:15:22 - Restored torrent. Torrent: "[bitsearch.to] Train to Busan (2016) 1080p x265 ita eng kor ac3 sub ita eng - MIRCrew.mkv"
+(I) 2025-10-21T17:15:23 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-21T17:15:23 - Using built-in WebUI.
+(N) 2025-10-21T17:15:23 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-21T17:15:23 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-21T17:15:24 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-21T17:16:20 - WebAPI login success. IP: ::ffff:172.20.0.3
+(N) 2025-10-21T17:16:21 - WebAPI login success. IP: ::ffff:172.20.0.9
+(N) 2025-10-22T11:52:02 - Added new torrent. Torrent: "Limitless (2011) WEBRip 1080p HEVC EAC3 ENG ITA SUB ENG ITA - Lul..."
+(N) 2025-10-22T11:56:39 - Added new torrent. Torrent: "I.Came.By.2022.1080p.WEB.H264-CUPCAKES"
+(N) 2025-10-22T11:57:26 - Added new torrent. Torrent: "[bitsearch.to] Bullet.Train.2022.REPACK.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA"
+(N) 2025-10-22T11:59:51 - Torrent download finished. Torrent: "[bitsearch.to] Bullet.Train.2022.REPACK.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA"
+(N) 2025-10-22T13:19:12 - Torrent download finished. Torrent: "I.Came.By.2022.1080p.WEB.H264-CUPCAKES"
+(N) 2025-10-22T13:48:15 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-22T14:17:33 - Torrent download finished. Torrent: "Limitless (2011) WEBRip 1080p HEVC EAC3 ENG ITA SUB ENG ITA - Lul..."
+(N) 2025-10-22T15:03:36 - Added new torrent. Torrent: "The.Perfect.Neighbor.2025.1080p.WEB.h264-EDITH"
+(N) 2025-10-22T15:09:29 - Torrent download finished. Torrent: "The.Perfect.Neighbor.2025.1080p.WEB.h264-EDITH"
+(N) 2025-10-22T15:13:24 - WebUI Set location: moving "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R", from "/downloads/data" to "/downloads/tvshows"
+(N) 2025-10-22T15:13:24 - Enqueued torrent move. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Source: "/downloads/data". Destination: "/downloads/tvshows"
+(N) 2025-10-22T15:13:24 - Start moving torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Destination: "/downloads/tvshows"
+(N) 2025-10-22T15:13:24 - Moved torrent successfully. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R". Destination: "/downloads/tvshows"
+(N) 2025-10-22T15:28:52 - qBittorrent termination initiated
+(N) 2025-10-22T15:28:53 - Saving resume data completed.
+(N) 2025-10-22T15:28:54 - BitTorrent session successfully finished.
+(N) 2025-10-22T15:28:55 - qBittorrent is now ready to exit
+(N) 2025-10-22T15:57:25 - qBittorrent v5.1.2 started. Process ID: 145
+(N) 2025-10-22T15:57:25 - Using config directory: /config/qBittorrent
+(N) 2025-10-22T15:57:25 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-10-22T15:57:25 - Peer ID: "-qB5120-"
+(I) 2025-10-22T15:57:25 - HTTP User-Agent: "qBittorrent/5.1.2"
+(I) 2025-10-22T15:57:25 - Distributed Hash Table (DHT) support: ON
+(I) 2025-10-22T15:57:25 - Local Peer Discovery support: ON
+(I) 2025-10-22T15:57:25 - Peer Exchange (PeX) support: ON
+(I) 2025-10-22T15:57:25 - Anonymous mode: OFF
+(I) 2025-10-22T15:57:25 - Encryption support: FORCED
+(I) 2025-10-22T15:57:25 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-10-22T15:57:25 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-10-22T15:57:25 - Successfully listening on IP. IP: "172.20.0.2". Port: "TCP/6881"
+(I) 2025-10-22T15:57:25 - Successfully listening on IP. IP: "172.20.0.2". Port: "UTP/6881"
+(I) 2025-10-22T15:57:25 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-10-22T15:57:25 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "The.Perfect.Neighbor.2025.1080p.WEB.h264-EDITH"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "I.Came.By.2022.1080p.WEB.H264-CUPCAKES"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "Felidae (1994) GERMAN DUAL 576p DVD AI AV1 Opus + Extras [RAV1NE]"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "Cure.1997.iNTERNAL.BDRip.x264-MANiC"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "Godless.S01.S01.COMPLETE.1080p.WEBRip.6CH.x265.HEVC-PSA"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "Primal Fear 1996 Remastered 1080p BluRay HEVC x265 5.1 BONE"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "[bitsearch.to] Bullet.Train.2022.REPACK.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA"
+(N) 2025-10-22T15:57:25 - Restored torrent. Torrent: "Unknown Number The High School Catfish (2025) (1080p) [WEBRip] [5.1] [YTS MX]"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "Midsommar 2019 Directors Cut 1080p BluRay REMUX AVC DTS-HD MA 5."
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "Redline.2009.1080p.BluRay.x264-nikt0"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "[bitsearch.to] www.UIndex.org    -    War Dogs 2016 1080p AMZN WEB-DL DDP5 1 H 264-GPRS"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "Come.And.See.1985.1080p.BluRay.x264.EAC3-SARTRE"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "Perfect Days (2023) FullHD 1080p.H264 Ita Jap AC3 5.1 Sub Ita Eng - realDMDJ DDL_Ita"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "Searching.for.Sugar.Man.2012.1080p.BluRay.X264-7SinS [PublicHD]"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "Compulsion.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264-BYNDR.mkv"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "Dept.Q.S01.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "Limitless (2011) WEBRip 1080p HEVC EAC3 ENG ITA SUB ENG ITA - Lul..."
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "The.Secret.Life.Of.Walter.Mitty.2013.1080p.WEB-DL.H264-PublicHD"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265."
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "[bitsearch.to] www.UIndex.org    -    The Mule 2018 1080p AMZN WEB-DL DDP5 1 H 264-GPRS"
+(N) 2025-10-22T15:57:26 - Restored torrent. Torrent: "[bitsearch.to] Train to Busan (2016) 1080p x265 ita eng kor ac3 sub ita eng - MIRCrew.mkv"
+(I) 2025-10-22T15:57:26 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Tue Sep 30 22:26:02 2025.
+(N) 2025-10-22T15:57:26 - Using built-in WebUI.
+(N) 2025-10-22T15:57:26 - WebUI translation for selected locale (en) has been successfully loaded.
+(N) 2025-10-22T15:57:26 - WebUI: Now listening on IP: *, port: 5080
+(I) 2025-10-22T15:57:26 - Detected external IP. IP: "187.180.164.237"
+(N) 2025-10-22T15:58:10 - WebAPI login success. IP: ::ffff:172.20.0.10
+(N) 2025-10-22T15:58:24 - WebAPI login success. IP: ::ffff:172.20.0.7
+(N) 2025-10-22T15:58:38 - WebAPI login success. IP: ::ffff:172.20.0.8
+(N) 2025-10-22T16:06:49 - Detected an attempt to add a duplicate torrent. Source: magnet:?xt=urn:btih:DCD72D51FB8B30B29FE1E7EC74C8690ED79BA6B5&dn=The+End+of+the+Fucking+World+-+SEASON+01+%5BS01%5D+COMPLETE+1080p+WEBRip+6CH+x265+HEVC&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce. Existing torrent: The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265.. Result: Merging of trackers is disabled
+(N) 2025-10-22T16:06:49 - Detected an attempt to add a duplicate torrent. Source: magnet:?xt=urn:btih:DCD72D51FB8B30B29FE1E7EC74C8690ED79BA6B5&dn=The+End+of+the+Fucking+World+-+SEASON+01+%5BS01%5D+COMPLETE+1080p+WEBRip+6CH+x265+HEVC&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce. Existing torrent: The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265.. Result: Merging of trackers is disabled
+(N) 2025-10-22T16:06:52 - Detected an attempt to add a duplicate torrent. Source: magnet:?xt=urn:btih:DCD72D51FB8B30B29FE1E7EC74C8690ED79BA6B5&dn=The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265.&tr=http%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.auctor.tv%3a6969%2fannounce&tr=udp%3a%2f%2fopentracker.i2p.rocks%3a6969%2fannounce&tr=https%3a%2f%2fopentracker.i2p.rocks%3a443%2fannounce&tr=udp%3a%2f%2fopen.demonii.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a6969%2fannounce&tr=http%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2fopen.stealth.si%3a80%2fannounce&tr=udp%3a%2f%2ftracker.torrent.eu.org%3a451%2fannounce&tr=udp%3a%2f%2ftracker.moeking.me%3a6969%2fannounce&tr=udp%3a%2f%2fexplodie.org%3a6969%2fannounce&tr=udp%3a%2f%2fexodus.desync.com%3a6969%2fannounce&tr=udp%3a%2f%2fuploads.gamecoast.net%3a6969%2fannounce&tr=udp%3a%2f%2ftracker1.bt.moack.co.kr%3a80%2fannounce&tr=udp%3a%2f%2ftracker.tiny-vps.com%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.theoks.net%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.skyts.net%3a6969%2fannounce&tr=udp%3a%2f%2ftracker-udp.gbitt.info%3a80%2fannounce&tr=udp%3a%2f%2fopen.tracker.ink%3a6969%2fannounce&tr=udp%3a%2f%2fmovies.zsw.ca%3a6969%2fannounce. Existing torrent: The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265.. Result: Merging of trackers is disabled
+(N) 2025-10-22T16:06:54 - Added new torrent. Torrent: "The End of the Fucking World S01 1080p NF WEBRip x265 HEVC 6CH-MRN"
+(N) 2025-10-22T17:58:05 - Torrent removed. Torrent: "The End of the Fucking World S01 1080p NF WEBRip x265 HEVC 6CH-MRN"
+(N) 2025-10-22T17:59:55 - WebUI Set location: moving "The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265.", from "/downloads/data" to "/downloads/tvshows"
+(N) 2025-10-22T17:59:55 - Enqueued torrent move. Torrent: "The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265.". Source: "/downloads/data". Destination: "/downloads/tvshows"
+(N) 2025-10-22T17:59:55 - Start moving torrent. Torrent: "The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265.". Destination: "/downloads/tvshows"
+(N) 2025-10-22T17:59:55 - Moved torrent successfully. Torrent: "The.End.of.the.Fucking.World.S01.COMPLETE.1080p.WEBRip.6CH.x265.". Destination: "/downloads/tvshows"
+(N) 2025-10-23T08:45:02 - WebAPI login success. IP: ::ffff:172.20.0.10
+(N) 2025-10-23T08:45:28 - Torrent removed. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-23T08:45:28 - Torrent content removed. Torrent: "MobLand (2025) S01 (1080p DS4K AMZN Webrip x265 10bit EAC3 5.1 - DNU)[TAoE]"
+(N) 2025-10-23T08:49:10 - Added new torrent. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix"
+(N) 2025-10-23T08:57:17 - Torrent download finished. Torrent: "MobLand.S01.1080p.AMZN.WEB-DL.DDP5.1.H.265-PrimeFix"
