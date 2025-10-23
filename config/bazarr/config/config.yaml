@@ -1,9 +1,10 @@
 ---
 addic7ed:
-  cookies: ''
-  password: ''
-  user_agent: ''
-  username: ''
+  cookies: PHPSESSID=39femf7m8a6ibvb49bvtk6bir7; wikisubtitlesuser=713269; wikisubtitlespass=99bb7843ade2d4de99b7d4cd59bb4466
+  password: djkas95
+  user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101
+    Firefox/144.0
+  username: sharch
   vip: false
 analytics:
   enabled: true
@@ -70,6 +71,7 @@ general:
   - opensubtitlescom
   - legendasnet
   - gestdown
+  - addic7ed
   flask_secret_key: 175bc0461317865c0cb931b2288ed3c3
   hi_extension: hi
   ignore_ass_subs: false
