@@ -1,5 +1,5 @@
 #!/bin/bash
-# filepath: cpu_temp.sh
+# filepath: htemp
 
 # Temperature sensor paths for OrangePi
 readonly CPU_TEMP_PATH="/sys/devices/virtual/thermal/thermal_zone0/temp"
