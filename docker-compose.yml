@@ -76,6 +76,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - UMASK=002
       - TZ=America/Sao_Paulo
     volumes:
       - jellyseerr-config:/app/config
@@ -94,7 +95,7 @@ services:
       - TZ=America/Sao_Paulo
     volumes:
       - jellyfin-config:/config
-      - torrent-downloads:/data
+      - torrent-downloads:/downloads
     devices:
       - /dev/dri:/dev/dri # mount gpu devices for hardware acceleration
     group_add:
@@ -153,7 +154,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /media/STORAGE/torrents
+      device: /media/STORAGE/downloads
   radarr-config:
     driver: local
     driver_opts:
