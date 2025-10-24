@@ -13,6 +13,7 @@ services:
       - UMASK=002
       - TZ=America/Sao_Paulo
       - WEBUI_PORT=5080
+      - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
       - qbittorrent-config:/config
       - torrent-downloads:/downloads
