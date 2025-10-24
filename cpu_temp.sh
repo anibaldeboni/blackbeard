@@ -2,8 +2,8 @@
 # filepath: cpu_temp.sh
 
 # Temperature sensor paths for OrangePi
-readonly CPU_TEMP_PATH="/sys/devices/virtual/thermal/thermal_zone1/temp"
-readonly GPU_TEMP_PATH="/sys/devices/virtual/thermal/thermal_zone0/temp"
+readonly CPU_TEMP_PATH="/sys/devices/virtual/thermal/thermal_zone0/temp"
+readonly GPU_TEMP_PATH="/sys/devices/virtual/thermal/thermal_zone1/temp"
 
 # ANSI color codes
 readonly COLOR_RESET='\033[0m'
