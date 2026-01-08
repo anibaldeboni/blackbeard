@@ -10,6 +10,7 @@ links:
 
 caps:
   categorymappings:
+    - {id: 54, cat: XXX, desc: Ai Generated"}
     - {id: 4, cat: XXX, desc: Amateur"}
     - {id: 5, cat: XXX, desc: Anal"}
     - {id: 6, cat: XXX, desc: Asian"}
@@ -191,4 +192,4 @@ search:
     minimumseedtime:
       # 48 hours (as seconds = 2 x 24 x 60 x 60)
       text: 172800
-# json UNIT3D 9.1.7 (custom)
+# json UNIT3D 9.2.0 (custom)

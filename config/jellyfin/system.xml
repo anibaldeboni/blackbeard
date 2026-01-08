@@ -157,8 +157,8 @@
       <Enabled>true</Enabled>
     </RepositoryInfo>
     <RepositoryInfo>
-      <Name>Custom Logo</Name>
-      <Url>https://raw.githubusercontent.com/ImLacy/Jellyfin-CustomLogo/refs/heads/main/manifest.json</Url>
+      <Name>Intro Skipper</Name>
+      <Url>https://intro-skipper.org/manifest.json</Url>
       <Enabled>true</Enabled>
     </RepositoryInfo>
   </PluginRepositories>

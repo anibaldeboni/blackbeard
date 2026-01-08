@@ -107,12 +107,11 @@ caps:
     book-search: [q]
 
 settings:
-  - name: username
+  - name: cookie
     type: text
-    label: Username
-  - name: password
-    type: password
-    label: Password
+    label: Cookie
+  - name: info_cookie
+    type: info_cookie
   - name: multilang
     type: checkbox
     label: Replace MULTi by another language in release name
@@ -126,15 +125,9 @@ settings:
       MULTi POLISH: MULTi POLISH
 
 login:
-  path: login.php
-  method: form
-  form: form[name="login"]
+  method: cookie
   inputs:
-    uid: "{{ .Config.username }}"
-    pwd: "{{ .Config.password }}"
-    keeplogged: 1
-  error:
-    - selector: font[color="#FF0000"]
+    cookie: "{{ .Config.cookie }}"
   test:
     path: index.php
     selector: a[href="logout.php"]
@@ -149,7 +142,7 @@ search:
     # does not support sorting results, or imdbid searching, or have imdb in results
 
   rows:
-    selector: div.boxcontent > table > tbody > tr:has(a.link1)
+    selector: div.boxcontent > table:has(a.link2)
 
   fields:
     categorydesc:
@@ -157,13 +150,7 @@ search:
       optional: true
       default: Pozostale
     title_phase1:
-      selector: a.link1
-      attribute: href
-      filters:
-        - name: regexp
-          args: f=(.+?)\.torrent
-        - name: urldecode
-        - name: htmldecode
+      selector: a.link2[href^="details.php?id="]
     title_multilang:
       text: "{{ .Result.title_phase1 }}"
       filters:
@@ -177,10 +164,13 @@ search:
       selector: a[href^="details.php?id="]
       attribute: href
     download:
-      selector: a.link1
+      selector: a[href^="details.php?id="]
       attribute: href
+      filters:
+        - name: replace
+          args: ["details.php?id=", "download.php?torrent="]
     poster:
-      selector: img
+      selector: img.poster-torrent
       attribute: src
     date:
       selector: td.pole
@@ -193,7 +183,7 @@ search:
       selector: td.pole
       filters:
         - name: regexp
-          args: "Rozmiar: (\\d+\\.\\d+ [T|G|M|K|k]B)"
+          args: "(\\d+\\.\\d+ [T|G|M|K|k]B)"
     seeders:
       selector: td.pole
       filters:

@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
   radarr:
     container_name: radarr
-    image: lscr.io/linuxserver/radarr:5.27.5
+    image: lscr.io/linuxserver/radarr:latest
     networks:
       - jollyroger
     environment:
@@ -39,7 +39,7 @@ services:
       - torrent-downloads:/downloads
     restart: unless-stopped
   sonarr:
-    image: linuxserver/sonarr:4.0.15
+    image: linuxserver/sonarr:latest
     container_name: sonarr
     networks:
       - jollyroger
@@ -56,7 +56,7 @@ services:
     restart: unless-stopped
   prowlarr:
     container_name: prowlarr
-    image: linuxserver/prowlarr:2.0.5
+    image: linuxserver/prowlarr:latest
     networks:
       - jollyroger
     environment:
@@ -70,7 +70,7 @@ services:
       - 9696:9696
     restart: unless-stopped
   jellyseerr:
-    image: fallenbagel/jellyseerr:2.7.3
+    image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
     networks:
       - jollyroger

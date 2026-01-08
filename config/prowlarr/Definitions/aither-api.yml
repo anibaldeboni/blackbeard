@@ -20,6 +20,7 @@ caps:
     tv-search: [q, season, ep, imdbid, tvdbid, tmdbid]
     movie-search: [q, imdbid, tmdbid]
     book-search: [q]
+  allowtvsearchimdb: true
 
 settings:
   - name: apikey
@@ -191,4 +192,4 @@ search:
     minimumseedtime:
       # 5 days (as seconds = 5 x 24 x 60 x 60)
       text: 432000
-# json UNIT3D 9.1.7
+# json UNIT3D 9.2.0

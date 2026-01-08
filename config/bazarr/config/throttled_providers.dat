@@ -1,1 +1,1 @@
-{'opensubtitlescom': ('DownloadLimitExceeded', datetime.datetime(2025, 10, 23, 19, 18, 33, 102890), '6 hours'), 'legendasnet': ('ConfigurationError', datetime.datetime(2025, 10, 24, 2, 30, 11, 29473), '12 hours')}
+{'legendasnet': ('ConfigurationError', datetime.datetime(2026, 1, 8, 22, 15, 13, 212790), '12 hours'), 'podnapisi': ('ConnectionError', datetime.datetime(2026, 1, 8, 10, 30, 50, 714677), '10 minutes')}

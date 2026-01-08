@@ -72,11 +72,18 @@ general:
   - legendasnet
   - gestdown
   - addic7ed
+  - yifysubtitles
+  - podnapisi
+  - tvsubtitles
+  external_webhook_password: ''
+  external_webhook_url: ''
+  external_webhook_username: ''
   flask_secret_key: 175bc0461317865c0cb931b2288ed3c3
   hi_extension: hi
   ignore_ass_subs: false
   ignore_pgs_subs: false
   ignore_vobsub_subs: false
+  instance_name: Bazarr
   ip: '*'
   language_equals: []
   minimum_score: 90
@@ -89,12 +96,12 @@ general:
   parse_embedded_audio_track: false
   path_mappings:
   - - /downloads/tvshows/
-    - /media-library/tvshows/
+    - /downloads/tvshows/
   - - ''
     - ''
   path_mappings_movie:
   - - /downloads/movies/
-    - /media-library/movies/
+    - /downloads/movies/
   - - ''
     - ''
   port: 6767
@@ -115,6 +122,7 @@ general:
   upgrade_manual: true
   upgrade_subs: true
   use_embedded_subs: true
+  use_external_webhook: false
   use_plex: false
   use_postprocessing: false
   use_postprocessing_threshold: false
@@ -187,6 +195,7 @@ opensubtitlescom:
 plex:
   apikey: ''
   auth_method: apikey
+  client_identifier: ''
   disable_auto_migration: false
   email: ''
   encryption_key: GHif_HR-31NvRO1I0PncbeY99Gt1pz32AhkMhQAtzmM
@@ -194,9 +203,11 @@ plex:
   migration_attempted: false
   migration_successful: false
   migration_timestamp: ''
-  movie_library: ''
+  movie_library: []
+  movie_library_ids: []
   port: 32400
-  series_library: ''
+  series_library: []
+  series_library_ids: []
   server_local: false
   server_machine_id: ''
   server_name: ''
@@ -217,6 +228,7 @@ postgresql:
   host: localhost
   password: ''
   port: 5432
+  url: ''
   username: ''
 proxy:
   exclude:
@@ -238,6 +250,7 @@ radarr:
   http_timeout: 60
   ip: radarr
   movies_sync: 60
+  movies_sync_on_live: true
   only_monitored: true
   port: 7878
   ssl: false
@@ -271,6 +284,7 @@ sonarr:
   only_monitored: false
   port: 8989
   series_sync: 60
+  series_sync_on_live: true
   ssl: false
   sync_only_monitored_episodes: false
   sync_only_monitored_series: false
@@ -280,6 +294,8 @@ subdl:
 subf2m:
   user_agent: ''
   verify_ssl: true
+subsource:
+  apikey: ''
 subsync:
   checker:
     blacklisted_languages: []
@@ -306,6 +322,7 @@ translator:
   default_score: 50
   gemini_key: ''
   gemini_model: gemini-2.0-flash
+  lingarr_token: ''
   lingarr_url: http://lingarr:9876
   translator_info: true
   translator_type: google_translate

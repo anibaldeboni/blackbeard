@@ -1,12 +1,12 @@
 ---
 id: betor
-name: Catálogo Betor
+name: Catálogo BeTor
 description: Agregador de agregadores ;)
 language: pt-BR
 type: public
 encoding: UTF-8
 links:
-- https://catalogo-betor.dgls.me/
+- https://catalogo.betor.top/
 
 caps:
   categories:
@@ -14,14 +14,19 @@ caps:
     tv: TV
   modes:
     search: [q]
-    tv-search: [q, imdbid]
+    tv-search: [q, imdbid, season]
     movie-search: [q, imdbid]
 
 search:
   paths:
-    - path: "{{ if .Query.Keywords }}/search/{{ else }}/{{ end }}{{ if .Query.IMDBID }}imdb/{{ .Query.IMDBID }}/{{ else }}{{ end }}"
+    - path: "{{ if .Query.Q }}/search/{{ else }}/{{ end }}{{ if .Query.IMDBID }}imdb/{{ .Query.IMDBID }}/{{ else }}filmes/{{ end }}"
       inputs:
-        q: "{{ .Keywords }}"
+        q: "{{ .Query.Q }}"
+      categories: ["movie"]
+    - path: "{{ if .Query.Q }}/search/{{ else }}/{{ end }}{{ if .Query.IMDBID }}imdb/{{ .Query.IMDBID }}/{{ else }}{{ end }}{{ if and (.Query.IMDBID) (.Query.Season) }}season/{{ .Query.Season }}/{{ else }}{{ end }}{{ if or (.Query.IMDBID) (.Query.Season) }}{{ else }}series/{{ end }}"
+      inputs:
+        q: "{{ .Query.Q }}"
+      categories: ["tv"]
   rows:
     selector: "[data-torrent]"
   fields:
