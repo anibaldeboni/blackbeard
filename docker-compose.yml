@@ -148,6 +148,21 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
+  profilarr:
+    image: santiagosayshey/profilarr:latest # or :beta
+    container_name: profilarr
+    networks:
+      - jollyroger
+    ports:
+      - "6868:6868"
+    volumes:
+      - ${PWD}/config/profilarr:/config
+    environment:
+      - PUID=1000 # Set to your user ID
+      - PGID=1000 # Set to your group ID
+      - UMASK=022 # Optional, defaults to 022
+      - TZ=America/Sao_Paulo # Set your timezone
+    restart: unless-stopped
 
 volumes:
   torrent-downloads:
