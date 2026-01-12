@@ -413,7 +413,7 @@ services:
       - WATCHTOWER_SCHEDULE=0 0 4 * * *   # 4 AM diariamente (cron format)
       - WATCHTOWER_INCLUDE_RESTARTING=true
       - WATCHTOWER_INCLUDE_STOPPED=false
-      - DOCKER_API_VERSION=1.44           # Força versão da API compatível
+      - DOCKER_API_VERSION=1.52           # Força versão da API compatível
       - TZ=${TZ:-America/Sao_Paulo}
     restart: unless-stopped
     labels:
