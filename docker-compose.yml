@@ -218,8 +218,8 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:6767/ping"]
       interval: 30s
       timeout: 10s
-      retries: 3
-      start_period: 40s
+      retries: 5
+      start_period: 120s  # Aumentado para 2 minutos
     deploy:
       resources:
         limits:
@@ -373,7 +373,7 @@ services:
       qbittorrent:
         condition: service_healthy
       bazarr:
-        condition: service_healthy
+        condition: service_started  # Não espera estar healthy, apenas iniciado
     networks:
       - jollyroger
     volumes:
