@@ -1,196 +1,217 @@
-# Blackbeard Media Stack 🏴‍☠️
+# Blackbeard Media Stack
 
-Blackbeard is a comprehensive Docker-based home media server solution that provides automated media acquisition, management, and streaming capabilities. This collection of services creates a complete self-hosted entertainment ecosystem.
+A comprehensive Docker-based home media server solution providing automated media acquisition, management, and streaming. Version 2.0 brings health checks, resource management, and reliability improvements.
 
-**Version 2.0** - Refatoração completa com health checks, gestão de recursos e melhorias de confiabilidade.
+## Services
 
-## 📦 Serviços Inclusos
+| Service | Port(s) | Description |
+|---------|---------|-------------|
+| qBittorrent | 5080, 6881 | Torrent client with VueTorrent interface |
+| Radarr | 7878 | Movie management with automated search |
+| Sonarr | 8989 | TV series management with episode tracking |
+| Prowlarr | 9696 | Unified indexer manager |
+| Bazarr | 6767 | Automatic subtitle management |
+| Jellyfin | 8096, 7359/udp, 8920 | Media server with Rockchip GPU acceleration |
+| Jellyseerr | 5055 | Media request interface |
+| Profilarr | 6868 | Quality profile manager |
+| FlareSolverr | 8191 | Cloudflare bypass proxy |
+| Nginx | 80, 443 | Reverse proxy |
+| Watchtower | - | Automatic container updates |
 
-| Serviço | Porta | Função |
-|---------|-------|--------|
-| **qBittorrent** | 5080 | Cliente de download torrent com interface VueTorrent |
-| **Radarr** | 7878 | Gerenciador de filmes com busca automatizada |
-| **Sonarr** | 8989 | Gerenciador de séries com tracking de episódios |
-| **Prowlarr** | 9696 | Gerenciador de indexadores integrado |
-| **Bazarr** | 6767 | Gerenciador de legendas automático |
-| **Jellyfin** | 8096 | Servidor de mídia com hardware acceleration |
-| **Jellyseerr** | 5055 | Interface de requisições de mídia |
-| **Profilarr** | 6868 | Gerenciador de perfis de qualidade |
-| **FlareSolverr** | 8191 | Proxy para bypass de Cloudflare |
-| **Nginx** | 80/443 | Reverse proxy unificado |
+## Requirements
 
-## 🚀 Instalação Rápida
-
-### Pré-requisitos
 - Docker Engine 20.10+
 - Docker Compose 2.0+
-- 8GB+ RAM recomendado
-- GPU para hardware acceleration (opcional)
+- 8GB+ RAM recommended
+- Rockchip SoC with Hantro VPU for hardware acceleration (optional)
+- Alternative: Any GPU with `/dev/dri` support (use commented Jellyfin config)
 
-### Passo a Passo
+## Quick Start
 
 ```bash
-# 1. Criar a rede Docker
+# Create Docker network
 docker network create jollyroger
 
-# 2. Copiar e configurar variáveis de ambiente
+# Configure environment variables
 cp .env.example .env
-nano .env  # Ajustar PUID, PGID, paths, etc.
+nano .env  # Set PUID, PGID, paths
 
-# 3. Iniciar o stack (recomendado)
+# Start the stack
 ./manage-stack.sh start
 
-# OU usando docker compose diretamente
-docker compose up -d
-
-# 4. Verificar status e health
+# Check status
 ./manage-stack.sh health
 ```
 
-### Configurações Importantes no .env
+### Environment Configuration
 
-Execute `id` no terminal para obter PUID e PGID:
-```bash
-PUID=1000              # Seu user ID
-PGID=1000              # Seu group ID
-TZ=America/Sao_Paulo   # Seu timezone
-DOWNLOADS_PATH=/media/STORAGE/downloads  # Path de downloads
-```
-
-## 🎮 Gerenciamento do Stack
-
-### Script de Gerenciamento (Recomendado)
+Run `id` to get your user and group IDs:
 
 ```bash
-./manage-stack.sh start          # Iniciar todos os serviços
-./manage-stack.sh stop           # Parar todos os serviços
-./manage-stack.sh restart        # Reiniciar todos os serviços
-./manage-stack.sh status         # Ver status
-./manage-stack.sh health         # Ver health checks
-./manage-stack.sh logs [service] # Ver logs
-./manage-stack.sh restart-svc <service>  # Reiniciar um serviço
-./manage-stack.sh update         # Atualizar imagens
-./manage-stack.sh backup         # Backup de configurações
-./manage-stack.sh resources      # Ver uso de recursos
-./manage-stack.sh help           # Ajuda completa
+PUID=1000                              # Your user ID
+PGID=1000                              # Your group ID
+TZ=America/Sao_Paulo                   # Your timezone
+DOWNLOADS_PATH=/media/STORAGE/downloads # Download location
 ```
 
-## 📖 Configuração Inicial dos Serviços
+## Stack Management
 
-### 1. qBittorrent (5080)
-- **Usuário:** `admin`
-- **Senha:** Execute `docker logs qbittorrent` para ver
-- **IMPORTANTE:** Altere a senha em Tools → Options → WebUI
-- Configure downloads para `/downloads`
+The `manage-stack.sh` script provides convenient management commands:
 
-### 2. Prowlarr (9696) → Configure Primeiro!
-- Adicione seus indexadores favoritos
-- Em Settings → Apps, adicione Radarr e Sonarr
-- Indexadores sincronizam automaticamente
+```bash
+./manage-stack.sh start              # Start all services
+./manage-stack.sh stop               # Stop all services
+./manage-stack.sh restart            # Restart all services
+./manage-stack.sh status             # View status
+./manage-stack.sh health             # Check health status
+./manage-stack.sh logs [service]     # View logs
+./manage-stack.sh restart-svc <svc>  # Restart specific service
+./manage-stack.sh update             # Update images
+./manage-stack.sh backup             # Backup configurations
+./manage-stack.sh resources          # View resource usage
+./manage-stack.sh help               # Show help
+```
 
-### 3. Radarr (7878) & Sonarr (8989)
-- Adicione qBittorrent como download client:
+## Service Configuration
+
+### 1. qBittorrent (Port 5080)
+- Default user: `admin`
+- Password: Check `docker logs qbittorrent`
+- Change password immediately in Tools > Options > WebUI
+- Set download path to `/downloads`
+
+### 2. Prowlarr (Port 9696) - Configure First
+- Add your preferred indexers
+- Connect Radarr and Sonarr in Settings > Apps
+- Indexers sync automatically to connected apps
+
+### 3. Radarr (Port 7878) & Sonarr (Port 8989)
+- Add qBittorrent as download client:
   - Host: `qbittorrent`, Port: `5080`
-  - Category: `movies` (Radarr) ou `tv` (Sonarr)
-- Root Folders:
+  - Category: `movies` (Radarr) or `tv` (Sonarr)
+- Set root folders:
   - Radarr: `/downloads/movies`
   - Sonarr: `/downloads/tv`
 
-### 4. Bazarr (6767)
-- Conecte ao Radarr e Sonarr
-- Configure providers de legendas
-- Defina idiomas (PT-BR, EN, etc.)
+### 4. Bazarr (Port 6767)
+- Connect to Radarr and Sonarr
+- Configure subtitle providers
+- Set preferred languages
 
-### 5. Jellyfin (8096)
-- Complete o setup wizard
-- Adicione bibliotecas:
-  - Filmes: `/downloads/movies`
-  - Séries: `/downloads/tv`
-- Configure hardware acceleration (Settings → Playback)
+### 5. Jellyfin (Port 8096)
+- Complete the setup wizard
+- Add media libraries:
+  - Movies: `/downloads/movies`
+  - TV Shows: `/downloads/tv`
+- Enable hardware acceleration in Settings > Playback
 
-### 6. Jellyseerr (5055)
-- Conecte ao Jellyfin (URL: `http://jellyfin:8096`)
-- Conecte ao Radarr e Sonarr
-- Configure permissões de usuários
+### 6. Jellyseerr (Port 5055)
+- Connect to Jellyfin at `http://jellyfin:8096`
+- Link Radarr and Sonarr
+- Configure user permissions
 
-### 7. Profilarr (6868)
-- Conecte ao Radarr e Sonarr
-- Configure perfis de qualidade automatizados
-
-## 🔧 Configuração Avançada
+## Advanced Configuration
 
 ### Hardware Acceleration (Jellyfin)
 
-Jellyfin está configurado para GPU via `/dev/dri`:
+Jellyfin uses the `nyanmisaka/jellyfin:latest-rockchip` image with Rockchip GPU support (Hantro VPU). The following devices are mapped:
+
+- `/dev/dri` - DRM rendering
+- `/dev/video0` - RGA (scaling/conversion)
+- `/dev/video1` - Hantro VPU Decoder
+- `/dev/video2` - Hantro VPU Encoder
 
 ```bash
-# Verificar dispositivos
+# Verify devices
 ls -la /dev/dri
+ls -la /dev/video*
 
-# Verificar grupos (ajuste no .env se necessário)
-getent group video   # Normalmente 44
-getent group render  # Normalmente 105
+# Check groups
+getent group video   # Usually 44
+getent group render  # Usually 105
 ```
 
-### Ajustar Limites de Recursos
+> **Note:** For non-Rockchip systems, a commented alternative using `lscr.io/linuxserver/jellyfin` is available in docker-compose.yml.
 
-Edite `.env` para ajustar CPU/memória:
+### Resource Limits
+
+Adjust CPU and memory limits in `.env`:
 
 ```bash
-# Reduzir Jellyfin
 JELLYFIN_CPU_LIMIT=2.0
 JELLYFIN_MEM_LIMIT=2g
-
-# Aumentar qBittorrent
 QBITTORRENT_CPU_LIMIT=4.0
 QBITTORRENT_MEM_LIMIT=4g
 ```
 
+### Automatic Updates (Watchtower)
+
+Watchtower is included in the stack and configured to automatically update containers daily at 4 AM. It only updates containers with the `com.centurylinklabs.watchtower.enable=true` label.
+
+Configuration:
+- `WATCHTOWER_CLEANUP=true` - Removes old images after update
+- `WATCHTOWER_LABEL_ENABLE=true` - Only updates labeled containers
+- `WATCHTOWER_SCHEDULE=0 0 4 * * *` - Runs daily at 4 AM
+- Watchtower itself is excluded from auto-updates
+
 ### Nginx Reverse Proxy
 
-Configure `config/nginx/nginx.conf` para proxy reverso unificado.
+Nginx provides a unified access point for all services. The configuration file is located at `config/nginx/nginx.conf`.
 
-Exemplo de configuração:
-```nginx
-server {
-    listen 80;
-    server_name radarr.example.com;
+**Server Names:** `localhost`, `blackbeard.local`
 
-    location / {
-        proxy_pass http://radarr:7878;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
+**Available Routes:**
+
+| Path | Service | Notes |
+|------|---------|-------|
+| `/` | Jellyfin | Redirects to `/jellyfin/` |
+| `/jellyfin/` | Jellyfin | Media server (port 8096) |
+| `/jellyseerr` | Jellyseerr | Request manager (port 5055) |
+| `/radarr` | Radarr | Movie manager (port 7878) |
+| `/sonarr` | Sonarr | TV manager (port 8989) |
+| `/bazarr` | Bazarr | Subtitle manager (port 6767) |
+| `/prowlarr` | Prowlarr | Indexer manager (port 9696) |
+| `/qbittorrent/` | qBittorrent | Torrent client (port 5080) |
+
+**Proxy Features:**
+- WebSocket support for real-time updates (Upgrade headers)
+- Automatic retry on backend failures (3 attempts, 30s timeout)
+- Proper forwarding headers (X-Real-IP, X-Forwarded-For/Proto/Host)
+- URL rewriting for sub-path routing
+
+**Important:** Before using the reverse proxy, configure each application's base URL:
+- Radarr/Sonarr/Prowlarr/Bazarr: Settings > General > URL Base (e.g., `/radarr`)
+- qBittorrent: Settings > WebUI > Alternative WebUI enabled
+
+### USB Automount (Optional)
+
+A udev rule is provided to automatically mount USB storage devices, useful for external media drives.
+
+**What it does:**
+- Automatically mounts USB block devices when connected
+- Uses the device label as mount point name (e.g., `/media/STORAGE`)
+- Falls back to device UUID if no label is set (e.g., `/media/1234-ABCD`)
+- Uses `systemd-mount` for non-blocking mount operations
+
+**Installation:**
+```bash
+# Copy the udev rule
+sudo cp udev/99-usb-automount.rules /etc/udev/rules.d/
+
+# Reload udev rules
+sudo udevadm control --reload-rules
+sudo udevadm trigger
 ```
 
-## 🔄 Atualizações Automáticas (Watchtower)
+**Note:** Ensure your `DOWNLOADS_PATH` in `.env` points to the mounted USB device path (e.g., `/media/STORAGE/downloads`).
 
-Todos os serviços possuem label `com.centurylinklabs.watchtower.enable=true`.
+## Backup
 
-Para habilitar atualizações automáticas, adicione Watchtower:
-
-```yaml
-watchtower:
-  image: containrrr/watchtower
-  container_name: watchtower
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-  environment:
-    - WATCHTOWER_CLEANUP=true
-    - WATCHTOWER_LABEL_ENABLE=true
-    - WATCHTOWER_SCHEDULE=0 0 4 * * *  # 4 AM diariamente
-    - TZ=${TZ:-America/Sao_Paulo}
-  restart: unless-stopped
-```
-
-## 💾 Backup
-
-### Automático
+### Automated
 ```bash
 ./manage-stack.sh backup
 ```
-Cria backup em `backups/YYYYMMDD_HHMMSS/`
+Creates backup in `backups/YYYYMMDD_HHMMSS/`
 
 ### Manual
 ```bash
@@ -199,109 +220,77 @@ tar -czf media-stack-backup-$(date +%Y%m%d).tar.gz config/ docker-compose.yml .e
 docker compose up -d
 ```
 
-**Volumes importantes:**
-- `config/` - Todas as configurações
-- `.env` - Variáveis de ambiente
-- `docker-compose.yml` - Definição do stack
+## Troubleshooting
 
-## 🐛 Troubleshooting
-
-### Containers não iniciam na ordem
+### Containers not starting in order
 ```bash
-./manage-stack.sh health  # Verificar health checks
-docker compose logs <service>  # Ver logs específicos
+./manage-stack.sh health
+docker compose logs <service>
 ```
 
-### Problemas de permissão
+### Permission issues
 ```bash
-id  # Verificar PUID/PGID
+id  # Check PUID/PGID
 sudo chown -R $PUID:$PGID ./config
 ```
 
-### Jellyfin não detecta GPU
+### Jellyfin not detecting GPU
 ```bash
-ls -la /dev/dri  # Verificar dispositivo
-id  # Verificar se está nos grupos video e render
-sudo usermod -aG video,render $USER  # Adicionar aos grupos
+ls -la /dev/dri
+sudo usermod -aG video,render $USER
 ```
 
-### Serviço não fica "healthy"
+### Service not healthy
 ```bash
 docker inspect <container> | grep -A 20 Health
-# Aumentar start_period no docker-compose.yml se necessário
 ```
 
-### qBittorrent não conecta
-```bash
-docker compose logs qbittorrent
-docker exec qbittorrent curl -f http://localhost:5080
+## Security Checklist
+
+- Change qBittorrent default password
+- Configure VPN for torrents
+- Use HTTPS with nginx (Let's Encrypt)
+- Regular configuration backups
+- Keep containers updated
+- Configure firewall appropriately
+
+## Version 2.0 Changes
+
+### Critical Fixes
+- Fixed `dependent_on` typo to `depends_on`
+- Added health checks to all services
+- Implemented dependency conditions with `service_healthy`
+- Configurable CPU and memory limits
+
+### New Features
+- Centralized `.env` configuration
+- Management script `manage-stack.sh`
+- Backup and Watchtower labels
+- Tmpfs for Jellyfin transcoding cache
+- Defined hostnames for all containers
+- Standardized UMASK (002)
+- Rockchip GPU support for Jellyfin (Hantro VPU)
+- Watchtower included for automatic updates
+
+### Service Startup Order
+```
+1. qbittorrent + flaresolverr (base services)
+2. prowlarr (depends on flaresolverr)
+3. radarr + sonarr (depend on qbittorrent + prowlarr)
+4. bazarr (depends on radarr + sonarr + flaresolverr)
+5. jellyfin (independent)
+6. jellyseerr + profilarr (depend on radarr + sonarr + jellyfin)
+7. nginx (depends on all services)
 ```
 
-## 📊 Monitoramento
+## Documentation
 
-```bash
-# Uso de recursos em tempo real
-./manage-stack.sh resources
-
-# Logs em tempo real
-./manage-stack.sh logs          # Todos
-./manage-stack.sh logs radarr   # Específico
-
-# Health checks
-./manage-stack.sh health
-```
-
-## 🔐 Segurança
-
-### Checklist de Segurança
-- ✅ Altere senha padrão do qBittorrent
-- ✅ Configure VPN para torrents
-- ✅ Use HTTPS no nginx (Let's Encrypt)
-- ✅ Backup regular das configurações
-- ✅ Mantenha containers atualizados
-- ✅ Configure firewall apropriadamente
-
-### Expor Apenas via Nginx
-Para maior segurança, remova portas diretas e acesse tudo via nginx:
-
-```yaml
-radarr:
-  ports: []  # Sem exposição direta
-```
-
-Acesse via: `http://your-server/radarr`
-
-## 📚 Documentação
-
-- [REFACTORING_CHANGES.md](REFACTORING_CHANGES.md) - Detalhes completos da refatoração v2.0
-- [.env.example](.env.example) - Todas as variáveis disponíveis
-- `./manage-stack.sh help` - Ajuda do script de gerenciamento
-
-## 🆕 Novidades v2.0
-
-### Melhorias Críticas
-✅ Corrigido erro `dependent_on` → `depends_on`
-✅ Health checks em todos os serviços
-✅ Dependências com condição `service_healthy`
-✅ Limites de CPU e memória configuráveis
-
-### Novas Features
-✅ Arquivo `.env` para configuração centralizada
-✅ Script de gerenciamento `manage-stack.sh`
-✅ Labels para backup e Watchtower
-✅ Tmpfs para cache do Jellyfin
-✅ Hostnames definidos
-✅ Organização por categorias
-✅ UMASK padronizado (002)
-
-Veja [REFACTORING_CHANGES.md](REFACTORING_CHANGES.md) para detalhes completos.
-
-## 🏴‍☠️ Filosofia
-
-O nome "Blackbeard" reflete o espírito libertário do auto-hospedagem, proporcionando liberdade e controle total sobre sua biblioteca de entretenimento.
+- [QUICKSTART.md](QUICKSTART.md) - 5-minute setup guide
+- [SUMMARY.md](SUMMARY.md) - Executive summary of v2.0 changes
+- [REFACTORING_CHANGES.md](REFACTORING_CHANGES.md) - Detailed refactoring notes
+- [.env.example](.env.example) - Available environment variables
 
 ---
 
-**Última atualização:** 2026-01-12
-**Versão:** 2.0.0
-**Status:** ✅ Pronto para produção
+**Version:** 2.0.0
+**Status:** Production Ready
