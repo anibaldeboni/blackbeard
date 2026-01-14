@@ -285,9 +285,6 @@ docker inspect <container> | grep -A 20 Health
 
 ## Documentation
 
-- [QUICKSTART.md](QUICKSTART.md) - 5-minute setup guide
-- [SUMMARY.md](SUMMARY.md) - Executive summary of v2.0 changes
-- [REFACTORING_CHANGES.md](REFACTORING_CHANGES.md) - Detailed refactoring notes
 - [.env.example](.env.example) - Available environment variables
 
 ---
