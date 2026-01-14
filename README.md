@@ -1,6 +1,6 @@
 # Blackbeard Media Stack
 
-A comprehensive Docker-based home media server solution providing automated media acquisition, management, and streaming. Version 2.0 brings health checks, resource management, and reliability improvements.
+A comprehensive Docker-based home media server solution providing automated media acquisition, management, and streaming. Version 2.1 brings a unified CLI tool with hardware monitoring and simplified installation.
 
 ## Services
 
@@ -29,48 +29,137 @@ A comprehensive Docker-based home media server solution providing automated medi
 ## Quick Start
 
 ```bash
-# Create Docker network
-docker network create jollyroger
+# Install the stack (creates directories, .env, network)
+./stack.sh stack install
 
-# Configure environment variables
-cp .env.example .env
-nano .env  # Set PUID, PGID, paths
+# Start all services
+./stack.sh stack start
 
-# Start the stack
-./manage-stack.sh start
-
-# Check status
-./manage-stack.sh health
+# Check health status
+./stack.sh stack health
 ```
 
-### Environment Configuration
+The `install` command automatically:
+- Checks Docker and Docker Compose installation
+- Creates the `jollyroger` Docker network
+- Copies `.env.example` to `.env`
+- Detects and configures your UID/GID
+- Creates all config directories
+- Detects GPU devices and configures groups
 
-Run `id` to get your user and group IDs:
+## Stack Management CLI
+
+The unified `stack.sh` script provides all management commands organized by groups:
 
 ```bash
-PUID=1000                              # Your user ID
-PGID=1000                              # Your group ID
-TZ=America/Sao_Paulo                   # Your timezone
-DOWNLOADS_PATH=/media/STORAGE/downloads # Download location
+./stack.sh <group> <command> [options]
 ```
 
-## Stack Management
+### Groups Overview
 
-The `manage-stack.sh` script provides convenient management commands:
+| Group | Description |
+|-------|-------------|
+| `stack` | Stack lifecycle management (install, start, stop, logs) |
+| `backup` | Volume backup and restore operations |
+| `docker` | Docker cleanup operations |
+| `hw` | Hardware monitoring (temperature, GPU/VPU) |
+
+### Stack Commands
 
 ```bash
-./manage-stack.sh start              # Start all services
-./manage-stack.sh stop               # Stop all services
-./manage-stack.sh restart            # Restart all services
-./manage-stack.sh status             # View status
-./manage-stack.sh health             # Check health status
-./manage-stack.sh logs [service]     # View logs
-./manage-stack.sh restart-svc <svc>  # Restart specific service
-./manage-stack.sh update             # Update images
-./manage-stack.sh backup             # Backup configurations
-./manage-stack.sh resources          # View resource usage
-./manage-stack.sh help               # Show help
+# Setup
+./stack.sh stack install            # First-time installation
+./stack.sh stack check              # Verify installation status
+./stack.sh stack uninstall          # Remove containers and network
+
+# Runtime
+./stack.sh stack start              # Start all services
+./stack.sh stack stop               # Stop all services
+./stack.sh stack restart            # Restart all services
+./stack.sh stack status             # View container status
+./stack.sh stack health             # Check health status
+./stack.sh stack logs [service]     # View logs (all or specific service)
+./stack.sh stack restart-svc <svc>  # Restart specific service
+./stack.sh stack update             # Pull new images and recreate
+./stack.sh stack resources          # View CPU/memory usage
+./stack.sh stack validate           # Validate docker-compose config
 ```
+
+### Backup Commands
+
+Backups use the `backup.enable=true` label to identify important volumes.
+
+```bash
+./stack.sh backup volumes           # List volumes marked for backup
+./stack.sh backup all               # Backup all marked volumes
+./stack.sh backup volume <name>     # Backup specific volume
+./stack.sh backup restore <file>    # Restore from backup file
+./stack.sh backup list              # List available backups
+./stack.sh backup cleanup [days]    # Remove old backups (default: 7 days)
+
+# Custom backup location
+BACKUP_DIR=/mnt/nas ./stack.sh backup all
+```
+
+### Docker Cleanup Commands
+
+```bash
+./stack.sh docker disk              # Show disk usage
+./stack.sh docker list              # List unused images
+./stack.sh docker dangling          # Remove dangling images (safe)
+./stack.sh docker prune             # Remove all unused images
+./stack.sh docker prune-old [days]  # Remove images older than N days
+./stack.sh docker clean             # Full cleanup (containers, networks, images)
+./stack.sh docker protected         # Show images in use
+```
+
+### Hardware Monitoring Commands (OrangePi/RK3566)
+
+```bash
+./stack.sh hw temp                  # Show CPU and GPU temperature
+./stack.sh hw temp cpu              # Show CPU temperature only
+./stack.sh hw temp gpu              # Show GPU temperature only
+./stack.sh hw temp-monitor [sec]    # Monitor temperature continuously
+./stack.sh hw gpu                   # Show GPU/VPU status
+./stack.sh hw gpu-monitor [sec]     # Monitor GPU/VPU continuously
+./stack.sh hw status                # Full hardware status
+```
+
+Temperature color coding:
+- **Green** - Cool: < 45°C
+- **Yellow** - Normal: 45-59°C
+- **Orange** - Warm: 60-74°C
+- **Red** - Hot: 75-84°C
+- **Bold Red** - Critical: >= 85°C
+
+## Environment Configuration
+
+The `.env` file is created automatically during installation. Key variables:
+
+```bash
+# User/Group IDs (auto-detected by install)
+PUID=1000
+PGID=1000
+
+# Timezone
+TZ=America/Sao_Paulo
+
+# Storage paths
+DOWNLOADS_PATH=/media/STORAGE/downloads
+CONFIG_BASE_PATH=./config
+
+# Resource limits (CPU cores / memory)
+JELLYFIN_CPU_LIMIT=4.0
+JELLYFIN_MEM_LIMIT=4g
+QBITTORRENT_CPU_LIMIT=2.0
+QBITTORRENT_MEM_LIMIT=2g
+
+# GPU groups (auto-detected by install)
+GPU_VIDEO_GROUP=44
+GPU_RENDER_GROUP=105
+```
+
+Run `id` to verify your user and group IDs.
 
 ## Service Configuration
 
@@ -129,24 +218,17 @@ ls -la /dev/video*
 # Check groups
 getent group video   # Usually 44
 getent group render  # Usually 105
+
+# Monitor GPU usage
+./stack.sh hw gpu
+./stack.sh hw gpu-monitor
 ```
 
 > **Note:** For non-Rockchip systems, a commented alternative using `lscr.io/linuxserver/jellyfin` is available in docker-compose.yml.
 
-### Resource Limits
-
-Adjust CPU and memory limits in `.env`:
-
-```bash
-JELLYFIN_CPU_LIMIT=2.0
-JELLYFIN_MEM_LIMIT=2g
-QBITTORRENT_CPU_LIMIT=4.0
-QBITTORRENT_MEM_LIMIT=4g
-```
-
 ### Automatic Updates (Watchtower)
 
-Watchtower is included in the stack and configured to automatically update containers daily at 4 AM. It only updates containers with the `com.centurylinklabs.watchtower.enable=true` label.
+Watchtower is included and configured to automatically update containers daily at 4 AM. It only updates containers with the `com.centurylinklabs.watchtower.enable=true` label.
 
 Configuration:
 - `WATCHTOWER_CLEANUP=true` - Removes old images after update
@@ -156,7 +238,7 @@ Configuration:
 
 ### Nginx Reverse Proxy
 
-Nginx provides a unified access point for all services. The configuration file is located at `config/nginx/nginx.conf`.
+Nginx provides a unified access point for all services. Configuration: `config/nginx/nginx.conf`
 
 **Server Names:** `localhost`, `blackbeard.local`
 
@@ -173,69 +255,72 @@ Nginx provides a unified access point for all services. The configuration file i
 | `/prowlarr` | Prowlarr | Indexer manager (port 9696) |
 | `/qbittorrent/` | qBittorrent | Torrent client (port 5080) |
 
-**Proxy Features:**
-- WebSocket support for real-time updates (Upgrade headers)
-- Automatic retry on backend failures (3 attempts, 30s timeout)
-- Proper forwarding headers (X-Real-IP, X-Forwarded-For/Proto/Host)
-- URL rewriting for sub-path routing
-
-**Important:** Before using the reverse proxy, configure each application's base URL:
+**Important:** Configure each application's base URL before using the reverse proxy:
 - Radarr/Sonarr/Prowlarr/Bazarr: Settings > General > URL Base (e.g., `/radarr`)
 - qBittorrent: Settings > WebUI > Alternative WebUI enabled
 
 ### USB Automount (Optional)
 
-A udev rule is provided to automatically mount USB storage devices, useful for external media drives.
+A udev rule is provided to automatically mount USB storage devices.
 
-**What it does:**
-- Automatically mounts USB block devices when connected
-- Uses the device label as mount point name (e.g., `/media/STORAGE`)
-- Falls back to device UUID if no label is set (e.g., `/media/1234-ABCD`)
-- Uses `systemd-mount` for non-blocking mount operations
-
-**Installation:**
 ```bash
-# Copy the udev rule
+# Install udev rule
 sudo cp udev/99-usb-automount.rules /etc/udev/rules.d/
 
-# Reload udev rules
+# Reload rules
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-**Note:** Ensure your `DOWNLOADS_PATH` in `.env` points to the mounted USB device path (e.g., `/media/STORAGE/downloads`).
+**Note:** Ensure `DOWNLOADS_PATH` in `.env` points to the mounted USB device path (e.g., `/media/STORAGE/downloads`).
 
-## Backup
+## Backup and Restore
 
-### Automated
+### Automated Backup
+
 ```bash
-./manage-stack.sh backup
+# Backup all volumes with backup label
+./stack.sh backup all
+
+# List available backups
+./stack.sh backup list
+
+# Restore a specific volume
+./stack.sh backup restore backups/20260114_120000/radarr-config.tar.gz
 ```
-Creates backup in `backups/YYYYMMDD_HHMMSS/`
 
-### Manual
+Backups are stored in `backups/YYYYMMDD_HHMMSS/`
+
+### Manual Backup
+
 ```bash
-docker compose down
+./stack.sh stack stop
 tar -czf media-stack-backup-$(date +%Y%m%d).tar.gz config/ docker-compose.yml .env
-docker compose up -d
+./stack.sh stack start
 ```
 
 ## Troubleshooting
 
-### Containers not starting in order
+### Check Installation Status
 ```bash
-./manage-stack.sh health
-docker compose logs <service>
+./stack.sh stack check
+```
+
+### Containers not starting
+```bash
+./stack.sh stack health
+./stack.sh stack logs <service>
 ```
 
 ### Permission issues
 ```bash
-id  # Check PUID/PGID
+id  # Check PUID/PGID match .env
 sudo chown -R $PUID:$PGID ./config
 ```
 
 ### Jellyfin not detecting GPU
 ```bash
+./stack.sh hw gpu                    # Check GPU status
 ls -la /dev/dri
 sudo usermod -aG video,render $USER
 ```
@@ -245,34 +330,49 @@ sudo usermod -aG video,render $USER
 docker inspect <container> | grep -A 20 Health
 ```
 
+### Monitor System Resources
+```bash
+./stack.sh stack resources           # Container CPU/memory
+./stack.sh hw temp                   # System temperature
+./stack.sh docker disk               # Docker disk usage
+```
+
 ## Security Checklist
 
 - Change qBittorrent default password
 - Configure VPN for torrents
 - Use HTTPS with nginx (Let's Encrypt)
 - Regular configuration backups
-- Keep containers updated
+- Keep containers updated (Watchtower handles this)
 - Configure firewall appropriately
 
-## Version 2.0 Changes
+## Directory Structure
 
-### Critical Fixes
-- Fixed `dependent_on` typo to `depends_on`
-- Added health checks to all services
-- Implemented dependency conditions with `service_healthy`
-- Configurable CPU and memory limits
+```
+blackbeard/
+├── docker-compose.yml          # Service definitions
+├── .env                        # Environment configuration
+├── .env.example                # Configuration template
+├── stack.sh                    # Unified management CLI
+├── config/                     # Service configurations
+│   ├── nginx/
+│   │   ├── nginx.conf
+│   │   └── logs/
+│   ├── qbittorrent/
+│   ├── radarr/
+│   ├── sonarr/
+│   ├── prowlarr/
+│   ├── bazarr/
+│   ├── jellyfin/
+│   ├── jellyseerr/
+│   └── profilarr/
+├── backups/                    # Volume backups
+├── catalogs/                   # Jellyseerr catalogs
+└── udev/                       # USB automount rules
+```
 
-### New Features
-- Centralized `.env` configuration
-- Management script `manage-stack.sh`
-- Backup and Watchtower labels
-- Tmpfs for Jellyfin transcoding cache
-- Defined hostnames for all containers
-- Standardized UMASK (002)
-- Rockchip GPU support for Jellyfin (Hantro VPU)
-- Watchtower included for automatic updates
+## Service Startup Order
 
-### Service Startup Order
 ```
 1. qbittorrent + flaresolverr (base services)
 2. prowlarr (depends on flaresolverr)
@@ -283,11 +383,25 @@ docker inspect <container> | grep -A 20 Health
 7. nginx (depends on all services)
 ```
 
-## Documentation
+## Version History
 
-- [.env.example](.env.example) - Available environment variables
+### Version 2.1.0
+- Unified CLI script `stack.sh` replacing individual scripts
+- Added `stack install` for automated first-time setup
+- Added `stack check` for installation verification
+- Hardware monitoring commands (`hw temp`, `hw gpu`)
+- Improved backup/restore workflow
+- Docker cleanup utilities
+
+### Version 2.0.0
+- Health checks for all services
+- Dependency conditions with `service_healthy`
+- Configurable CPU and memory limits
+- Centralized `.env` configuration
+- Rockchip GPU support for Jellyfin
+- Watchtower for automatic updates
 
 ---
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Status:** Production Ready
