@@ -304,7 +304,7 @@ services:
       - "${GPU_RENDER_GROUP:-105}"
     ports:
       - 8096:8096 # WebUI na porta 8096
-      - 7360:7359/udp # Service discovery
+      - 7359:7359/udp # Service discovery
       - 8920:8920 # HTTPS
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
