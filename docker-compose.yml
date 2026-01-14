@@ -36,7 +36,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${QBITTORRENT_CPU_LIMIT:-2.0}'
+          cpus: "${QBITTORRENT_CPU_LIMIT:-2.0}"
           memory: ${QBITTORRENT_MEM_LIMIT:-2g}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -65,7 +65,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${FLARESOLVERR_CPU_LIMIT:-1.0}'
+          cpus: "${FLARESOLVERR_CPU_LIMIT:-1.0}"
           memory: ${FLARESOLVERR_MEM_LIMIT:-1g}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -102,7 +102,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${PROWLARR_CPU_LIMIT:-0.5}'
+          cpus: "${PROWLARR_CPU_LIMIT:-0.5}"
           memory: ${PROWLARR_MEM_LIMIT:-512m}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -143,7 +143,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${RADARR_CPU_LIMIT:-1.0}'
+          cpus: "${RADARR_CPU_LIMIT:-1.0}"
           memory: ${RADARR_MEM_LIMIT:-1g}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -180,7 +180,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${SONARR_CPU_LIMIT:-1.0}'
+          cpus: "${SONARR_CPU_LIMIT:-1.0}"
           memory: ${SONARR_MEM_LIMIT:-1g}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -219,11 +219,11 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 120s  # Aumentado para 2 minutos
+      start_period: 120s # Aumentado para 2 minutos
     deploy:
       resources:
         limits:
-          cpus: '${BAZARR_CPU_LIMIT:-0.5}'
+          cpus: "${BAZARR_CPU_LIMIT:-0.5}"
           memory: ${BAZARR_MEM_LIMIT:-512m}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -234,8 +234,51 @@ services:
   # MEDIA SERVER
   # ============================================================================
 
+  # jellyfin:
+  #   image: lscr.io/linuxserver/jellyfin:10.10.7
+  #   container_name: jellyfin
+  #   hostname: jellyfin
+  #   networks:
+  #     - jollyroger
+  #   environment:
+  #     - PUID=${PUID:-1000}
+  #     - PGID=${PGID:-1000}
+  #     - UMASK=${UMASK:-002}
+  #     - TZ=${TZ:-America/Sao_Paulo}
+  #   volumes:
+  #     - jellyfin-config:/config
+  #     - torrent-downloads:/downloads
+  #     - /tmp/jellyfin-cache:/cache
+  #   tmpfs:
+  #     - /tmp/jellyfin-transcode
+  #   devices:
+  #     - /dev/dri:/dev/dri
+  #   group_add:
+  #     - "${GPU_VIDEO_GROUP:-44}"
+  #     - "${GPU_RENDER_GROUP:-105}"
+  #   ports:
+  #     - 8096:8096
+  #     - 7359:7359/udp
+  #     - 8920:8920
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 60s
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '${JELLYFIN_CPU_LIMIT:-4.0}'
+  #         memory: ${JELLYFIN_MEM_LIMIT:-4g}
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.enable=true"
+  #     - "backup.enable=true"
+  #   restart: unless-stopped
+
+  # Jellyfin com suporte a GPU Rockchip (Hantro VPU)
   jellyfin:
-    image: lscr.io/linuxserver/jellyfin:10.10.7
+    image: nyanmisaka/jellyfin:latest-rockchip
     container_name: jellyfin
     hostname: jellyfin
     networks:
@@ -253,13 +296,16 @@ services:
       - /tmp/jellyfin-transcode
     devices:
       - /dev/dri:/dev/dri
+      - /dev/video0:/dev/video0 # RGA - scaling/conversão
+      - /dev/video1:/dev/video1 # Hantro VPU Decoder
+      - /dev/video2:/dev/video2 # Hantro VPU Encoder
     group_add:
       - "${GPU_VIDEO_GROUP:-44}"
       - "${GPU_RENDER_GROUP:-105}"
     ports:
-      - 8096:8096
-      - 7359:7359/udp
-      - 8920:8920
+      - 8096:8096 # WebUI na porta 8096
+      - 7360:7359/udp # Service discovery
+      - 8920:8920 # HTTPS
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
       interval: 30s
@@ -269,54 +315,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${JELLYFIN_CPU_LIMIT:-4.0}'
+          cpus: "${JELLYFIN_CPU_LIMIT:-4.0}"
           memory: ${JELLYFIN_MEM_LIMIT:-4g}
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "backup.enable=true"
-    restart: unless-stopped
-
-  # Jellyfin com suporte a GPU Rockchip (Hantro VPU) para teste
-  jellyfin-gpu:
-    image: nyanmisaka/jellyfin:latest-rockchip
-    container_name: jellyfin-gpu
-    hostname: jellyfin-gpu
-    networks:
-      - jollyroger
-    environment:
-      - PUID=${PUID:-1000}
-      - PGID=${PGID:-1000}
-      - UMASK=${UMASK:-002}
-      - TZ=${TZ:-America/Sao_Paulo}
-    volumes:
-      - jellyfin-gpu-config:/config
-      - torrent-downloads:/downloads
-      - /tmp/jellyfin-gpu-cache:/cache
-    tmpfs:
-      - /tmp/jellyfin-gpu-transcode
-    devices:
-      - /dev/dri:/dev/dri
-      - /dev/video0:/dev/video0   # RGA - scaling/conversão
-      - /dev/video1:/dev/video1   # Hantro VPU Decoder
-      - /dev/video2:/dev/video2   # Hantro VPU Encoder
-    group_add:
-      - "${GPU_VIDEO_GROUP:-44}"
-      - "${GPU_RENDER_GROUP:-105}"
-    ports:
-      - 8097:8096                 # WebUI na porta 8097
-      - 7360:7359/udp             # Service discovery
-      - 8921:8920                 # HTTPS
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
-    deploy:
-      resources:
-        limits:
-          cpus: '${JELLYFIN_GPU_CPU_LIMIT:-4.0}'
-          memory: ${JELLYFIN_GPU_MEM_LIMIT:-4g}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "backup.enable=true"
@@ -349,7 +349,15 @@ services:
     ports:
       - 5055:5055
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5055/api/v1/status"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:5055/api/v1/status",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -357,7 +365,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${JELLYSEERR_CPU_LIMIT:-0.5}'
+          cpus: "${JELLYSEERR_CPU_LIMIT:-0.5}"
           memory: ${JELLYSEERR_MEM_LIMIT:-512m}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -391,7 +399,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${PROFILARR_CPU_LIMIT:-0.5}'
+          cpus: "${PROFILARR_CPU_LIMIT:-0.5}"
           memory: ${PROFILARR_MEM_LIMIT:-512m}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -419,7 +427,7 @@ services:
       qbittorrent:
         condition: service_healthy
       bazarr:
-        condition: service_started  # Não espera estar healthy, apenas iniciado
+        condition: service_started # Não espera estar healthy, apenas iniciado
     networks:
       - jollyroger
     volumes:
@@ -429,15 +437,23 @@ services:
       - 80:80
       - 443:443
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:80",
+        ]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 120s  # Aguarda backends ficarem prontos (bazarr leva até 120s)
+      start_period: 120s # Aguarda backends ficarem prontos (bazarr leva até 120s)
     deploy:
       resources:
         limits:
-          cpus: '${NGINX_CPU_LIMIT:-0.5}'
+          cpus: "${NGINX_CPU_LIMIT:-0.5}"
           memory: ${NGINX_MEM_LIMIT:-256m}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -454,16 +470,16 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - WATCHTOWER_CLEANUP=true           # Remove imagens antigas
-      - WATCHTOWER_LABEL_ENABLE=true      # Apenas containers com label
-      - WATCHTOWER_SCHEDULE=0 0 4 * * *   # 4 AM diariamente (cron format)
+      - WATCHTOWER_CLEANUP=true # Remove imagens antigas
+      - WATCHTOWER_LABEL_ENABLE=true # Apenas containers com label
+      - WATCHTOWER_SCHEDULE=0 0 4 * * * # 4 AM diariamente (cron format)
       - WATCHTOWER_INCLUDE_RESTARTING=true
       - WATCHTOWER_INCLUDE_STOPPED=false
-      - DOCKER_API_VERSION=1.52           # Força versão da API compatível
+      - DOCKER_API_VERSION=1.52 # Força versão da API compatível
       - TZ=${TZ:-America/Sao_Paulo}
     restart: unless-stopped
     labels:
-      - "com.centurylinklabs.watchtower.enable=false"  # Não atualizar a si mesmo
+      - "com.centurylinklabs.watchtower.enable=false" # Não atualizar a si mesmo
 
 # ============================================================================
 # VOLUMES
