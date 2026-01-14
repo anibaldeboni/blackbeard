@@ -276,6 +276,52 @@ services:
       - "backup.enable=true"
     restart: unless-stopped
 
+  # Jellyfin com suporte a GPU Rockchip (Hantro VPU) para teste
+  jellyfin-gpu:
+    image: nyanmisaka/jellyfin:latest-rockchip
+    container_name: jellyfin-gpu
+    hostname: jellyfin-gpu
+    networks:
+      - jollyroger
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
+    volumes:
+      - jellyfin-gpu-config:/config
+      - torrent-downloads:/downloads
+      - /tmp/jellyfin-gpu-cache:/cache
+    tmpfs:
+      - /tmp/jellyfin-gpu-transcode
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/video0:/dev/video0   # RGA - scaling/conversão
+      - /dev/video1:/dev/video1   # Hantro VPU Decoder
+      - /dev/video2:/dev/video2   # Hantro VPU Encoder
+    group_add:
+      - "${GPU_VIDEO_GROUP:-44}"
+      - "${GPU_RENDER_GROUP:-105}"
+    ports:
+      - 8097:8096                 # WebUI na porta 8097
+      - 7360:7359/udp             # Service discovery
+      - 8921:8920                 # HTTPS
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '${JELLYFIN_GPU_CPU_LIMIT:-4.0}'
+          memory: ${JELLYFIN_GPU_MEM_LIMIT:-4g}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
+    restart: unless-stopped
+
   # ============================================================================
   # REQUEST MANAGER
   # ============================================================================
@@ -474,6 +520,15 @@ volumes:
       type: none
       o: bind
       device: ${CONFIG_BASE_PATH:-./config}/jellyfin
+    labels:
+      - "backup.enable=true"
+
+  jellyfin-gpu-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${CONFIG_BASE_PATH:-./config}/jellyfin-gpu
     labels:
       - "backup.enable=true"
 
