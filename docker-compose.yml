@@ -1,225 +1,582 @@
 name: media-stack
+
 services:
-  ## Default credentials of qBittorrent - Username: admin password: adminadmin ##
+  # ============================================================================
+  # BASE SERVICES - Download Client & Proxy
+  # ============================================================================
+
+  ## Default credentials of qBittorrent - Username: admin password: use `docker logs qbittorrent` to see the password ##
   ## Change password after install from UI --> Tools --> Options --> WebUI ##
   qbittorrent:
-    container_name: qbittorrent
     image: lscr.io/linuxserver/qbittorrent:5.1.2
-
-    networks: # Comment this line if vpn is enabled
-      - jollyroger # Comment this line if vpn is enabled
-
+    container_name: qbittorrent
+    hostname: qbittorrent
+    networks:
+      - jollyroger
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
       - WEBUI_PORT=5080
+      - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
       - qbittorrent-config:/config
       - torrent-downloads:/downloads
-
     ports:
       - 5080:5080
       - 6881:6881
       - 6881:6881/udp
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: "${QBITTORRENT_CPU_LIMIT:-2.0}"
+          memory: ${QBITTORRENT_MEM_LIMIT:-2g}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
     restart: unless-stopped
 
-  radarr:
-    container_name: radarr
-    image: lscr.io/linuxserver/radarr:5.27.5
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    hostname: flaresolverr
     networks:
-      - jollyroger # Comment this line if VPN is enabled
-
+      - jollyroger
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
+      - LOG_LEVEL=${FLARESOLVERR_LOG_LEVEL:-info}
+      - LOG_HTML=${FLARESOLVERR_LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${FLARESOLVERR_CAPTCHA_SOLVER:-none}
+      - TZ=${TZ:-America/Sao_Paulo}
+    ports:
+      - "${FLARESOLVERR_PORT:-8191}:8191"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8191/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "${FLARESOLVERR_CPU_LIMIT:-1.0}"
+          memory: ${FLARESOLVERR_MEM_LIMIT:-1g}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    restart: unless-stopped
+
+  # ============================================================================
+  # INDEXER MANAGER
+  # ============================================================================
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    hostname: prowlarr
+    depends_on:
+      flaresolverr:
+        condition: service_healthy
+    networks:
+      - jollyroger
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
+    volumes:
+      - prowlarr-config:/config
+    ports:
+      - 9696:9696
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9696/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: "${PROWLARR_CPU_LIMIT:-0.5}"
+          memory: ${PROWLARR_MEM_LIMIT:-512m}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
+    restart: unless-stopped
+
+  # ============================================================================
+  # CONTENT MANAGERS - Movies & TV Shows
+  # ============================================================================
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    hostname: radarr
+    depends_on:
+      qbittorrent:
+        condition: service_healthy
+      prowlarr:
+        condition: service_healthy
+    networks:
+      - jollyroger
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
     ports:
       - 7878:7878
     volumes:
       - radarr-config:/config
       - torrent-downloads:/downloads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7878/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: "${RADARR_CPU_LIMIT:-1.0}"
+          memory: ${RADARR_MEM_LIMIT:-1g}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
     restart: unless-stopped
 
   sonarr:
-    image: linuxserver/sonarr:4.0.15
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
+    hostname: sonarr
+    depends_on:
+      qbittorrent:
+        condition: service_healthy
+      prowlarr:
+        condition: service_healthy
     networks:
-      - jollyroger # Comment this line if VPN is enabled
-
+      - jollyroger
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
     volumes:
       - sonarr-config:/config
       - torrent-downloads:/downloads
     ports:
       - 8989:8989
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8989/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: "${SONARR_CPU_LIMIT:-1.0}"
+          memory: ${SONARR_MEM_LIMIT:-1g}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
     restart: unless-stopped
 
-  prowlarr:
-    container_name: prowlarr
-    image: linuxserver/prowlarr:2.0.5
+  # ============================================================================
+  # SUBTITLE MANAGER
+  # ============================================================================
 
-    networks: # Comment this line if vpn is enabled
-      - jollyroger # Comment this line if vpn is enabled
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
-    volumes:
-      - prowlarr-config:/config
-
-    ports:
-      - 9696:9696
-    restart: unless-stopped
-
-  jellyseerr:
-    image: fallenbagel/jellyseerr:2.7.3
-    container_name: jellyseerr
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    hostname: bazarr
+    depends_on:
+      sonarr:
+        condition: service_healthy
+      radarr:
+        condition: service_healthy
+      flaresolverr:
+        condition: service_healthy
     networks:
       - jollyroger
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
+    volumes:
+      - bazarr-config:/config
+      - torrent-downloads:/downloads
+    ports:
+      - 6767:6767
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6767/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s # Aumentado para 2 minutos
+    deploy:
+      resources:
+        limits:
+          cpus: "${BAZARR_CPU_LIMIT:-0.5}"
+          memory: ${BAZARR_MEM_LIMIT:-512m}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
+    restart: unless-stopped
+
+  # ============================================================================
+  # MEDIA SERVER
+  # ============================================================================
+
+  # jellyfin:
+  #   image: lscr.io/linuxserver/jellyfin:10.10.7
+  #   container_name: jellyfin
+  #   hostname: jellyfin
+  #   networks:
+  #     - jollyroger
+  #   environment:
+  #     - PUID=${PUID:-1000}
+  #     - PGID=${PGID:-1000}
+  #     - UMASK=${UMASK:-002}
+  #     - TZ=${TZ:-America/Sao_Paulo}
+  #   volumes:
+  #     - jellyfin-config:/config
+  #     - torrent-downloads:/downloads
+  #     - /tmp/jellyfin-cache:/cache
+  #   tmpfs:
+  #     - /tmp/jellyfin-transcode
+  #   devices:
+  #     - /dev/dri:/dev/dri
+  #   group_add:
+  #     - "${GPU_VIDEO_GROUP:-44}"
+  #     - "${GPU_RENDER_GROUP:-105}"
+  #   ports:
+  #     - 8096:8096
+  #     - 7359:7359/udp
+  #     - 8920:8920
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 60s
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '${JELLYFIN_CPU_LIMIT:-4.0}'
+  #         memory: ${JELLYFIN_MEM_LIMIT:-4g}
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.enable=true"
+  #     - "backup.enable=true"
+  #   restart: unless-stopped
+
+  # Jellyfin com suporte a GPU Rockchip (Hantro VPU)
+  jellyfin:
+    image: nyanmisaka/jellyfin:latest-rockchip
+    container_name: jellyfin
+    hostname: jellyfin
+    networks:
+      - jollyroger
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
+    volumes:
+      - jellyfin-config:/config
+      - torrent-downloads:/downloads
+      - /tmp/jellyfin-cache:/cache
+    tmpfs:
+      - /tmp/jellyfin-transcode
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/video0:/dev/video0 # RGA - scaling/conversão
+      - /dev/video1:/dev/video1 # Hantro VPU Decoder
+      - /dev/video2:/dev/video2 # Hantro VPU Encoder
+    group_add:
+      - "${GPU_VIDEO_GROUP:-44}"
+      - "${GPU_RENDER_GROUP:-105}"
+    ports:
+      - 8096:8096 # WebUI na porta 8096
+      - 7359:7359/udp # Service discovery
+      - 8920:8920 # HTTPS
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: "${JELLYFIN_CPU_LIMIT:-4.0}"
+          memory: ${JELLYFIN_MEM_LIMIT:-4g}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
+    restart: unless-stopped
+
+  # ============================================================================
+  # REQUEST MANAGER
+  # ============================================================================
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    hostname: jellyseerr
+    depends_on:
+      radarr:
+        condition: service_healthy
+      sonarr:
+        condition: service_healthy
+      jellyfin:
+        condition: service_healthy
+    networks:
+      - jollyroger
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
     volumes:
       - jellyseerr-config:/app/config
     ports:
       - 5055:5055
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:5055/api/v1/status",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: "${JELLYSEERR_CPU_LIMIT:-0.5}"
+          memory: ${JELLYSEERR_MEM_LIMIT:-512m}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
     restart: unless-stopped
 
-  jellyfin:
-    image: linuxserver/jellyfin:10.10.7
-    container_name: jellyfin
+  # ============================================================================
+  # QUALITY PROFILES MANAGER
+  # ============================================================================
+
+  profilarr:
+    image: santiagosayshey/profilarr:latest
+    container_name: profilarr
+    hostname: profilarr
+    depends_on:
+      radarr:
+        condition: service_healthy
+      sonarr:
+        condition: service_healthy
     networks:
       - jollyroger
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
-    volumes:
-      - jellyfin-config:/config
-      - torrent-downloads:/data
-    devices:
-      - /dev/video0:/dev/video0 # Mount GPU device
-      - /dev/video1:/dev/video1
-      - /dev/video2:/dev/video2
     ports:
-      - 8096:8096
-      - 7359:7359/udp
-      - 8920:8920
+      - "6868:6868"
+    volumes:
+      - ${CONFIG_BASE_PATH:-./config}/profilarr:/config
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - UMASK=${UMASK:-002}
+      - TZ=${TZ:-America/Sao_Paulo}
+    deploy:
+      resources:
+        limits:
+          cpus: "${PROFILARR_CPU_LIMIT:-0.5}"
+          memory: ${PROFILARR_MEM_LIMIT:-512m}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     restart: unless-stopped
 
-  jackett:
-    image: lscr.io/linuxserver/jackett:latest
-    container_name: jackett
-    networks:
-      - jollyroger
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
-      - AUTO_UPDATE=true #optional
-      - RUN_OPTS= #optional
-    volumes:
-      - jackett-config:/config
-      - torrent-downloads:/downloads
-    ports:
-      - 9117:9117
-    restart: unless-stopped
-  flaresolverr:
-    # DockerHub mirror flaresolverr/flaresolverr:latest
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
-    networks:
-      - jollyroger
-    environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=America/Sao_Paulo
-    ports:
-      - "${PORT:-8191}:8191"
-    restart: unless-stopped
+  # ============================================================================
+  # REVERSE PROXY
+  # ============================================================================
 
   nginx:
-    image: nginx:1.27.1-alpine
+    image: nginx:1.29.2-alpine
     container_name: nginx
+    hostname: nginx
+    depends_on:
+      jellyfin:
+        condition: service_healthy
+      jellyseerr:
+        condition: service_healthy
+      sonarr:
+        condition: service_healthy
+      radarr:
+        condition: service_healthy
+      prowlarr:
+        condition: service_healthy
+      qbittorrent:
+        condition: service_healthy
+      bazarr:
+        condition: service_started # Não espera estar healthy, apenas iniciado
     networks:
       - jollyroger
     volumes:
-      # - nginx-config:/etc/nginx
-      - /home/orangepi/.config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${CONFIG_BASE_PATH:-./config}/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - nginx-logs:/var/log/nginx
     ports:
       - 80:80
       - 443:443
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:80",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s # Aguarda backends ficarem prontos (bazarr leva até 120s)
+    deploy:
+      resources:
+        limits:
+          cpus: "${NGINX_CPU_LIMIT:-0.5}"
+          memory: ${NGINX_MEM_LIMIT:-256m}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     restart: unless-stopped
+  # ============================================================================
+  # IMAGE UPDATER
+  # ============================================================================
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    hostname: watchtower
+    networks:
+      - jollyroger
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true # Remove imagens antigas
+      - WATCHTOWER_LABEL_ENABLE=true # Apenas containers com label
+      - WATCHTOWER_SCHEDULE=0 0 4 * * * # 4 AM diariamente (cron format)
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_INCLUDE_STOPPED=false
+      - DOCKER_API_VERSION=1.52 # Força versão da API compatível
+      - TZ=${TZ:-America/Sao_Paulo}
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false" # Não atualizar a si mesmo
 
+# ============================================================================
+# VOLUMES
+# ============================================================================
 volumes:
   torrent-downloads:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /media/STORAGE/torrents
+      device: ${DOWNLOADS_PATH:-/media/STORAGE/downloads}
+    labels:
+      - "backup.enable=true"
+
   radarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/radarr
+      device: ${CONFIG_BASE_PATH:-./config}/radarr
+    labels:
+      - "backup.enable=true"
+
   sonarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/sonarr
+      device: ${CONFIG_BASE_PATH:-./config}/sonarr
+    labels:
+      - "backup.enable=true"
+
   prowlarr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/prowlarr
+      device: ${CONFIG_BASE_PATH:-./config}/prowlarr
+    labels:
+      - "backup.enable=true"
+
+  bazarr-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${CONFIG_BASE_PATH:-./config}/bazarr
+    labels:
+      - "backup.enable=true"
+
   jellyfin-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/jellyfin
+      device: ${CONFIG_BASE_PATH:-./config}/jellyfin
+    labels:
+      - "backup.enable=true"
+
+  jellyfin-gpu-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${CONFIG_BASE_PATH:-./config}/jellyfin-gpu
+    labels:
+      - "backup.enable=true"
+
   qbittorrent-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/qbittorrent
+      device: ${CONFIG_BASE_PATH:-./config}/qbittorrent
+    labels:
+      - "backup.enable=true"
+
   jellyseerr-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/jellyseerr
-  jackett-config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/orangepi/.config/jackett
-  nginx-config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/orangepi/.config/nginx
+      device: ${CONFIG_BASE_PATH:-./config}/jellyseerr
+    labels:
+      - "backup.enable=true"
+
   nginx-logs:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/orangepi/.config/nginx/logs
+      device: ${CONFIG_BASE_PATH:-./config}/nginx/logs
 
+# ============================================================================
+# NETWORKS
+# ============================================================================
 networks:
   jollyroger:
     external: true
+    name: jollyroger

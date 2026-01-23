@@ -1,0 +1,22 @@
+**/logs/
+**/log/
+**/cache/
+**/data/
+**/MediaCover/
+**/Backups/
+**/BT_backup/
+**/Sentry/
+.DS_Store
+logs.*
+
+# Config directories (contain sensitive data and user-specific configurations)
+# Only nginx config is kept as reference/template
+config/radarr/
+config/sonarr/
+config/prowlarr/
+config/bazarr/
+config/jellyfin/
+config/qbittorrent/
+config/jellyseerr/
+config/profilarr/
+config/flaresolverr/

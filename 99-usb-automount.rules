@@ -1,1 +1,0 @@
-ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z][0-9]", ENV{ID_FS_LABEL_ENC}=="", ENV{ID_FS_UUID_ENC}!="", ENV{UDISKS_FILESYSTEM_SHARED}="1", RUN{program}+="/usr/bin/systemd-mount --no-block --discover --options=nofail,umask=000 /dev/%k /media/%E{ID_FS_UUID_ENC}"
