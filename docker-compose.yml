@@ -276,9 +276,9 @@ services:
   #     - "backup.enable=true"
   #   restart: unless-stopped
 
-  # Jellyfin com suporte a GPU Rockchip (Hantro VPU)
+  # Jellyfin com suporte a V4L2M2M (Hantro VPU via kernel mainline)
   jellyfin:
-    image: nyanmisaka/jellyfin:latest-rockchip
+    image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     hostname: jellyfin
     networks:
@@ -295,17 +295,16 @@ services:
     tmpfs:
       - /tmp/jellyfin-transcode
     devices:
-      - /dev/dri:/dev/dri
-      - /dev/video0:/dev/video0 # RGA - scaling/conversão
-      - /dev/video1:/dev/video1 # Hantro VPU Decoder
-      - /dev/video2:/dev/video2 # Hantro VPU Encoder
+      - /dev/dri:/dev/dri           # GPU Mali (renderização)
+      - /dev/video1:/dev/video1     # Hantro VPU Decoder (rk3568-vpu-dec)
+      - /dev/video2:/dev/video2     # Hantro VPU Encoder (rk3568-vepu-enc)
     group_add:
-      - "${GPU_VIDEO_GROUP:-44}"
-      - "${GPU_RENDER_GROUP:-105}"
+      - "${GPU_VIDEO_GROUP:-44}"    # video group
+      - "${GPU_RENDER_GROUP:-105}"  # render group
     ports:
-      - 8096:8096 # WebUI na porta 8096
+      - 8096:8096     # WebUI
       - 7359:7359/udp # Service discovery
-      - 8920:8920 # HTTPS
+      - 8920:8920     # HTTPS
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
       interval: 30s
