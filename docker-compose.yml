@@ -233,49 +233,6 @@ services:
   # ============================================================================
   # MEDIA SERVER
   # ============================================================================
-
-  # jellyfin:
-  #   image: lscr.io/linuxserver/jellyfin:10.10.7
-  #   container_name: jellyfin
-  #   hostname: jellyfin
-  #   networks:
-  #     - jollyroger
-  #   environment:
-  #     - PUID=${PUID:-1000}
-  #     - PGID=${PGID:-1000}
-  #     - UMASK=${UMASK:-002}
-  #     - TZ=${TZ:-America/Sao_Paulo}
-  #   volumes:
-  #     - jellyfin-config:/config
-  #     - torrent-downloads:/downloads
-  #     - /tmp/jellyfin-cache:/cache
-  #   tmpfs:
-  #     - /tmp/jellyfin-transcode
-  #   devices:
-  #     - /dev/dri:/dev/dri
-  #   group_add:
-  #     - "${GPU_VIDEO_GROUP:-44}"
-  #     - "${GPU_RENDER_GROUP:-105}"
-  #   ports:
-  #     - 8096:8096
-  #     - 7359:7359/udp
-  #     - 8920:8920
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
-  #     interval: 30s
-  #     timeout: 10s
-  #     retries: 3
-  #     start_period: 60s
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         cpus: '${JELLYFIN_CPU_LIMIT:-4.0}'
-  #         memory: ${JELLYFIN_MEM_LIMIT:-4g}
-  #   labels:
-  #     - "com.centurylinklabs.watchtower.enable=true"
-  #     - "backup.enable=true"
-  #   restart: unless-stopped
-
   # Jellyfin com suporte a V4L2M2M (Hantro VPU via kernel mainline)
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -295,16 +252,16 @@ services:
     tmpfs:
       - /tmp/jellyfin-transcode
     devices:
-      - /dev/dri:/dev/dri           # GPU Mali (renderização)
-      - /dev/video1:/dev/video1     # Hantro VPU Decoder (rk3568-vpu-dec)
-      - /dev/video2:/dev/video2     # Hantro VPU Encoder (rk3568-vepu-enc)
+      - /dev/dri:/dev/dri # GPU Mali (renderização)
+      - /dev/video1:/dev/video1 # Hantro VPU Decoder (rk3568-vpu-dec)
+      - /dev/video2:/dev/video2 # Hantro VPU Encoder (rk3568-vepu-enc)
     group_add:
-      - "${GPU_VIDEO_GROUP:-44}"    # video group
-      - "${GPU_RENDER_GROUP:-105}"  # render group
+      - "${GPU_VIDEO_GROUP:-44}" # video group
+      - "${GPU_RENDER_GROUP:-105}" # render group
     ports:
-      - 8096:8096     # WebUI
+      - 8096:8096 # WebUI
       - 7359:7359/udp # Service discovery
-      - 8920:8920     # HTTPS
+      - 8920:8920 # HTTPS
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
       interval: 30s
