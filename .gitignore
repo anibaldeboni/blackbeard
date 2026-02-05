@@ -20,3 +20,4 @@ config/qbittorrent/
 config/jellyseerr/
 config/profilarr/
 config/flaresolverr/
+config/netdata/
