@@ -352,6 +352,12 @@ services:
       - PGID=${PGID:-1000}
       - UMASK=${UMASK:-002}
       - TZ=${TZ:-America/Sao_Paulo}
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --spider http://localhost:6868 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     deploy:
       resources:
         limits:
