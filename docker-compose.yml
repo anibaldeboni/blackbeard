@@ -353,7 +353,8 @@ services:
       - UMASK=${UMASK:-002}
       - TZ=${TZ:-America/Sao_Paulo}
     healthcheck:
-      test: ["CMD-SHELL", "wget --quiet --spider http://localhost:6868 || exit 1"]
+      test:
+        ["CMD-SHELL", "wget --quiet --spider http://localhost:6868 || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -399,7 +400,11 @@ services:
       - 80:80
       - 443:443
     healthcheck:
-      test: ["CMD-SHELL", "[ -f /var/run/nginx.pid ] && kill -0 $(cat /var/run/nginx.pid) || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "[ -f /var/run/nginx.pid ] && kill -0 $(cat /var/run/nginx.pid) || exit 1",
+        ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -437,31 +442,6 @@ services:
   # ============================================================================
   # MONITORING
   # ============================================================================
-  uptime-kuma:
-    image: louislam/uptime-kuma:2
-    container_name: uptime-kuma
-    hostname: uptime-kuma
-    networks:
-      - jollyroger
-    environment:
-      - PUID=${PUID:-1000}
-      - PGID=${PGID:-1000}
-      - TZ=${TZ:-America/Sao_Paulo}
-    restart: unless-stopped
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "backup.enable=true"
-    deploy:
-      resources:
-        limits:
-          cpus: "${UPTIME_KUMA_CPU_LIMIT:-0.5}"
-          memory: ${UPTIME_KUMA_MEM_LIMIT:-256m}
-    volumes:
-      - kuma-config:/app/data
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    ports:
-      - "3001:3001"
-
   netdata:
     image: netdata/netdata:stable
     container_name: netdata
