@@ -463,6 +463,43 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - "3001:3001"
+
+  netdata:
+    image: netdata/netdata:stable
+    container_name: netdata
+    hostname: blackbeard
+    pid: host
+    network_mode: host
+    cap_add:
+      - SYS_PTRACE
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      - NETDATA_CLAIM_TOKEN=${NETDATA_CLAIM_TOKEN:-}
+      - NETDATA_CLAIM_URL=${NETDATA_CLAIM_URL:-https://app.netdata.cloud}
+      - NETDATA_CLAIM_ROOMS=${NETDATA_CLAIM_ROOMS:-}
+      - TZ=${TZ:-America/Sao_Paulo}
+    volumes:
+      - netdata-config:/etc/netdata
+      - netdata-lib:/var/lib/netdata
+      - netdata-cache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/log:/host/var/log:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    deploy:
+      resources:
+        limits:
+          cpus: "${NETDATA_CPU_LIMIT:-1.0}"
+          memory: ${NETDATA_MEM_LIMIT:-512m}
 # ============================================================================
 # VOLUMES
 # ============================================================================
@@ -561,6 +598,27 @@ volumes:
       type: none
       o: bind
       device: ${CONFIG_BASE_PATH:-./config}/uptime-kuma
+
+  netdata-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${CONFIG_BASE_PATH:-./config}/netdata/config
+
+  netdata-lib:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${CONFIG_BASE_PATH:-./config}/netdata/lib
+
+  netdata-cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${CONFIG_BASE_PATH:-./config}/netdata/cache
 
 # ============================================================================
 # NETWORKS
