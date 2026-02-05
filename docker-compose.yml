@@ -460,6 +460,7 @@ services:
           memory: ${UPTIME_KUMA_MEM_LIMIT:-256m}
     volumes:
       - kuma-config:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - "3001:3001"
 # ============================================================================
