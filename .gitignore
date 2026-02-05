@@ -8,7 +8,7 @@
 **/Sentry/
 .DS_Store
 logs.*
-
+.env
 # Config directories (contain sensitive data and user-specific configurations)
 # Only nginx config is kept as reference/template
 config/radarr/
