@@ -436,7 +436,32 @@ services:
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=false" # Não atualizar a si mesmo
-
+  # ============================================================================
+  # MONITORING
+  # ============================================================================
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: uptime-kuma
+    hostname: uptime-kuma
+    networks:
+      - jollyroger
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-America/Sao_Paulo}
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "backup.enable=true"
+    deploy:
+      resources:
+        limits:
+          cpus: "${UPTIME_KUMA_CPU_LIMIT:-0.5}"
+          memory: ${UPTIME_KUMA_MEM_LIMIT:-256m}
+    volumes:
+      - kuma-config:/app/data
+    ports:
+      - "3001:3001"
 # ============================================================================
 # VOLUMES
 # ============================================================================
@@ -528,6 +553,13 @@ volumes:
       type: none
       o: bind
       device: ${CONFIG_BASE_PATH:-./config}/nginx/logs
+
+  kuma-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${CONFIG_BASE_PATH:-./config}/uptime-kuma
 
 # ============================================================================
 # NETWORKS
