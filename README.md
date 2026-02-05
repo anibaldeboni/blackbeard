@@ -1,6 +1,6 @@
 # Blackbeard Media Stack
 
-A comprehensive Docker-based home media server solution providing automated media acquisition, management, and streaming. Version 2.1 brings a unified CLI tool with hardware monitoring and simplified installation.
+A Docker-based home media server stack optimized for Orange Pi 3B (RK3566), featuring V4L2M2M hardware transcoding via Hantro VPU. Provides automated media acquisition, management, and streaming with a unified CLI for hardware monitoring and stack management.
 
 ## Services
 
@@ -11,7 +11,7 @@ A comprehensive Docker-based home media server solution providing automated medi
 | Sonarr | 8989 | TV series management with episode tracking |
 | Prowlarr | 9696 | Unified indexer manager |
 | Bazarr | 6767 | Automatic subtitle management |
-| Jellyfin | 8096, 7359/udp, 8920 | Media server with Rockchip GPU acceleration |
+| Jellyfin | 8096, 7359/udp, 8920 | Media server with V4L2M2M hardware acceleration |
 | Jellyseerr | 5055 | Media request interface |
 | Profilarr | 6868 | Quality profile manager |
 | FlareSolverr | 8191 | Cloudflare bypass proxy |
@@ -22,9 +22,9 @@ A comprehensive Docker-based home media server solution providing automated medi
 
 - Docker Engine 20.10+
 - Docker Compose 2.0+
-- 8GB+ RAM recommended
-- Rockchip SoC with Hantro VPU for hardware acceleration (optional)
-- Alternative: Any GPU with `/dev/dri` support (use commented Jellyfin config)
+- 4GB+ RAM recommended
+- V4L2M2M compatible device with Hantro VPU for hardware acceleration (optional)
+- Alternative: Rockchip SoC with full GPU support (use `nyanmisaka/jellyfin` image)
 
 ## Quick Start
 
@@ -144,15 +144,40 @@ PGID=1000
 # Timezone
 TZ=America/Sao_Paulo
 
+# Permissions
+UMASK=002
+
 # Storage paths
 DOWNLOADS_PATH=/media/STORAGE/downloads
 CONFIG_BASE_PATH=./config
+
+# FlareSolverr Settings
+FLARESOLVERR_LOG_LEVEL=info
+FLARESOLVERR_LOG_HTML=false
+FLARESOLVERR_CAPTCHA_SOLVER=none
+FLARESOLVERR_PORT=8191
 
 # Resource limits (CPU cores / memory)
 JELLYFIN_CPU_LIMIT=4.0
 JELLYFIN_MEM_LIMIT=4g
 QBITTORRENT_CPU_LIMIT=2.0
 QBITTORRENT_MEM_LIMIT=2g
+RADARR_CPU_LIMIT=1.0
+RADARR_MEM_LIMIT=1g
+SONARR_CPU_LIMIT=1.0
+SONARR_MEM_LIMIT=1g
+PROWLARR_CPU_LIMIT=0.5
+PROWLARR_MEM_LIMIT=512m
+BAZARR_CPU_LIMIT=0.5
+BAZARR_MEM_LIMIT=512m
+JELLYSEERR_CPU_LIMIT=0.5
+JELLYSEERR_MEM_LIMIT=512m
+FLARESOLVERR_CPU_LIMIT=1.0
+FLARESOLVERR_MEM_LIMIT=1g
+NGINX_CPU_LIMIT=0.5
+NGINX_MEM_LIMIT=256m
+PROFILARR_CPU_LIMIT=0.5
+PROFILARR_MEM_LIMIT=512m
 
 # GPU groups (auto-detected by install)
 GPU_VIDEO_GROUP=44
@@ -203,12 +228,15 @@ Run `id` to verify your user and group IDs.
 
 ### Hardware Acceleration (Jellyfin)
 
-Jellyfin uses the `nyanmisaka/jellyfin:latest-rockchip` image with Rockchip GPU support (Hantro VPU). The following devices are mapped:
+Jellyfin uses the `lscr.io/linuxserver/jellyfin:latest` image with V4L2M2M hardware acceleration (Hantro VPU via kernel mainline). The following devices are mapped:
 
-- `/dev/dri` - DRM rendering
-- `/dev/video0` - RGA (scaling/conversion)
-- `/dev/video1` - Hantro VPU Decoder
-- `/dev/video2` - Hantro VPU Encoder
+- `/dev/dri` - GPU Mali (rendering)
+- `/dev/video1` - Hantro VPU Decoder (rk3568-vpu-dec)
+- `/dev/video2` - Hantro VPU Encoder (rk3568-vepu-enc)
+
+Additional performance optimizations:
+- `/tmp/jellyfin-cache` - Mounted volume for cache
+- `/tmp/jellyfin-transcode` - tmpfs for fast transcoding
 
 ```bash
 # Verify devices
@@ -224,7 +252,7 @@ getent group render  # Usually 105
 ./stack.sh hw gpu-monitor
 ```
 
-> **Note:** For non-Rockchip systems, a commented alternative using `lscr.io/linuxserver/jellyfin` is available in docker-compose.yml.
+> **Note:** For Rockchip systems with full GPU support, you can use `nyanmisaka/jellyfin:latest-rockchip` image (commented alternative in docker-compose.yml).
 
 ### Automatic Updates (Watchtower)
 
@@ -364,6 +392,7 @@ blackbeard/
 │   ├── prowlarr/
 │   ├── bazarr/
 │   ├── jellyfin/
+│   ├── jellyfin-gpu/           # Alternative Jellyfin config (Rockchip)
 │   ├── jellyseerr/
 │   └── profilarr/
 ├── backups/                    # Volume backups
