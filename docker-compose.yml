@@ -393,15 +393,7 @@ services:
       - 80:80
       - 443:443
     healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://localhost:80",
-        ]
+      test: ["CMD-SHELL", "[ -f /var/run/nginx.pid ] && kill -0 $(cat /var/run/nginx.pid) || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
