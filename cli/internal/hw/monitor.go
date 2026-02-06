@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"strconv"
 	"strings"
 	"syscall"
 	"time"
 
 	"github.com/anibalnet/blackbeard/cli/internal/ui"
+	"github.com/fatih/color"
 )
 
 // RunTempMonitor monitors temperature continuously until interrupted.
@@ -65,68 +65,141 @@ func RunGPUMonitor(ctx context.Context, p *ui.Printer, intervalSec int) error {
 	ticker := time.NewTicker(time.Duration(intervalSec) * time.Second)
 	defer ticker.Stop()
 
-	printGPULine(p)
+	// Initial read to establish baseline
+	prevInterrupts := ReadVPUInterrupts()
+	printGPUDashboard(p, nil, intervalSec)
 
 	for {
 		select {
 		case <-ctx.Done():
 			return nil
 		case <-ticker.C:
+			// Read current interrupts and calculate delta
+			currentInterrupts := ReadVPUInterrupts()
+			deltas := CalculateVPUDelta(prevInterrupts, currentInterrupts, intervalSec)
+			prevInterrupts = currentInterrupts
+
 			// Clear screen for dashboard effect
 			fmt.Print("\033[2J\033[H")
-			fmt.Println("╔══════════════════════════════════════════════════════════════╗")
-			fmt.Println("║           Orange Pi 3B - GPU/VPU Monitor                    ║")
-			fmt.Println("╚══════════════════════════════════════════════════════════════╝")
-			fmt.Println()
-			printGPULine(p)
+			printGPUDashboard(p, deltas, intervalSec)
 		}
 	}
 }
 
-func printGPULine(p *ui.Printer) {
-	curData, err := os.ReadFile(GPUFreqPath + "/cur_freq")
-	if err == nil {
-		maxData, _ := os.ReadFile(GPUFreqPath + "/max_freq")
-		cur, _ := strconv.Atoi(strings.TrimSpace(string(curData)))
-		max, _ := strconv.Atoi(strings.TrimSpace(string(maxData)))
-		if max > 0 {
-			pct := cur * 100 / max
-			p.Printf("GPU Mali:  %3d MHz / %d MHz (%d%%)\n", cur/1000000, max/1000000, pct)
+func printGPUDashboard(p *ui.Printer, vpuDeltas []VPUInterruptDelta, intervalSec int) {
+	timestamp := time.Now().Format("2006-01-02 15:04:05")
+
+	fmt.Println("╔══════════════════════════════════════════════════════════════════╗")
+	fmt.Printf("║         Orange Pi 3B - GPU Mali RK3566 Monitor                 ║\n")
+	fmt.Printf("║         %s                                       ║\n", timestamp)
+	fmt.Println("╚══════════════════════════════════════════════════════════════════╝")
+	fmt.Println()
+
+	info := ReadGPUInfo()
+	gpuTemp := ReadGPUTempDirect()
+
+	// GPU Status Box
+	fmt.Println("┌─ GPU Status ─────────────────────────────────────────────────────┐")
+
+	if info.MaxFreq > 0 {
+		freqColor := getFreqColor(info.FreqPct)
+		p.Printf("│ Frequency:    %s / %d MHz (%d%%)%s│\n",
+			freqColor.Sprintf("%3d MHz", info.CurrentFreq/1000000),
+			info.MaxFreq/1000000, info.FreqPct,
+			strings.Repeat(" ", 28-len(fmt.Sprintf("%d", info.MaxFreq/1000000))-len(fmt.Sprintf("%d", info.FreqPct))))
+
+		if info.TargetFreq > 0 {
+			p.Printf("│ Target Freq:  %d MHz%s│\n",
+				info.TargetFreq/1000000,
+				strings.Repeat(" ", 48-len(fmt.Sprintf("%d", info.TargetFreq/1000000))))
+		}
+
+		p.Printf("│ Governor:     %-20s%s│\n", info.Governor, strings.Repeat(" ", 29))
+	}
+
+	if gpuTemp.Valid {
+		p.Printf("│ Temperature:  %s%s│\n",
+			FormatTemp(gpuTemp),
+			strings.Repeat(" ", 49))
+	}
+
+	if info.PowerState != "" {
+		powerColor := getPowerStateColor(info.PowerState)
+		p.Printf("│ Power State:  %s%s│\n",
+			powerColor.Sprintf("%-10s", info.PowerState),
+			strings.Repeat(" ", 45))
+	}
+
+	fmt.Println("└──────────────────────────────────────────────────────────────────┘")
+	fmt.Println()
+
+	// Available Frequencies
+	if len(info.AvailableFreqs) > 0 {
+		fmt.Println("Available Frequencies (MHz):")
+		p.Printf("  ")
+		for i, freq := range info.AvailableFreqs {
+			if i > 0 {
+				p.Printf(",  ")
+			}
+			freqMHz := freq / 1000000
+			if freq == info.CurrentFreq {
+				getFreqColor(info.FreqPct).Printf("[%d]", freqMHz)
+			} else {
+				p.Printf("%d", freqMHz)
+			}
+		}
+		p.Printf("\n")
+	}
+	fmt.Println()
+
+	// VPU/RGA Info
+	vpuInfo := ReadVPUInfo()
+
+	// Calculate overall VPU activity
+	var maxRate float64
+	if vpuDeltas != nil {
+		for _, delta := range vpuDeltas {
+			if delta.RatePerSec > maxRate {
+				maxRate = delta.RatePerSec
+			}
 		}
 	}
 
-	p.Println("")
-	p.Println("VPU/RGA Clocks:")
-	clkData, err := os.ReadFile("/sys/kernel/debug/clk/clk_summary")
-	if err == nil {
-		for _, line := range strings.Split(string(clkData), "\n") {
-			lower := strings.ToLower(line)
-			if strings.Contains(lower, "vpu") || strings.Contains(lower, "rga") {
-				fields := strings.Fields(line)
-				if len(fields) >= 4 {
-					freq, _ := strconv.Atoi(fields[3])
-					p.Printf("  %-20s %d MHz\n", fields[0], freq/1000000)
-				}
-			}
+	vpuColor, vpuStatus := getVPUActivityColor(maxRate)
+
+	fmt.Println("┌─ VPU Status ─────────────────────────────────────────────────────┐")
+	p.Printf("│ Activity:     %s%s│\n",
+		vpuColor.Sprintf("%-10s", vpuStatus),
+		strings.Repeat(" ", 46))
+
+	if vpuDeltas != nil && len(vpuDeltas) > 0 {
+		p.Printf("│ Interrupts/s:%s│\n", strings.Repeat(" ", 49))
+		for _, delta := range vpuDeltas {
+			intColor, _ := getVPUActivityColor(delta.RatePerSec)
+			p.Printf("│   %-12s %s (+%d)%s│\n",
+				delta.Name,
+				intColor.Sprintf("%.1f/s", delta.RatePerSec),
+				delta.Delta,
+				strings.Repeat(" ", 33-len(fmt.Sprintf("%.1f/s", delta.RatePerSec))-len(fmt.Sprintf("%d", delta.Delta))))
 		}
 	} else {
-		p.Warning("VPU/RGA clock info not available")
+		p.Printf("│ (calculating...)%s│\n", strings.Repeat(" ", 49))
 	}
 
-	p.Println("")
-	p.Println("VPU Interrupts:")
-	irqData, err := os.ReadFile("/proc/interrupts")
-	if err == nil {
-		for _, line := range strings.Split(string(irqData), "\n") {
-			lower := strings.ToLower(line)
-			if strings.Contains(lower, "hantro") || strings.Contains(lower, "fdea") || strings.Contains(lower, "fdee") {
-				fields := strings.Fields(line)
-				if len(fields) >= 2 {
-					p.Printf("  %-10s %s\n", fields[len(fields)-1], fields[1])
-				}
+	// VPU Clocks
+	if len(vpuInfo.Clocks) > 0 {
+		p.Printf("│ Clocks:%s│\n", strings.Repeat(" ", 57))
+		for name, freq := range vpuInfo.Clocks {
+			freqMHz := freq / 1000000
+			if freqMHz > 0 {
+				color.New(color.FgGreen).Printf("│   %-18s %4d MHz%s│\n",
+					name, freqMHz, strings.Repeat(" ", 36))
+			} else {
+				p.Printf("│   %-18s %4d MHz%s│\n",
+					name, freqMHz, strings.Repeat(" ", 36))
 			}
 		}
-	} else {
-		p.Warning("VPU interrupt info not available")
 	}
+
+	fmt.Println("└──────────────────────────────────────────────────────────────────┘")
 }

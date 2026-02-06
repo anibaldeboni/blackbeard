@@ -1,6 +1,8 @@
 package hw
 
 import (
+	"os"
+	"strconv"
 	"strings"
 
 	"github.com/anibalnet/blackbeard/cli/internal/ui"
@@ -41,6 +43,14 @@ func ReadTemps() map[string]TempReading {
 		}
 	}
 
+	// Fallback: try direct GPU temperature read if gopsutil didn't find it
+	if _, hasGPU := result["GPU"]; !hasGPU {
+		gpuTemp := ReadGPUTempDirect()
+		if gpuTemp.Valid {
+			result["GPU"] = gpuTemp
+		}
+	}
+
 	return result
 }
 
@@ -55,6 +65,28 @@ func classifyTempSensor(key string) string {
 		return "GPU"
 	default:
 		return ""
+	}
+}
+
+// ReadGPUTempDirect reads GPU temperature directly from thermal zone.
+// This is a fallback when gopsutil doesn't detect the GPU thermal sensor.
+func ReadGPUTempDirect() TempReading {
+	// thermal_zone1 is confirmed as gpu-thermal on RK3566
+	data, err := os.ReadFile("/sys/class/thermal/thermal_zone1/temp")
+	if err != nil {
+		return TempReading{Label: "GPU", Valid: false}
+	}
+
+	// Temperature is in millidegrees Celsius
+	tempMillidegrees, err := strconv.ParseFloat(strings.TrimSpace(string(data)), 64)
+	if err != nil {
+		return TempReading{Label: "GPU", Valid: false}
+	}
+
+	return TempReading{
+		Label:   "GPU",
+		Celsius: tempMillidegrees / 1000.0,
+		Valid:   true,
 	}
 }
 
