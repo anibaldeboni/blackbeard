@@ -21,3 +21,5 @@ config/jellyseerr/
 config/profilarr/
 config/flaresolverr/
 config/netdata/
+# CLI build artifacts
+cli/bin/

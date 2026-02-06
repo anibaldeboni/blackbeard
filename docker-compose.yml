@@ -253,8 +253,11 @@ services:
       - /tmp/jellyfin-transcode
     devices:
       - /dev/dri:/dev/dri # GPU Mali (renderização)
+      - /dev/video0:/dev/video0 # Rockchip RGA (Graphics Accelerator)
       - /dev/video1:/dev/video1 # Hantro VPU Decoder (rk3568-vpu-dec)
       - /dev/video2:/dev/video2 # Hantro VPU Encoder (rk3568-vepu-enc)
+      - /dev/media0:/dev/media0 # Media device for VPU Decoder
+      - /dev/media1:/dev/media1 # Media device for VPU Encoder
     group_add:
       - "${GPU_VIDEO_GROUP:-44}" # video group
       - "${GPU_RENDER_GROUP:-105}" # render group
