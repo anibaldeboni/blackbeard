@@ -1,17 +1,11 @@
 package hw
 
 import (
-	"os"
-	"strconv"
 	"strings"
 
 	"github.com/anibalnet/blackbeard/cli/internal/ui"
 	"github.com/fatih/color"
-)
-
-const (
-	CPUTempPath = "/sys/devices/virtual/thermal/thermal_zone0/temp"
-	GPUTempPath = "/sys/devices/virtual/thermal/thermal_zone1/temp"
+	"github.com/shirou/gopsutil/v4/sensors"
 )
 
 // TempReading holds a temperature reading.
@@ -21,21 +15,47 @@ type TempReading struct {
 	Valid   bool
 }
 
-// ReadTemp reads temperature from a sysfs thermal zone path.
-func ReadTemp(sysfsPath, label string) TempReading {
-	data, err := os.ReadFile(sysfsPath)
+// ReadTemps reads all temperature sensors via gopsutil.
+func ReadTemps() map[string]TempReading {
+	result := make(map[string]TempReading)
+
+	temps, err := sensors.SensorsTemperatures()
 	if err != nil {
-		return TempReading{Label: label, Valid: false}
+		return result
 	}
 
-	raw := strings.TrimSpace(string(data))
-	millidegrees, err := strconv.Atoi(raw)
-	if err != nil {
-		return TempReading{Label: label, Valid: false}
+	for _, t := range temps {
+		if t.Temperature <= 0 {
+			continue
+		}
+		label := classifyTempSensor(t.SensorKey)
+		if label == "" {
+			continue
+		}
+		if _, exists := result[label]; !exists {
+			result[label] = TempReading{
+				Label:   label,
+				Celsius: t.Temperature,
+				Valid:   true,
+			}
+		}
 	}
 
-	celsius := float64(millidegrees) / 1000.0
-	return TempReading{Label: label, Celsius: celsius, Valid: true}
+	return result
+}
+
+// classifyTempSensor maps gopsutil sensor keys to labels.
+// On RK3566 thermal zones are typically named with cpu/soc/gpu prefixes.
+func classifyTempSensor(key string) string {
+	lower := strings.ToLower(key)
+	switch {
+	case strings.Contains(lower, "cpu") || strings.Contains(lower, "soc"):
+		return "CPU"
+	case strings.Contains(lower, "gpu"):
+		return "GPU"
+	default:
+		return ""
+	}
 }
 
 // FormatTemp returns a color-coded temperature string.
@@ -43,9 +63,8 @@ func FormatTemp(t TempReading) string {
 	if !t.Valid {
 		return "N/A"
 	}
-
 	c := getTempColor(t.Celsius)
-	return c.Sprintf("%.1f", t.Celsius) + "°C"
+	return c.Sprintf("%.1f", t.Celsius) + "\u00b0C"
 }
 
 func getTempColor(celsius float64) *color.Color {
@@ -55,7 +74,7 @@ func getTempColor(celsius float64) *color.Color {
 	case celsius < 60:
 		return color.New(color.FgYellow)
 	case celsius < 75:
-		return color.New(color.FgHiRed) // Orange-ish
+		return color.New(color.FgHiRed)
 	case celsius < 85:
 		return color.New(color.FgRed)
 	default:
@@ -65,27 +84,45 @@ func getTempColor(celsius float64) *color.Color {
 
 // RunTemp shows temperature for the specified target.
 func RunTemp(p *ui.Printer, target string) error {
+	temps := ReadTemps()
+
+	get := func(label string) TempReading {
+		if t, ok := temps[label]; ok {
+			return t
+		}
+		return TempReading{Label: label, Valid: false}
+	}
+
 	switch target {
 	case "cpu":
-		t := ReadTemp(CPUTempPath, "CPU")
-		p.Printf("CPU: %s\n", FormatTemp(t))
+		p.Printf("CPU: %s\n", FormatTemp(get("CPU")))
 	case "gpu":
-		t := ReadTemp(GPUTempPath, "GPU")
-		p.Printf("GPU: %s\n", FormatTemp(t))
-	default: // "all"
-		cpu := ReadTemp(CPUTempPath, "CPU")
-		gpu := ReadTemp(GPUTempPath, "GPU")
-		p.Printf("CPU: %s | GPU: %s\n", FormatTemp(cpu), FormatTemp(gpu))
+		p.Printf("GPU: %s\n", FormatTemp(get("GPU")))
+	default:
+		p.Printf("CPU: %s | GPU: %s\n", FormatTemp(get("CPU")), FormatTemp(get("GPU")))
 	}
 	return nil
 }
 
-// RunFullStatus shows full hardware status.
+// RunFullStatus shows comprehensive hardware status.
 func RunFullStatus(p *ui.Printer) error {
-	p.Header("Hardware Status")
+	RunInfo(p)
+	p.Println("")
 
-	p.Println("Temperature:")
+	p.Header("Temperature")
 	RunTemp(p, "all")
+	p.Println("")
+
+	RunCPU(p)
+	p.Println("")
+
+	RunMem(p)
+	p.Println("")
+
+	RunDisk(p, nil)
+	p.Println("")
+
+	RunNet(p)
 	p.Println("")
 
 	return RunGPUStatus(p)

@@ -39,8 +39,18 @@ func RunTempMonitor(ctx context.Context, p *ui.Printer, intervalSec int) error {
 
 func printTempLine(p *ui.Printer) {
 	timestamp := time.Now().Format("2006-01-02 15:04:05")
-	cpu := ReadTemp(CPUTempPath, "CPU")
-	gpu := ReadTemp(GPUTempPath, "GPU")
+	temps := ReadTemps()
+
+	cpu := temps["CPU"]
+	if !cpu.Valid {
+		cpu = TempReading{Label: "CPU", Valid: false}
+	}
+
+	gpu := temps["GPU"]
+	if !gpu.Valid {
+		gpu = TempReading{Label: "GPU", Valid: false}
+	}
+
 	p.Printf("[%s] CPU: %s | GPU: %s\n", timestamp, FormatTemp(cpu), FormatTemp(gpu))
 }
 

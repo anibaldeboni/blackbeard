@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/alecthomas/kong"
 	"github.com/anibalnet/blackbeard/cli/internal/backup"
@@ -259,11 +260,48 @@ func (cmd *DockerProtectedCmd) Run(ctx *Ctx) error {
 // --- Hardware monitoring commands ---
 
 type HwCmd struct {
+	Cpu         HwCpuCmd         `cmd:"" help:"Show CPU model, cores, and usage."`
+	Mem         HwMemCmd         `cmd:"" help:"Show RAM and swap usage."`
+	Disk        HwDiskCmd        `cmd:"" help:"Show disk usage for specified paths."`
+	Net         HwNetCmd         `cmd:"" help:"Show network I/O per interface."`
+	Info        HwInfoCmd        `cmd:"" help:"Show host information (OS, kernel, uptime, load)."`
 	Temp        HwTempCmd        `cmd:"" help:"Show temperature (CPU, GPU, or both)."`
 	TempMonitor HwTempMonitorCmd `cmd:"temp-monitor" help:"Monitor temperature continuously."`
 	Gpu         HwGpuCmd         `cmd:"" help:"Show GPU/VPU status."`
 	GpuMonitor  HwGpuMonitorCmd  `cmd:"gpu-monitor" help:"Monitor GPU/VPU continuously."`
 	Status      HwStatusCmd      `cmd:"" help:"Show full hardware status."`
+}
+
+type HwCpuCmd struct{}
+
+func (cmd *HwCpuCmd) Run(ctx *Ctx) error {
+	return hw.RunCPU(ctx.Printer)
+}
+
+type HwMemCmd struct{}
+
+func (cmd *HwMemCmd) Run(ctx *Ctx) error {
+	return hw.RunMem(ctx.Printer)
+}
+
+type HwDiskCmd struct {
+	Paths []string `arg:"" optional:"" help:"Paths to check. Defaults to / and /media/STORAGE if present."`
+}
+
+func (cmd *HwDiskCmd) Run(ctx *Ctx) error {
+	return hw.RunDisk(ctx.Printer, cmd.Paths)
+}
+
+type HwNetCmd struct{}
+
+func (cmd *HwNetCmd) Run(ctx *Ctx) error {
+	return hw.RunNet(ctx.Printer)
+}
+
+type HwInfoCmd struct{}
+
+func (cmd *HwInfoCmd) Run(ctx *Ctx) error {
+	return hw.RunInfo(ctx.Printer)
 }
 
 type HwTempCmd struct {
@@ -319,11 +357,8 @@ func main() {
 	projectDir, err := config.ResolveProjectDir(cli.ProjectDir)
 	if err != nil {
 		// hw commands don't need project dir
-		if kongCtx.Command() != "hw temp" &&
-			kongCtx.Command() != "hw temp-monitor" &&
-			kongCtx.Command() != "hw gpu" &&
-			kongCtx.Command() != "hw gpu-monitor" &&
-			kongCtx.Command() != "hw status" {
+		cmd := kongCtx.Command()
+		if !strings.HasPrefix(cmd, "hw ") {
 			printer.Error(err.Error())
 			os.Exit(1)
 		}
@@ -344,9 +379,7 @@ func main() {
 
 	needsDocker := true
 	switch {
-	case cmd == "hw temp", cmd == "hw temp-monitor",
-		cmd == "hw gpu", cmd == "hw gpu-monitor",
-		cmd == "hw status",
+	case strings.HasPrefix(cmd, "hw "),
 		cmd == "backup list", cmd == "backup cleanup",
 		cmd == "stack validate", cmd == "stack dirs":
 		needsDocker = false
