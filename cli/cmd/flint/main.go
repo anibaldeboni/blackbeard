@@ -58,6 +58,7 @@ type StackCmd struct {
 	Update    StackUpdateCmd    `cmd:"" help:"Pull new images and recreate containers."`
 	Resources StackResourcesCmd `cmd:"" help:"Show resource usage (CPU, memory)."`
 	Validate  StackValidateCmd  `cmd:"" help:"Validate docker-compose configuration."`
+	Dirs      StackDirsCmd      `cmd:"" help:"Check config directories and create missing ones."`
 }
 
 type StackInstallCmd struct{}
@@ -137,6 +138,12 @@ type StackValidateCmd struct{}
 
 func (cmd *StackValidateCmd) Run(ctx *Ctx) error {
 	return stack.RunValidate(ctx.Context, ctx.Config, ctx.Printer)
+}
+
+type StackDirsCmd struct{}
+
+func (cmd *StackDirsCmd) Run(ctx *Ctx) error {
+	return stack.RunDirs(ctx.Context, ctx.Config, ctx.Printer)
 }
 
 // --- Backup commands ---
@@ -341,7 +348,7 @@ func main() {
 		cmd == "hw gpu", cmd == "hw gpu-monitor",
 		cmd == "hw status",
 		cmd == "backup list", cmd == "backup cleanup",
-		cmd == "stack validate":
+		cmd == "stack validate", cmd == "stack dirs":
 		needsDocker = false
 	}
 

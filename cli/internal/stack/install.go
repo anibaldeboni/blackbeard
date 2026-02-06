@@ -112,34 +112,20 @@ func RunInstall(ctx context.Context, cfg *config.Config, clients *dkr.Clients, p
 
 	// Step 6: Create config directories (discovered from docker-compose.yml)
 	p.Info("[6/8] Creating config directories...")
-	project, loadErr := dkr.LoadProject(ctx, cfg.ComposeFile, cfg.EnvFile)
-	if loadErr != nil {
-		p.Error(fmt.Sprintf("reading docker-compose.yml: %s", loadErr))
-		errors++
-	} else {
-		configDirs := dkr.ConfigDirsFromProject(project, cfg.ConfigBasePath)
-		// Always ensure backups dir exists too
-		allDirs := append(configDirs, "")
-		for _, dir := range allDirs {
-			var fullPath string
-			if dir == "" {
-				// backups dir
-				fullPath = filepath.Join(cfg.ProjectDir, "backups")
-				dir = "backups"
-			} else {
-				fullPath = filepath.Join(cfg.ConfigBasePath, dir)
-			}
-			if _, err := os.Stat(fullPath); os.IsNotExist(err) {
-				if err := os.MkdirAll(fullPath, 0755); err != nil {
-					p.Error(fmt.Sprintf("creating %s: %s", dir, err))
-					errors++
-				} else {
-					p.Success(fmt.Sprintf("Created %s", dir))
-				}
-			} else {
-				p.Info(fmt.Sprintf("  %s (exists)", dir))
-			}
+	_, _, dirErrors := EnsureConfigDirs(ctx, cfg, p)
+	errors += dirErrors
+
+	// Always ensure backups dir exists too
+	backupsPath := filepath.Join(cfg.ProjectDir, "backups")
+	if _, err := os.Stat(backupsPath); os.IsNotExist(err) {
+		if err := os.MkdirAll(backupsPath, 0755); err != nil {
+			p.Error(fmt.Sprintf("creating backups: %s", err))
+			errors++
+		} else {
+			p.Success("Created backups")
 		}
+	} else {
+		p.Info("  backups (exists)")
 	}
 
 	// Step 7: Check downloads directory
