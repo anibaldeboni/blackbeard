@@ -70,21 +70,6 @@ func (c *Config) EnvExampleExists() bool {
 	return err == nil
 }
 
-// ConfigDirs returns the list of config directories that should exist.
-func (c *Config) ConfigDirs() []string {
-	return []string{
-		"qbittorrent",
-		"radarr",
-		"sonarr",
-		"prowlarr",
-		"bazarr",
-		"jellyfin",
-		"jellyfin-gpu",
-		"jellyseerr",
-		"profilarr",
-		"nginx/logs",
-	}
-}
 
 func getEnv(key, fallback string) string {
 	if v := os.Getenv(key); v != "" {

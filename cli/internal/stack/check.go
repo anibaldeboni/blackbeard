@@ -69,20 +69,27 @@ func RunCheck(ctx context.Context, cfg *config.Config, clients *dkr.Clients, p *
 		allOK = false
 	}
 
-	// Check config dirs
+	// Check config dirs (discovered from docker-compose.yml)
 	fmt.Printf("Config dirs:      ")
-	missing := 0
-	for _, dir := range cfg.ConfigDirs() {
-		fullPath := filepath.Join(cfg.ConfigBasePath, dir)
-		if _, err := os.Stat(fullPath); os.IsNotExist(err) {
-			missing++
-		}
-	}
-	if missing == 0 {
-		fmt.Println(ok("OK"))
-	} else {
-		fmt.Printf("%s\n", warn(fmt.Sprintf("%d MISSING", missing)))
+	project, loadErr := dkr.LoadProject(ctx, cfg.ComposeFile, cfg.EnvFile)
+	if loadErr != nil {
+		fmt.Println(warn("CANNOT READ COMPOSE"))
 		allOK = false
+	} else {
+		configDirs := dkr.ConfigDirsFromProject(project, cfg.ConfigBasePath)
+		missing := 0
+		for _, dir := range configDirs {
+			fullPath := filepath.Join(cfg.ConfigBasePath, dir)
+			if _, err := os.Stat(fullPath); os.IsNotExist(err) {
+				missing++
+			}
+		}
+		if missing == 0 {
+			fmt.Printf("%s (%d dirs)\n", ok("OK"), len(configDirs))
+		} else {
+			fmt.Printf("%s\n", warn(fmt.Sprintf("%d MISSING", missing)))
+			allOK = false
+		}
 	}
 
 	// Check downloads path
