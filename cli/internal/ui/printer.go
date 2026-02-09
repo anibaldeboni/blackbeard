@@ -25,12 +25,46 @@ func NewPrinter(noColor bool) *Printer {
 	}
 }
 
-// Header prints a blue boxed header.
+// Header prints a modern styled header with gradient effect.
 func (p *Printer) Header(msg string) {
-	blue := color.New(color.FgBlue)
-	blue.Fprintln(p.Out, "================================")
-	blue.Fprintln(p.Out, msg)
-	blue.Fprintln(p.Out, "================================")
+	cyan := color.New(color.FgCyan, color.Bold)
+	blue := color.New(color.FgBlue, color.Bold)
+
+	// Calculate box width based on message length
+	width := max(len(msg)+4, 50)
+
+	// Top border with gradient effect
+	cyan.Fprint(p.Out, "\n╔")
+	for i := 0; i < width-2; i++ {
+		if i < width/3 {
+			cyan.Fprint(p.Out, "═")
+		} else if i < 2*width/3 {
+			blue.Fprint(p.Out, "═")
+		} else {
+			color.New(color.FgHiBlue).Fprint(p.Out, "═")
+		}
+	}
+	cyan.Fprintln(p.Out, "╗")
+
+	// Message with padding
+	padding := (width - len(msg) - 2) / 2
+	cyan.Fprint(p.Out, "║")
+	fmt.Fprint(p.Out, " ")
+	for i := 0; i < padding-1; i++ {
+		fmt.Fprint(p.Out, " ")
+	}
+	color.New(color.FgHiWhite, color.Bold).Fprint(p.Out, msg)
+	for i := 0; i < width-len(msg)-padding-2; i++ {
+		fmt.Fprint(p.Out, " ")
+	}
+	cyan.Fprintln(p.Out, "║")
+
+	// Bottom border
+	cyan.Fprint(p.Out, "╚")
+	for i := 0; i < width-2; i++ {
+		cyan.Fprint(p.Out, "═")
+	}
+	cyan.Fprintln(p.Out, "╝")
 }
 
 // Success prints a green checkmark message.
