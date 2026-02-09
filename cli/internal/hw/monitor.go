@@ -89,10 +89,7 @@ func RunGPUMonitor(ctx context.Context, p *ui.Printer, intervalSec int) error {
 func printGPUDashboard(p *ui.Printer, vpuDeltas []VPUInterruptDelta, intervalSec int) {
 	timestamp := time.Now().Format("2006-01-02 15:04:05")
 
-	fmt.Println("╔══════════════════════════════════════════════════════════════════╗")
-	fmt.Printf("║         Orange Pi 3B - GPU Mali RK3566 Monitor                 ║\n")
-	fmt.Printf("║         %s                                       ║\n", timestamp)
-	fmt.Println("╚══════════════════════════════════════════════════════════════════╝")
+	p.Header("Orange Pi 3B - GPU Mali RK3566 Monitor", timestamp)
 	fmt.Println()
 
 	info := ReadGPUInfo()

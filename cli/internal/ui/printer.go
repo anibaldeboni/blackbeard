@@ -14,6 +14,13 @@ type Printer struct {
 	noColor bool
 }
 
+type Position int
+
+const (
+	Top Position = iota
+	Bottom
+)
+
 // NewPrinter creates a new Printer. If noColor is true, disables color output.
 func NewPrinter(noColor bool) *Printer {
 	if noColor {
@@ -25,46 +32,84 @@ func NewPrinter(noColor bool) *Printer {
 	}
 }
 
-// Header prints a modern styled header with gradient effect.
-func (p *Printer) Header(msg string) {
+// Header prints a modern styled header with multiple content lines.
+func (p *Printer) Header(msgs ...string) {
+	if len(msgs) == 0 {
+		return
+	}
+
+	width := p.calculateHeaderWidth(msgs...)
+	p.printHeaderLine(width, Top)
+
+	for _, msg := range msgs {
+		p.printHeaderContent(msg, width)
+	}
+
+	p.printHeaderLine(width, Bottom)
+	p.Println("")
+}
+
+// calculateHeaderWidth calculates the minimum width needed for all messages.
+func (p *Printer) calculateHeaderWidth(msgs ...string) int {
+	maxLen := 0
+	for _, msg := range msgs {
+		if len(msg) > maxLen {
+			maxLen = len(msg)
+		}
+	}
+	// Add padding: 2 for borders + 4 for internal spacing
+	width := max(maxLen+6, 50)
+	return width
+}
+
+// printHeaderLine prints the top or bottom border of the header.
+func (p *Printer) printHeaderLine(width int, style Position) {
 	cyan := color.New(color.FgCyan, color.Bold)
 	blue := color.New(color.FgBlue, color.Bold)
+	hiBlue := color.New(color.FgHiBlue, color.Bold)
 
-	// Calculate box width based on message length
-	width := max(len(msg)+4, 50)
+	if style == Top {
+		cyan.Fprint(p.Out, "\n╔")
+	} else {
+		cyan.Fprint(p.Out, "╚")
+	}
 
-	// Top border with gradient effect
-	cyan.Fprint(p.Out, "\n╔")
+	// Print border with gradient effect
 	for i := 0; i < width-2; i++ {
 		if i < width/3 {
 			cyan.Fprint(p.Out, "═")
 		} else if i < 2*width/3 {
 			blue.Fprint(p.Out, "═")
 		} else {
-			color.New(color.FgHiBlue).Fprint(p.Out, "═")
+			hiBlue.Fprint(p.Out, "═")
 		}
 	}
-	cyan.Fprintln(p.Out, "╗")
 
-	// Message with padding
-	padding := (width - len(msg) - 2) / 2
+	if style == Top {
+		cyan.Fprintln(p.Out, "╗")
+	} else {
+		cyan.Fprintln(p.Out, "╝")
+	}
+}
+
+// printHeaderContent prints a centered content line within the header box.
+func (p *Printer) printHeaderContent(msg string, width int) {
+	cyan := color.New(color.FgCyan, color.Bold)
+	white := color.New(color.FgHiWhite, color.Bold)
+
+	leftPadding := (width - len(msg) - 2) / 2
+	rightPadding := width - len(msg) - leftPadding - 3
+
 	cyan.Fprint(p.Out, "║")
 	fmt.Fprint(p.Out, " ")
-	for i := 0; i < padding-1; i++ {
+	for range leftPadding {
 		fmt.Fprint(p.Out, " ")
 	}
-	color.New(color.FgHiWhite, color.Bold).Fprint(p.Out, msg)
-	for i := 0; i < width-len(msg)-padding-2; i++ {
+	white.Fprint(p.Out, msg)
+	for range rightPadding {
 		fmt.Fprint(p.Out, " ")
 	}
 	cyan.Fprintln(p.Out, "║")
-
-	// Bottom border
-	cyan.Fprint(p.Out, "╚")
-	for i := 0; i < width-2; i++ {
-		cyan.Fprint(p.Out, "═")
-	}
-	cyan.Fprintln(p.Out, "╝")
 }
 
 // Success prints a green checkmark message.
