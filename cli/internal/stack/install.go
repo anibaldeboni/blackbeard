@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -152,10 +153,8 @@ func RunInstall(ctx context.Context, cfg *config.Config, clients *dkr.Clients, p
 		p.Success("/dev/dri available (GPU rendering)")
 		gpuAvailable = true
 	}
-	for _, dev := range []string{"/dev/video0", "/dev/video1", "/dev/video2"} {
-		if _, err := os.Stat(dev); err == nil {
-			p.Success(fmt.Sprintf("%s available (VPU)", dev))
-		}
+	for _, dev := range listVPUDevices() {
+		p.Success(fmt.Sprintf("%s available (VPU)", dev))
 	}
 	if !gpuAvailable {
 		p.Warning("No GPU devices found (hardware transcoding disabled)")
@@ -249,4 +248,27 @@ func lookupGroupID(name string) string {
 		return ""
 	}
 	return group.Gid
+}
+
+func listVPUDevices() []string {
+	paths, err := filepath.Glob("/dev/video*")
+	if err != nil {
+		return nil
+	}
+
+	devices := make([]string, 0, len(paths))
+	for _, path := range paths {
+		base := strings.TrimPrefix(filepath.Base(path), "video")
+		if base == "" {
+			continue
+		}
+		if _, err := strconv.Atoi(base); err != nil {
+			continue
+		}
+		if _, err := os.Stat(path); err == nil {
+			devices = append(devices, path)
+		}
+	}
+	sort.Strings(devices)
+	return devices
 }
