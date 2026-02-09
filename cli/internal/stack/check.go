@@ -16,7 +16,6 @@ import (
 // RunCheck verifies the installation status.
 func RunCheck(ctx context.Context, cfg *config.Config, clients *dkr.Clients, p *ui.Printer) error {
 	p.Header("Installation Status Check")
-	p.Println("")
 
 	allOK := true
 	ok := color.New(color.FgGreen).SprintFunc()
