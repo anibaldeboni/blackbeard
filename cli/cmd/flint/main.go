@@ -50,13 +50,13 @@ type StackCmd struct {
 	Install   StackInstallCmd   `cmd:"" help:"Install/setup the stack (creates dirs, .env, network)."`
 	Check     StackCheckCmd     `cmd:"" help:"Check installation status."`
 	Uninstall StackUninstallCmd `cmd:"" help:"Remove containers and network (preserves config)."`
-	Start     StackStartCmd     `cmd:"" help:"Start the entire stack."`
-	Stop      StackStopCmd      `cmd:"" help:"Stop the entire stack."`
+	Start     StackStartCmd     `cmd:"" help:"Start the stack or a specific service."`
+	Stop      StackStopCmd      `cmd:"" help:"Stop the stack or a specific service."`
 	Restart   StackRestartCmd   `cmd:"" help:"Restart the stack or a specific service."`
 	Status    StackStatusCmd    `cmd:"" help:"Show container status."`
 	Health    StackHealthCmd    `cmd:"" help:"Show health check status."`
 	Logs      StackLogsCmd      `cmd:"" help:"Show logs (optionally for a specific service)."`
-	Update    StackUpdateCmd    `cmd:"" help:"Pull new images and recreate containers."`
+	Update    StackUpdateCmd    `cmd:"" help:"Pull new images and recreate containers (optionally for a service)."`
 	Resources StackResourcesCmd `cmd:"" help:"Show resource usage (CPU, memory)."`
 	Validate  StackValidateCmd  `cmd:"" help:"Validate docker-compose configuration."`
 	Dirs      StackDirsCmd      `cmd:"" help:"Check config directories and create missing ones."`
@@ -80,16 +80,20 @@ func (cmd *StackUninstallCmd) Run(ctx *Ctx) error {
 	return stack.RunUninstall(ctx.Context, ctx.Config, ctx.Clients, ctx.Printer, ctx.Yes)
 }
 
-type StackStartCmd struct{}
-
-func (cmd *StackStartCmd) Run(ctx *Ctx) error {
-	return stack.RunStart(ctx.Context, ctx.Config, ctx.Clients, ctx.Printer)
+type StackStartCmd struct {
+	Service string `arg:"" optional:"" help:"Service to start. If omitted, starts entire stack."`
 }
 
-type StackStopCmd struct{}
+func (cmd *StackStartCmd) Run(ctx *Ctx) error {
+	return stack.RunStart(ctx.Context, ctx.Config, ctx.Clients, ctx.Printer, cmd.Service)
+}
+
+type StackStopCmd struct {
+	Service string `arg:"" optional:"" help:"Service to stop. If omitted, stops entire stack."`
+}
 
 func (cmd *StackStopCmd) Run(ctx *Ctx) error {
-	return stack.RunStop(ctx.Context, ctx.Config, ctx.Clients, ctx.Printer)
+	return stack.RunStop(ctx.Context, ctx.Config, ctx.Clients, ctx.Printer, cmd.Service)
 }
 
 type StackRestartCmd struct {
@@ -123,10 +127,12 @@ func (cmd *StackLogsCmd) Run(ctx *Ctx) error {
 	return stack.RunLogs(ctx.Context, ctx.Config, ctx.Clients, ctx.Printer, cmd.Service)
 }
 
-type StackUpdateCmd struct{}
+type StackUpdateCmd struct {
+	Service string `arg:"" optional:"" help:"Service to update. If omitted, updates entire stack."`
+}
 
 func (cmd *StackUpdateCmd) Run(ctx *Ctx) error {
-	return stack.RunUpdate(ctx.Context, ctx.Config, ctx.Clients, ctx.Printer)
+	return stack.RunUpdate(ctx.Context, ctx.Config, ctx.Clients, ctx.Printer, cmd.Service)
 }
 
 type StackResourcesCmd struct{}
