@@ -393,7 +393,7 @@ services:
       qbittorrent:
         condition: service_healthy
       bazarr:
-        condition: service_started # Não espera estar healthy, apenas iniciado
+        condition: service_healthy
     networks:
       - jollyroger
     volumes:

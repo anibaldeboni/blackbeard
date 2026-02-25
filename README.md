@@ -279,13 +279,15 @@ Nginx provides a unified access point for all services. Configuration: `config/n
 | `/jellyseerr` | Jellyseerr | Request manager (port 5055) |
 | `/radarr` | Radarr | Movie manager (port 7878) |
 | `/sonarr` | Sonarr | TV manager (port 8989) |
-| `/bazarr` | Bazarr | Subtitle manager (port 6767) |
+| `/bazarr/` | Bazarr | Subtitle manager (port 6767) |
 | `/prowlarr` | Prowlarr | Indexer manager (port 9696) |
 | `/qbittorrent/` | qBittorrent | Torrent client (port 5080) |
 
 **Important:** Configure each application's base URL before using the reverse proxy:
 - Radarr/Sonarr/Prowlarr/Bazarr: Settings > General > URL Base (e.g., `/radarr`)
 - qBittorrent: Settings > WebUI > Alternative WebUI enabled
+
+`/bazarr` is automatically redirected to `/bazarr/`.
 
 ### USB Automount (Optional)
 
@@ -356,6 +358,18 @@ sudo usermod -aG video,render $USER
 ### Service not healthy
 ```bash
 docker inspect <container> | grep -A 20 Health
+```
+
+### Nginx returns 502 for Bazarr
+```bash
+# Check Bazarr and Nginx states
+docker compose ps bazarr nginx
+
+# Confirm Bazarr is responding directly
+curl -i http://localhost:6767/ping
+
+# Follow recent logs for connection errors
+docker compose logs --tail=200 bazarr nginx
 ```
 
 ### Monitor System Resources
