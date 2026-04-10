@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blackbeard</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0d0f14;
+            --surface: rgba(22, 26, 37, 0.82);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #c9a227;
+            --accent2: #e8c547;
+            --text: #e2e8f0;
+            --text-muted: #8892a4;
+            --radius: 14px;
+            --panel-w: 220px;
+            --collapsed: 64px;
+            --transition: 0.28s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* ── Stars ── */
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0;
+            animation: twinkle var(--dur, 4s) ease-in-out infinite var(--delay, 0s);
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: var(--max-op, 0.6);
+            }
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 16px;
+        }
+
+        .skull {
+            font-size: 72px;
+            line-height: 1;
+            filter: drop-shadow(0 0 24px rgba(201, 162, 39, 0.45));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 45%, #fff5cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 2px 18px rgba(201, 162, 39, 0.3));
+        }
+
+        .hero-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        /* ── Floating panel ── */
+        .panel {
+            position: fixed;
+            left: 0;
+            top: 16px;
+            z-index: 100;
+            width: var(--panel-w);
+            background: var(--surface);
+            backdrop-filter: blur(16px) saturate(1.6);
+            -webkit-backdrop-filter: blur(16px) saturate(1.6);
+            border: 1px solid var(--border);
+            border-left: none;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 10px 0 10px 0;
+            transition: width var(--transition), background var(--transition),
+                border-color var(--transition), backdrop-filter var(--transition);
+            overflow: hidden;
+        }
+
+        .panel.collapsed {
+            width: var(--collapsed);
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-color: transparent;
+            overflow: visible;
+        }
+
+        /* ── Toggle button ── */
+        .toggle-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            height: 36px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 14px;
+            padding: 0 12px;
+            margin-bottom: 4px;
+            transition: color 0.2s;
+        }
+
+        .toggle-btn:hover {
+            color: var(--accent2);
+        }
+
+        /* When collapsed the button itself carries the visible hit-target */
+        .panel.collapsed .toggle-btn {
+            justify-content: center;
+            padding: 0;
+        }
+
+        .toggle-icon {
+            display: inline-block;
+            transition: transform var(--transition);
+            line-height: 1;
+        }
+
+        .panel.collapsed .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* ── Service list ── */
+        .service-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 0 6px;
+        }
+
+        .service-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 9px 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.88rem;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .service-item a:hover {
+            background: rgba(201, 162, 39, 0.12);
+            color: var(--accent2);
+        }
+
+        .svc-icon {
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* Fallback avatar for icons that fail to load */
+        .svc-avatar {
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .svc-name {
+            transition: opacity var(--transition), width var(--transition);
+            opacity: 1;
+        }
+
+        .panel.collapsed .svc-name {
+            opacity: 0;
+            width: 0;
+            pointer-events: none;
+        }
+
+        .panel.collapsed .service-list {
+            padding: 0 8px;
+        }
+
+        .panel.collapsed .service-item a {
+            justify-content: center;
+            gap: 0;
+            padding: 9px 0;
+        }
+
+        .panel.collapsed .service-item a:hover {
+            background: rgba(201, 162, 39, 0.1);
+            transform: translateX(1px) scale(1.02);
+            box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.22), 0 6px 14px rgba(0, 0, 0, 0.25);
+        }
+
+        /* ── Divider ── */
+        .panel-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 6px 10px;
+            transition: opacity var(--transition);
+        }
+
+        .panel.collapsed .panel-divider {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Stars background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Hero -->
+    <main class="hero">
+        <div class="skull">☠️</div>
+        <h1 class="hero-title">Blackbeard</h1>
+        <p class="hero-sub">Home Media Server</p>
+    </main>
+
+    <!-- Floating service menu -->
+    <nav class="panel" id="panel" aria-label="Services">
+        <button class="toggle-btn" id="toggleBtn" aria-label="Toggle menu" title="Toggle menu">
+            <span class="toggle-icon" aria-hidden="true">◀</span>
+        </button>
+        <div class="panel-divider"></div>
+        <ul class="service-list" id="serviceList"></ul>
+    </nav>
+
+    <script>
+        (function () {
+            // ── Service definitions ──────────────────────────────────────────────
+            var SERVICES = [
+                { name: 'Jellyfin', port: 8096, color: '#00a4dc' },
+                { name: 'Jellyseerr', port: 5055, color: '#4f46e5' },
+                { name: 'Sonarr', port: 8989, color: '#35c5f4' },
+                { name: 'Radarr', port: 7878, color: '#ffc230' },
+                { name: 'qBittorrent', port: 5080, color: '#2f9ed3' },
+                { name: 'Prowlarr', port: 9696, color: '#ff7043' },
+                { name: 'Bazarr', port: 6767, color: '#43a047' },
+            ];
+
+            var host = window.location.hostname;
+
+            // ── Build service list ───────────────────────────────────────────────
+            var list = document.getElementById('serviceList');
+
+            SERVICES.forEach(function (svc) {
+                var url = 'http://' + host + ':' + svc.port;
+                var init = svc.name.charAt(0);
+
+                var li = document.createElement('li');
+                li.className = 'service-item';
+
+                var a = document.createElement('a');
+                a.href = url;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+
+                // Icon — try favicon first
+                var img = document.createElement('img');
+                img.className = 'svc-icon';
+                img.alt = svc.name + ' icon';
+                img.width = 30;
+                img.height = 30;
+                img.src = url + '/favicon.ico';
+                img.onerror = function () {
+                    // Swap to a colored initial avatar
+                    var av = document.createElement('span');
+                    av.className = 'svc-avatar';
+                    av.style.background = svc.color;
+                    av.textContent = init;
+                    av.setAttribute('aria-hidden', 'true');
+                    img.parentNode && img.parentNode.replaceChild(av, img);
+                };
+
+                var span = document.createElement('span');
+                span.className = 'svc-name';
+                span.textContent = svc.name;
+
+                a.appendChild(img);
+                a.appendChild(span);
+                li.appendChild(a);
+                list.appendChild(li);
+            });
+
+            // ── Collapse / expand ────────────────────────────────────────────────
+            var panel = document.getElementById('panel');
+            var btn = document.getElementById('toggleBtn');
+            var STORAGE_KEY = 'bb-menu-collapsed';
+
+            function applyState(collapsed) {
+                if (collapsed) {
+                    panel.classList.add('collapsed');
+                    btn.setAttribute('aria-expanded', 'false');
+                } else {
+                    panel.classList.remove('collapsed');
+                    btn.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            // Restore saved state
+            applyState(localStorage.getItem(STORAGE_KEY) === '1');
+
+            btn.addEventListener('click', function () {
+                var isNowCollapsed = !panel.classList.contains('collapsed');
+                applyState(isNowCollapsed);
+                localStorage.setItem(STORAGE_KEY, isNowCollapsed ? '1' : '0');
+            });
+
+            // ── Stars ────────────────────────────────────────────────────────────
+            var container = document.getElementById('stars');
+            var frag = document.createDocumentFragment();
+            for (var i = 0; i < 120; i++) {
+                var s = document.createElement('div');
+                s.className = 'star';
+                var size = Math.random() * 2.2 + 0.6;
+                s.style.cssText = [
+                    'width:' + size + 'px',
+                    'height:' + size + 'px',
+                    'left:' + (Math.random() * 100) + '%',
+                    'top:' + (Math.random() * 100) + '%',
+                    '--dur:' + (Math.random() * 5 + 2).toFixed(1) + 's',
+                    '--delay:' + (Math.random() * 6).toFixed(1) + 's',
+                    '--max-op:' + (Math.random() * 0.5 + 0.2).toFixed(2),
+                ].join(';');
+                frag.appendChild(s);
+            }
+            container.appendChild(frag);
+        })();
+    </script>
+</body>
+
+</html>

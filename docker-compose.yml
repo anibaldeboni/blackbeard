@@ -398,6 +398,7 @@ services:
       - jollyroger
     volumes:
       - ${CONFIG_BASE_PATH:-./config}/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${CONFIG_BASE_PATH:-./config}/nginx/www:/usr/share/nginx/html:ro
       - nginx-logs:/var/log/nginx
     ports:
       - 80:80
