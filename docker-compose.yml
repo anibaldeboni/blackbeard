@@ -79,9 +79,6 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     hostname: prowlarr
-    depends_on:
-      flaresolverr:
-        condition: service_healthy
     networks:
       - jollyroger
     environment:
@@ -117,11 +114,6 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     hostname: radarr
-    depends_on:
-      qbittorrent:
-        condition: service_healthy
-      prowlarr:
-        condition: service_healthy
     networks:
       - jollyroger
     environment:
@@ -154,11 +146,6 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     hostname: sonarr
-    depends_on:
-      qbittorrent:
-        condition: service_healthy
-      prowlarr:
-        condition: service_healthy
     networks:
       - jollyroger
     environment:
@@ -195,13 +182,6 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     hostname: bazarr
-    depends_on:
-      sonarr:
-        condition: service_healthy
-      radarr:
-        condition: service_healthy
-      flaresolverr:
-        condition: service_healthy
     networks:
       - jollyroger
     environment:
@@ -289,13 +269,6 @@ services:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
     hostname: jellyseerr
-    depends_on:
-      radarr:
-        condition: service_healthy
-      sonarr:
-        condition: service_healthy
-      jellyfin:
-        condition: service_healthy
     networks:
       - jollyroger
     environment:
@@ -339,11 +312,6 @@ services:
     image: santiagosayshey/profilarr:latest
     container_name: profilarr
     hostname: profilarr
-    depends_on:
-      radarr:
-        condition: service_healthy
-      sonarr:
-        condition: service_healthy
     networks:
       - jollyroger
     ports:
@@ -379,21 +347,6 @@ services:
     image: nginx:1.29.2-alpine
     container_name: nginx
     hostname: nginx
-    depends_on:
-      jellyfin:
-        condition: service_healthy
-      jellyseerr:
-        condition: service_healthy
-      sonarr:
-        condition: service_healthy
-      radarr:
-        condition: service_healthy
-      prowlarr:
-        condition: service_healthy
-      qbittorrent:
-        condition: service_healthy
-      bazarr:
-        condition: service_healthy
     networks:
       - jollyroger
     volumes:
@@ -412,7 +365,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 120s # Aguarda backends ficarem prontos (bazarr leva até 120s)
+      start_period: 20s # Nginx sobe independente dos backends no boot paralelo
     deploy:
       resources:
         limits:
