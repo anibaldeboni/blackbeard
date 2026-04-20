@@ -19,7 +19,7 @@ services:
       - UMASK=${UMASK:-002}
       - TZ=${TZ:-America/Sao_Paulo}
       - WEBUI_PORT=5080
-      - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
+      # - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
       - qbittorrent-config:/config
       - torrent-downloads:/downloads
@@ -28,7 +28,7 @@ services:
       - 6881:6881
       - 6881:6881/udp
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5080"]
+      test: [ "CMD", "curl", "-f", "http://localhost:5080" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -57,7 +57,7 @@ services:
     ports:
       - "${FLARESOLVERR_PORT:-8191}:8191"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8191/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8191/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -91,7 +91,7 @@ services:
     ports:
       - 9696:9696
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9696/ping"]
+      test: [ "CMD", "curl", "-f", "http://localhost:9696/ping" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -127,7 +127,7 @@ services:
       - radarr-config:/config
       - torrent-downloads:/downloads
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7878/ping"]
+      test: [ "CMD", "curl", "-f", "http://localhost:7878/ping" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -159,7 +159,7 @@ services:
     ports:
       - 8989:8989
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8989/ping"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8989/ping" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -195,7 +195,7 @@ services:
     ports:
       - 6767:6767
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:6767/ping"]
+      test: [ "CMD", "curl", "-f", "http://localhost:6767/ping" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -246,7 +246,7 @@ services:
       - 7359:7359/udp # Service discovery
       - 8920:8920 # HTTPS
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8096/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -324,8 +324,7 @@ services:
       - UMASK=${UMASK:-002}
       - TZ=${TZ:-America/Sao_Paulo}
     healthcheck:
-      test:
-        ["CMD-SHELL", "wget --quiet --spider http://localhost:6868 || exit 1"]
+      test: [ "CMD-SHELL", "wget --quiet --spider http://localhost:6868 || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -360,7 +359,8 @@ services:
       test:
         [
           "CMD-SHELL",
-          "[ -f /var/run/nginx.pid ] && kill -0 $(cat /var/run/nginx.pid) || exit 1",
+          "[ -f /var/run/nginx.pid ] && kill -0 $(cat /var/run/nginx.pid) ||
+            exit 1",
         ]
       interval: 30s
       timeout: 10s
