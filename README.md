@@ -285,7 +285,7 @@ Nginx provides a unified access point for all services. Configuration: `config/n
 
 **Important:** Configure each application's base URL before using the reverse proxy:
 - Radarr/Sonarr/Prowlarr/Bazarr: Settings > General > URL Base (e.g., `/radarr`)
-- qBittorrent: Settings > WebUI > Alternative WebUI enabled
+- qBittorrent: Settings > WebUI > Root folder = `/qbittorrent`
 
 `/bazarr` is automatically redirected to `/bazarr/`.
 
