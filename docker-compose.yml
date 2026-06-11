@@ -28,7 +28,7 @@ services:
       - 6881:6881
       - 6881:6881/udp
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:5080" ]
+      test: ["CMD", "curl", "-f", "http://localhost:5080"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -57,7 +57,7 @@ services:
     ports:
       - "${FLARESOLVERR_PORT:-8191}:8191"
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8191/health" ]
+      test: ["CMD", "curl", "-f", "http://localhost:8191/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -91,7 +91,7 @@ services:
     ports:
       - 9696:9696
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9696/ping" ]
+      test: ["CMD", "curl", "-f", "http://localhost:9696/ping"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -127,7 +127,7 @@ services:
       - radarr-config:/config
       - torrent-downloads:/downloads
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:7878/ping" ]
+      test: ["CMD", "curl", "-f", "http://localhost:7878/ping"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -159,7 +159,7 @@ services:
     ports:
       - 8989:8989
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8989/ping" ]
+      test: ["CMD", "curl", "-f", "http://localhost:8989/ping"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -195,7 +195,7 @@ services:
     ports:
       - 6767:6767
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:6767/ping" ]
+      test: ["CMD", "curl", "-f", "http://localhost:6767/ping"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -246,7 +246,7 @@ services:
       - 7359:7359/udp # Service discovery
       - 8920:8920 # HTTPS
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8096/health" ]
+      test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -265,10 +265,11 @@ services:
   # REQUEST MANAGER
   # ============================================================================
 
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
-    hostname: jellyseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    init: true
+    container_name: seerr
+    hostname: seerr
     networks:
       - jollyroger
     environment:
@@ -277,19 +278,11 @@ services:
       - UMASK=${UMASK:-002}
       - TZ=${TZ:-America/Sao_Paulo}
     volumes:
-      - jellyseerr-config:/app/config
+      - seerr-config:/app/config
     ports:
       - 5055:5055
     healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://localhost:5055/api/v1/status",
-        ]
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1
       interval: 30s
       timeout: 10s
       retries: 3
@@ -297,8 +290,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "${JELLYSEERR_CPU_LIMIT:-0.5}"
-          memory: ${JELLYSEERR_MEM_LIMIT:-512m}
+          cpus: "${SEERR_CPU_LIMIT:-0.5}"
+          memory: ${SEERR_MEM_LIMIT:-512m}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "backup.enable=true"
@@ -324,7 +317,8 @@ services:
       - UMASK=${UMASK:-002}
       - TZ=${TZ:-America/Sao_Paulo}
     healthcheck:
-      test: [ "CMD-SHELL", "wget --quiet --spider http://localhost:6868 || exit 1" ]
+      test:
+        ["CMD-SHELL", "wget --quiet --spider http://localhost:6868 || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -356,11 +350,10 @@ services:
       - 80:80
       - 443:443
     healthcheck:
-      test:
-        [
+      test: [
           "CMD-SHELL",
           "[ -f /var/run/nginx.pid ] && kill -0 $(cat /var/run/nginx.pid) ||
-            exit 1",
+          exit 1",
         ]
       interval: 30s
       timeout: 10s
@@ -493,15 +486,6 @@ volumes:
     labels:
       - "backup.enable=true"
 
-  jellyfin-gpu-config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${CONFIG_BASE_PATH:-./config}/jellyfin-gpu
-    labels:
-      - "backup.enable=true"
-
   qbittorrent-config:
     driver: local
     driver_opts:
@@ -511,7 +495,7 @@ volumes:
     labels:
       - "backup.enable=true"
 
-  jellyseerr-config:
+  seerr-config:
     driver: local
     driver_opts:
       type: none
@@ -526,13 +510,6 @@ volumes:
       type: none
       o: bind
       device: ${CONFIG_BASE_PATH:-./config}/nginx/logs
-
-  kuma-config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${CONFIG_BASE_PATH:-./config}/uptime-kuma
 
   netdata-config:
     driver: local
