@@ -258,6 +258,7 @@ Available routes:
 - `/bazarr/`
 - `/prowlarr`
 - `/qbittorrent/`
+- `/assets/` (landing page static assets from `config/nginx/www/assets/`)
 
 After first login, configure base URLs in apps that run behind subpaths (Radarr/Sonarr/Prowlarr/Bazarr).
 

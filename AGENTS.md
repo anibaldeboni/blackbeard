@@ -104,6 +104,7 @@ All services are proxied via Nginx at these subpaths:
 - `/bazarr/`
 - `/prowlarr`
 - `/qbittorrent/`
+- `/assets/` (landing page static assets mounted from `config/nginx/www/assets/`)
 
 When adding or changing routes, edit `config/nginx/nginx.conf`. Services that run behind a subpath (Radarr, Sonarr, Prowlarr, Bazarr) require their base URL to be configured in their own UI settings after first login.
 
