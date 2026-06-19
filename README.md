@@ -12,7 +12,7 @@ A Docker-based home media server stack optimized for Orange Pi 3B (RK3566), feat
 | Prowlarr | 9696 | Unified indexer manager |
 | Bazarr | 6767 | Automatic subtitle management |
 | Jellyfin | 8096, 7359/udp, 8920 | Media server with V4L2M2M hardware acceleration |
-| Jellyseerr | 5055 | Media request interface |
+| Seerr | 5055 | Media request interface |
 | Profilarr | 6868 | Quality profile manager |
 | FlareSolverr | 8191 | Cloudflare bypass proxy |
 | Nginx | 80, 443 | Reverse proxy |
@@ -170,8 +170,8 @@ PROWLARR_CPU_LIMIT=0.5
 PROWLARR_MEM_LIMIT=512m
 BAZARR_CPU_LIMIT=0.5
 BAZARR_MEM_LIMIT=512m
-JELLYSEERR_CPU_LIMIT=0.5
-JELLYSEERR_MEM_LIMIT=512m
+SEERR_CPU_LIMIT=0.5
+SEERR_MEM_LIMIT=512m
 FLARESOLVERR_CPU_LIMIT=1.0
 FLARESOLVERR_MEM_LIMIT=1g
 NGINX_CPU_LIMIT=0.5
@@ -219,7 +219,7 @@ Run `id` to verify your user and group IDs.
   - TV Shows: `/downloads/tv`
 - Enable hardware acceleration in Settings > Playback
 
-### 6. Jellyseerr (Port 5055)
+### 6. Seerr (Port 5055)
 - Connect to Jellyfin at `http://jellyfin:8096`
 - Link Radarr and Sonarr
 - Configure user permissions
@@ -276,7 +276,7 @@ Nginx provides a unified access point for all services. Configuration: `config/n
 |------|---------|-------|
 | `/` | Jellyfin | Redirects to `/jellyfin/` |
 | `/jellyfin/` | Jellyfin | Media server (port 8096) |
-| `/jellyseerr` | Jellyseerr | Request manager (port 5055) |
+| `/seerr` | Seerr | Request manager (port 5055) |
 | `/radarr` | Radarr | Movie manager (port 7878) |
 | `/sonarr` | Sonarr | TV manager (port 8989) |
 | `/bazarr/` | Bazarr | Subtitle manager (port 6767) |
@@ -406,11 +406,10 @@ blackbeard/
 │   ├── prowlarr/
 │   ├── bazarr/
 │   ├── jellyfin/
-│   ├── jellyfin-gpu/           # Alternative Jellyfin config (Rockchip)
 │   ├── jellyseerr/
 │   └── profilarr/
 ├── backups/                    # Volume backups
-├── catalogs/                   # Jellyseerr catalogs
+├── catalogs/                   # Prowlarr catalogs
 └── udev/                       # USB automount rules
 ```
 
@@ -422,7 +421,7 @@ blackbeard/
 3. radarr + sonarr (depend on qbittorrent + prowlarr)
 4. bazarr (depends on radarr + sonarr + flaresolverr)
 5. jellyfin (independent)
-6. jellyseerr + profilarr (depend on radarr + sonarr + jellyfin)
+6. seerr + profilarr (depend on radarr + sonarr + jellyfin)
 7. nginx (depends on all services)
 ```
 
