@@ -37,31 +37,39 @@
             overflow: hidden;
         }
 
-        /* ── Stars ── */
-        .stars {
+        /* ── Snow ── */
+        .snow {
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: 0;
         }
 
-        .star {
+        .snowflake {
             position: absolute;
             border-radius: 50%;
             background: #fff;
             opacity: 0;
-            animation: twinkle var(--dur, 4s) ease-in-out infinite var(--delay, 0s);
+            animation: fall linear infinite;
         }
 
-        @keyframes twinkle {
-
-            0%,
-            100% {
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(var(--x-start, 0vw));
                 opacity: 0;
             }
 
-            50% {
-                opacity: var(--max-op, 0.6);
+            10% {
+                opacity: var(--max-op, 0.8);
+            }
+
+            90% {
+                opacity: var(--max-op, 0.8);
+            }
+
+            100% {
+                transform: translateY(100vh) translateX(var(--x-end, 5vw));
+                opacity: 0;
             }
         }
 
@@ -273,8 +281,8 @@
 
 <body>
 
-    <!-- Stars background -->
-    <div class="stars" id="stars"></div>
+    <!-- Snow background -->
+    <div class="snow" id="snow"></div>
 
     <!-- Hero -->
     <main class="hero">
@@ -378,21 +386,29 @@
                 localStorage.setItem(STORAGE_KEY, isNowCollapsed ? '1' : '0');
             });
 
-            // ── Stars ────────────────────────────────────────────────────────────
-            var container = document.getElementById('stars');
+            // ── Snow ─────────────────────────────────────────────────────────────
+            var container = document.getElementById('snow');
             var frag = document.createDocumentFragment();
-            for (var i = 0; i < 120; i++) {
+            var numFlakes = 300;
+
+            for (var i = 0; i < numFlakes; i++) {
                 var s = document.createElement('div');
-                s.className = 'star';
-                var size = Math.random() * 2.2 + 0.6;
+                s.className = 'snowflake';
+                var size = Math.random() * 3 + 1;
+                var startX = Math.random() * 100;
+                var endX = startX + (Math.random() * 20 - 10);
+                var duration = Math.random() * 8 + 5; // 5 to 13 seconds
+                var delay = Math.random() * -15; // Start some off-screen
+
                 s.style.cssText = [
                     'width:' + size + 'px',
                     'height:' + size + 'px',
-                    'left:' + (Math.random() * 100) + '%',
-                    'top:' + (Math.random() * 100) + '%',
-                    '--dur:' + (Math.random() * 5 + 2).toFixed(1) + 's',
-                    '--delay:' + (Math.random() * 6).toFixed(1) + 's',
-                    '--max-op:' + (Math.random() * 0.5 + 0.2).toFixed(2),
+                    'left:' + startX + '%',
+                    'animation-duration:' + duration + 's',
+                    'animation-delay:' + delay + 's',
+                    '--max-op:' + (Math.random() * 0.4 + 0.3).toFixed(2),
+                    '--x-start:' + (Math.random() * 20 - 10) + 'vw',
+                    '--x-end:' + (Math.random() * 20 - 10) + 'vw',
                 ].join(';');
                 frag.appendChild(s);
             }
