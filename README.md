@@ -1,449 +1,270 @@
 # Blackbeard Media Stack
 
-A Docker-based home media server stack optimized for Orange Pi 3B (RK3566), featuring V4L2M2M hardware transcoding via Hantro VPU. Provides automated media acquisition, management, and streaming with a unified CLI for hardware monitoring and stack management.
+Docker-based home media server stack optimized for Orange Pi 3B (RK3566), with Jellyfin hardware acceleration via V4L2M2M.
+
+This guide is terminal-only and uses Git + Docker/Docker Compose commands.
 
 ## Services
 
-| Service | Port(s) | Description |
-|---------|---------|-------------|
-| qBittorrent | 5080, 6881 | Torrent client with VueTorrent interface |
-| Radarr | 7878 | Movie management with automated search |
-| Sonarr | 8989 | TV series management with episode tracking |
-| Prowlarr | 9696 | Unified indexer manager |
-| Bazarr | 6767 | Automatic subtitle management |
-| Jellyfin | 8096, 7359/udp, 8920 | Media server with V4L2M2M hardware acceleration |
-| Seerr | 5055 | Media request interface |
+| Service | Port(s) | Purpose |
+|---|---:|---|
+| qBittorrent | 5080, 6881/tcp+udp | Torrent client |
+| Radarr | 7878 | Movie management |
+| Sonarr | 8989 | TV management |
+| Prowlarr | 9696 | Indexer manager |
+| Bazarr | 6767 | Subtitle management |
+| Jellyfin | 8096, 7359/udp, 8920 | Media server |
+| Seerr | 5055 | Request management |
 | Profilarr | 6868 | Quality profile manager |
 | FlareSolverr | 8191 | Cloudflare bypass proxy |
 | Nginx | 80, 443 | Reverse proxy |
-| Watchtower | - | Automatic container updates |
+| Watchtower | - | Automatic image updates |
+| Netdata | 19999 (host network) | Host monitoring |
 
 ## Requirements
 
-- Docker Engine 20.10+
-- Docker Compose 2.0+
-- 4GB+ RAM recommended
-- V4L2M2M compatible device with Hantro VPU for hardware acceleration (optional)
-- Alternative: Rockchip SoC with full GPU support (use `nyanmisaka/jellyfin` image)
+- Linux host with Docker Engine 20.10+
+- Docker Compose v2
+- Git
+- 4 GB RAM or more (recommended)
 
-## Quick Start
+Quick check:
 
 ```bash
-# Install the stack (creates directories, .env, network)
-./stack.sh stack install
-
-# Start all services
-./stack.sh stack start
-
-# Check health status
-./stack.sh stack health
+docker --version
+docker compose version
+git --version
 ```
 
-The `install` command automatically:
-- Checks Docker and Docker Compose installation
-- Creates the `jollyroger` Docker network
-- Copies `.env.example` to `.env`
-- Detects and configures your UID/GID
-- Creates all config directories
-- Detects GPU devices and configures groups
+## First-Time Setup
 
-## Stack Management CLI
+> Run commands on the machine that will host the containers (for example, your OrangePi over SSH).
 
-The unified `stack.sh` script provides all management commands organized by groups:
+1) Clone the repository:
 
 ```bash
-./stack.sh <group> <command> [options]
+git clone https://github.com/anibalnet/blackbeard.git
+cd blackbeard
 ```
 
-### Groups Overview
-
-| Group | Description |
-|-------|-------------|
-| `stack` | Stack lifecycle management (install, start, stop, logs) |
-| `backup` | Volume backup and restore operations |
-| `docker` | Docker cleanup operations |
-| `hw` | Hardware monitoring (temperature, GPU/VPU) |
-
-### Stack Commands
+2) Create the external Docker network required by compose:
 
 ```bash
-# Setup
-./stack.sh stack install            # First-time installation
-./stack.sh stack check              # Verify installation status
-./stack.sh stack uninstall          # Remove containers and network
-
-# Runtime
-./stack.sh stack start              # Start all services
-./stack.sh stack stop               # Stop all services
-./stack.sh stack restart            # Restart all services
-./stack.sh stack status             # View container status
-./stack.sh stack health             # Check health status
-./stack.sh stack logs [service]     # View logs (all or specific service)
-./stack.sh stack restart-svc <svc>  # Restart specific service
-./stack.sh stack update             # Pull new images and recreate
-./stack.sh stack resources          # View CPU/memory usage
-./stack.sh stack validate           # Validate docker-compose config
+docker network create jollyroger || true
 ```
 
-### Backup Commands
-
-Backups use the `backup.enable=true` label to identify important volumes.
+3) Create your environment file:
 
 ```bash
-./stack.sh backup volumes           # List volumes marked for backup
-./stack.sh backup all               # Backup all marked volumes
-./stack.sh backup volume <name>     # Backup specific volume
-./stack.sh backup restore <file>    # Restore from backup file
-./stack.sh backup list              # List available backups
-./stack.sh backup cleanup [days]    # Remove old backups (default: 7 days)
-
-# Custom backup location
-BACKUP_DIR=/mnt/nas ./stack.sh backup all
+cp .env.example .env
 ```
 
-### Docker Cleanup Commands
+4) Review key values in `.env`:
 
 ```bash
-./stack.sh docker disk              # Show disk usage
-./stack.sh docker list              # List unused images
-./stack.sh docker dangling          # Remove dangling images (safe)
-./stack.sh docker prune             # Remove all unused images
-./stack.sh docker prune-old [days]  # Remove images older than N days
-./stack.sh docker clean             # Full cleanup (containers, networks, images)
-./stack.sh docker protected         # Show images in use
+# Current user/group IDs
+id
+
+# GPU groups (commonly 44 and 105 on OrangePi)
+getent group video
+getent group render
 ```
 
-### Hardware Monitoring Commands (OrangePi/RK3566)
+Important variables to verify:
+
+- `PUID` and `PGID`
+- `TZ`
+- `DOWNLOADS_PATH`
+- `CONFIG_BASE_PATH`
+- `GPU_VIDEO_GROUP` and `GPU_RENDER_GROUP`
+
+5) Create expected directories:
 
 ```bash
-./stack.sh hw temp                  # Show CPU and GPU temperature
-./stack.sh hw temp cpu              # Show CPU temperature only
-./stack.sh hw temp gpu              # Show GPU temperature only
-./stack.sh hw temp-monitor [sec]    # Monitor temperature continuously
-./stack.sh hw gpu                   # Show GPU/VPU status
-./stack.sh hw gpu-monitor [sec]     # Monitor GPU/VPU continuously
-./stack.sh hw status                # Full hardware status
+mkdir -p \
+  config/qbittorrent \
+  config/radarr \
+  config/sonarr \
+  config/prowlarr \
+  config/bazarr \
+  config/jellyfin \
+  config/jellyseerr \
+  config/profilarr \
+  config/nginx/logs \
+  config/nginx/www \
+  config/netdata/config \
+  config/netdata/lib \
+  config/netdata/cache \
+  backups
 ```
 
-Temperature color coding:
-- **Green** - Cool: < 45°C
-- **Yellow** - Normal: 45-59°C
-- **Orange** - Warm: 60-74°C
-- **Red** - Hot: 75-84°C
-- **Bold Red** - Critical: >= 85°C
-
-## Environment Configuration
-
-The `.env` file is created automatically during installation. Key variables:
+6) Start the stack:
 
 ```bash
-# User/Group IDs (auto-detected by install)
-PUID=1000
-PGID=1000
-
-# Timezone
-TZ=America/Sao_Paulo
-
-# Permissions
-UMASK=002
-
-# Storage paths
-DOWNLOADS_PATH=/media/STORAGE/downloads
-CONFIG_BASE_PATH=./config
-
-# FlareSolverr Settings
-FLARESOLVERR_LOG_LEVEL=info
-FLARESOLVERR_LOG_HTML=false
-FLARESOLVERR_CAPTCHA_SOLVER=none
-FLARESOLVERR_PORT=8191
-
-# Resource limits (CPU cores / memory)
-JELLYFIN_CPU_LIMIT=4.0
-JELLYFIN_MEM_LIMIT=4g
-QBITTORRENT_CPU_LIMIT=2.0
-QBITTORRENT_MEM_LIMIT=2g
-RADARR_CPU_LIMIT=1.0
-RADARR_MEM_LIMIT=1g
-SONARR_CPU_LIMIT=1.0
-SONARR_MEM_LIMIT=1g
-PROWLARR_CPU_LIMIT=0.5
-PROWLARR_MEM_LIMIT=512m
-BAZARR_CPU_LIMIT=0.5
-BAZARR_MEM_LIMIT=512m
-SEERR_CPU_LIMIT=0.5
-SEERR_MEM_LIMIT=512m
-FLARESOLVERR_CPU_LIMIT=1.0
-FLARESOLVERR_MEM_LIMIT=1g
-NGINX_CPU_LIMIT=0.5
-NGINX_MEM_LIMIT=256m
-PROFILARR_CPU_LIMIT=0.5
-PROFILARR_MEM_LIMIT=512m
-
-# GPU groups (auto-detected by install)
-GPU_VIDEO_GROUP=44
-GPU_RENDER_GROUP=105
+docker compose pull
+docker compose up -d
+docker compose ps
 ```
 
-Run `id` to verify your user and group IDs.
-
-## Service Configuration
-
-### 1. qBittorrent (Port 5080)
-- Default user: `admin`
-- Password: Check `docker logs qbittorrent`
-- Change password immediately in Tools > Options > WebUI
-- Set download path to `/downloads`
-
-### 2. Prowlarr (Port 9696) - Configure First
-- Add your preferred indexers
-- Connect Radarr and Sonarr in Settings > Apps
-- Indexers sync automatically to connected apps
-
-### 3. Radarr (Port 7878) & Sonarr (Port 8989)
-- Add qBittorrent as download client:
-  - Host: `qbittorrent`, Port: `5080`
-  - Category: `movies` (Radarr) or `tv` (Sonarr)
-- Set root folders:
-  - Radarr: `/downloads/movies`
-  - Sonarr: `/downloads/tv`
-
-### 4. Bazarr (Port 6767)
-- Connect to Radarr and Sonarr
-- Configure subtitle providers
-- Set preferred languages
-
-### 5. Jellyfin (Port 8096)
-- Complete the setup wizard
-- Add media libraries:
-  - Movies: `/downloads/movies`
-  - TV Shows: `/downloads/tv`
-- Enable hardware acceleration in Settings > Playback
-
-### 6. Seerr (Port 5055)
-- Connect to Jellyfin at `http://jellyfin:8096`
-- Link Radarr and Sonarr
-- Configure user permissions
-
-## Advanced Configuration
-
-### Hardware Acceleration (Jellyfin)
-
-Jellyfin uses the `lscr.io/linuxserver/jellyfin:latest` image with V4L2M2M hardware acceleration (Hantro VPU via kernel mainline). The following devices are mapped:
-
-- `/dev/dri` - GPU Mali (rendering)
-- `/dev/video1` - Hantro VPU Decoder (rk3568-vpu-dec)
-- `/dev/video2` - Hantro VPU Encoder (rk3568-vepu-enc)
-
-Additional performance optimizations:
-- `/tmp/jellyfin-cache` - Mounted volume for cache
-- `/tmp/jellyfin-transcode` - tmpfs for fast transcoding
+7) Follow startup logs (first boot may take a few minutes):
 
 ```bash
-# Verify devices
+docker compose logs -f --tail=100
+```
+
+## Daily Operations
+
+Check service status:
+
+```bash
+docker compose ps
+```
+
+Follow logs for all services:
+
+```bash
+docker compose logs -f --tail=100
+```
+
+Follow logs for one service:
+
+```bash
+docker compose logs -f --tail=100 radarr
+```
+
+Stop and start:
+
+```bash
+docker compose stop
+docker compose start
+```
+
+Restart all or one service:
+
+```bash
+docker compose restart
+docker compose restart jellyfin
+```
+
+Validate compose configuration:
+
+```bash
+docker compose config
+```
+
+## Updating the Stack
+
+Manual update flow:
+
+```bash
+docker compose pull
+docker compose up -d --force-recreate
+docker compose ps
+```
+
+Note: Watchtower is also enabled to auto-update labeled containers.
+
+## Backup and Restore (Essential)
+
+List volumes marked for backup:
+
+```bash
+docker volume ls --filter label=backup.enable=true
+```
+
+Example backup for `radarr-config` volume:
+
+```bash
+mkdir -p backups
+docker run --rm \
+  -v radarr-config:/data:ro \
+  -v "$(pwd)/backups:/backup" \
+  alpine \
+  sh -c 'tar czf /backup/radarr-config-$(date +%Y%m%d-%H%M%S).tar.gz -C /data .'
+```
+
+Example restore for `radarr-config`:
+
+```bash
+docker compose stop radarr
+
+docker run --rm \
+  -v radarr-config:/data \
+  -v "$(pwd)/backups:/backup:ro" \
+  alpine \
+  sh -c 'rm -rf /data/* && tar xzf /backup/radarr-config-YYYYMMDD-HHMMSS.tar.gz -C /data'
+
+docker compose start radarr
+```
+
+## Essential Troubleshooting
+
+Containers not starting:
+
+```bash
+docker compose ps
+docker compose logs --tail=200
+```
+
+Healthcheck still pending during first boot:
+
+```bash
+docker compose ps
+docker inspect bazarr --format '{{json .State.Health}}'
+```
+
+Permission issues on config paths:
+
+```bash
+id
+sudo chown -R $(id -u):$(id -g) config
+```
+
+Jellyfin hardware acceleration issues:
+
+```bash
 ls -la /dev/dri
 ls -la /dev/video*
-
-# Check groups
-getent group video   # Usually 44
-getent group render  # Usually 105
-
-# Monitor GPU usage
-./stack.sh hw gpu
-./stack.sh hw gpu-monitor
+getent group video
+getent group render
+docker compose logs --tail=200 jellyfin
 ```
 
-> **Note:** For Rockchip systems with full GPU support, you can use `nyanmisaka/jellyfin:latest-rockchip` image (commented alternative in docker-compose.yml).
-
-### Automatic Updates (Watchtower)
-
-Watchtower is included and configured to automatically update containers daily at 4 AM. It only updates containers with the `com.centurylinklabs.watchtower.enable=true` label.
-
-Configuration:
-- `WATCHTOWER_CLEANUP=true` - Removes old images after update
-- `WATCHTOWER_LABEL_ENABLE=true` - Only updates labeled containers
-- `WATCHTOWER_SCHEDULE=0 0 4 * * *` - Runs daily at 4 AM
-- Watchtower itself is excluded from auto-updates
-
-### Nginx Reverse Proxy
-
-Nginx provides a unified access point for all services. Configuration: `config/nginx/nginx.conf`
-
-**Server Names:** `localhost`, `blackbeard.local`
-
-**Available Routes:**
-
-| Path | Service | Notes |
-|------|---------|-------|
-| `/` | Jellyfin | Redirects to `/jellyfin/` |
-| `/jellyfin/` | Jellyfin | Media server (port 8096) |
-| `/seerr` | Seerr | Request manager (port 5055) |
-| `/radarr` | Radarr | Movie manager (port 7878) |
-| `/sonarr` | Sonarr | TV manager (port 8989) |
-| `/bazarr/` | Bazarr | Subtitle manager (port 6767) |
-| `/prowlarr` | Prowlarr | Indexer manager (port 9696) |
-| `/qbittorrent/` | qBittorrent | Torrent client (port 5080) |
-
-**Important:** Configure each application's base URL before using the reverse proxy:
-- Radarr/Sonarr/Prowlarr/Bazarr: Settings > General > URL Base (e.g., `/radarr`)
-- qBittorrent: Use default WebUI (`Use alternative WebUI` disabled), unless `DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest` is enabled and configured correctly.
-
-`/bazarr` is automatically redirected to `/bazarr/`.
-
-### USB Automount (Optional)
-
-A udev rule is provided to automatically mount USB storage devices.
+External network error:
 
 ```bash
-# Install udev rule
-sudo cp udev/99-usb-automount.rules /etc/udev/rules.d/
-
-# Reload rules
-sudo udevadm control --reload-rules
-sudo udevadm trigger
+docker network ls | grep jollyroger
+docker network create jollyroger || true
+docker compose up -d
 ```
 
-**Note:** Ensure `DOWNLOADS_PATH` in `.env` points to the mounted USB device path (e.g., `/media/STORAGE/downloads`).
-
-## Backup and Restore
-
-### Automated Backup
+Port already in use:
 
 ```bash
-# Backup all volumes with backup label
-./stack.sh backup all
-
-# List available backups
-./stack.sh backup list
-
-# Restore a specific volume
-./stack.sh backup restore backups/20260114_120000/radarr-config.tar.gz
+sudo lsof -i :80
+sudo lsof -i :443
 ```
 
-Backups are stored in `backups/YYYYMMDD_HHMMSS/`
+## Nginx Routes
 
-### Manual Backup
+Nginx config file: `config/nginx/nginx.conf`.
 
-```bash
-./stack.sh stack stop
-tar -czf media-stack-backup-$(date +%Y%m%d).tar.gz config/ docker-compose.yml .env
-./stack.sh stack start
-```
+Available routes:
 
-## Troubleshooting
+- `/jellyfin/`
+- `/seerr`
+- `/radarr`
+- `/sonarr`
+- `/bazarr/`
+- `/prowlarr`
+- `/qbittorrent/`
 
-### Check Installation Status
-```bash
-./stack.sh stack check
-```
+After first login, configure base URLs in apps that run behind subpaths (Radarr/Sonarr/Prowlarr/Bazarr).
 
-### Containers not starting
-```bash
-./stack.sh stack health
-./stack.sh stack logs <service>
-```
+## Basic Security Checklist
 
-### Permission issues
-```bash
-id  # Check PUID/PGID match .env
-sudo chown -R $PUID:$PGID ./config
-```
-
-### Jellyfin not detecting GPU
-```bash
-./stack.sh hw gpu                    # Check GPU status
-ls -la /dev/dri
-sudo usermod -aG video,render $USER
-```
-
-### Service not healthy
-```bash
-docker inspect <container> | grep -A 20 Health
-```
-
-### Nginx returns 502 for Bazarr
-```bash
-# Check Bazarr and Nginx states
-docker compose ps bazarr nginx
-
-# Confirm Bazarr is responding directly
-curl -i http://localhost:6767/ping
-
-# Follow recent logs for connection errors
-docker compose logs --tail=200 bazarr nginx
-```
-
-### Monitor System Resources
-```bash
-./stack.sh stack resources           # Container CPU/memory
-./stack.sh hw temp                   # System temperature
-./stack.sh docker disk               # Docker disk usage
-```
-
-## Security Checklist
-
-- Change qBittorrent default password
-- Configure VPN for torrents
-- Use HTTPS with nginx (Let's Encrypt)
-- Regular configuration backups
-- Keep containers updated (Watchtower handles this)
-- Configure firewall appropriately
-
-## Directory Structure
-
-```
-blackbeard/
-├── docker-compose.yml          # Service definitions
-├── .env                        # Environment configuration
-├── .env.example                # Configuration template
-├── stack.sh                    # Unified management CLI
-├── config/                     # Service configurations
-│   ├── nginx/
-│   │   ├── nginx.conf
-│   │   └── logs/
-│   ├── qbittorrent/
-│   ├── radarr/
-│   ├── sonarr/
-│   ├── prowlarr/
-│   ├── bazarr/
-│   ├── jellyfin/
-│   ├── jellyseerr/
-│   └── profilarr/
-├── backups/                    # Volume backups
-├── catalogs/                   # Prowlarr catalogs
-└── udev/                       # USB automount rules
-```
-
-## Service Startup Order
-
-```
-1. qbittorrent + flaresolverr (base services)
-2. prowlarr (depends on flaresolverr)
-3. radarr + sonarr (depend on qbittorrent + prowlarr)
-4. bazarr (depends on radarr + sonarr + flaresolverr)
-5. jellyfin (independent)
-6. seerr + profilarr (depend on radarr + sonarr + jellyfin)
-7. nginx (depends on all services)
-```
-
-## Version History
-
-### Version 2.1.0
-- Unified CLI script `stack.sh` replacing individual scripts
-- Added `stack install` for automated first-time setup
-- Added `stack check` for installation verification
-- Hardware monitoring commands (`hw temp`, `hw gpu`)
-- Improved backup/restore workflow
-- Docker cleanup utilities
-
-### Version 2.0.0
-- Health checks for all services
-- Dependency conditions with `service_healthy`
-- Configurable CPU and memory limits
-- Centralized `.env` configuration
-- Rockchip GPU support for Jellyfin
-- Watchtower for automatic updates
-
----
-
-**Version:** 2.1.0
-**Status:** Production Ready
+- Change qBittorrent default password immediately.
+- Restrict exposed ports to trusted networks.
+- Configure HTTPS in Nginx for external access.
+- Keep periodic backups of `config/`, `.env`, and `backups/`.
+- Review Watchtower auto-update behavior regularly.
