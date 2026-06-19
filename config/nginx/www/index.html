@@ -173,12 +173,10 @@
 
         .toggle-icon {
             display: inline-block;
-            transition: transform var(--transition);
+            min-width: 1ch;
             line-height: 1;
-        }
-
-        .panel.collapsed .toggle-icon {
-            transform: rotate(180deg);
+            font-size: 1.1rem;
+            font-weight: 700;
         }
 
         /* ── Service list ── */
@@ -289,7 +287,7 @@
     <!-- Floating service menu -->
     <nav class="panel" id="panel" aria-label="Services">
         <button class="toggle-btn" id="toggleBtn" aria-label="Toggle menu" title="Toggle menu">
-            <span class="toggle-icon" aria-hidden="true">◀</span>
+            <span class="toggle-icon" id="toggleIcon" aria-hidden="true">-</span>
         </button>
         <div class="panel-divider"></div>
         <ul class="service-list" id="serviceList"></ul>
@@ -299,13 +297,13 @@
         (function () {
             // ── Service definitions ──────────────────────────────────────────────
             var SERVICES = [
-                { name: 'Jellyfin', port: 8096, color: '#00a4dc' },
-                { name: 'Jellyseerr', port: 5055, color: '#4f46e5' },
-                { name: 'Sonarr', port: 8989, color: '#35c5f4' },
-                { name: 'Radarr', port: 7878, color: '#ffc230' },
-                { name: 'qBittorrent', port: 5080, color: '#2f9ed3' },
-                { name: 'Prowlarr', port: 9696, color: '#ff7043' },
-                { name: 'Bazarr', port: 6767, color: '#43a047' },
+                { name: 'Jellyfin', port: 8096, color: '#00a4dc', icon: 'assets/jellyfin.png' },
+                { name: 'Seerr', port: 5055, color: '#4f46e5', icon: 'assets/seerr.png' },
+                { name: 'Sonarr', port: 8989, color: '#35c5f4', icon: 'assets/sonarr.png' },
+                { name: 'Radarr', port: 7878, color: '#ffc230', icon: 'assets/radarr.png' },
+                { name: 'qBittorrent', port: 5080, color: '#2f9ed3', icon: 'assets/qbittorrent.png' },
+                { name: 'Prowlarr', port: 9696, color: '#ff7043', icon: 'assets/prowlarr.png' },
+                { name: 'Bazarr', port: 6767, color: '#43a047', icon: 'assets/bazarr.png' },
             ];
 
             var host = window.location.hostname;
@@ -325,13 +323,13 @@
                 a.target = '_blank';
                 a.rel = 'noopener noreferrer';
 
-                // Icon — try favicon first
+                // Icon — prefer the local asset for this service
                 var img = document.createElement('img');
                 img.className = 'svc-icon';
                 img.alt = svc.name + ' icon';
                 img.width = 30;
                 img.height = 30;
-                img.src = url + '/favicon.ico';
+                img.src = svc.icon;
                 img.onerror = function () {
                     // Swap to a colored initial avatar
                     var av = document.createElement('span');
@@ -355,15 +353,18 @@
             // ── Collapse / expand ────────────────────────────────────────────────
             var panel = document.getElementById('panel');
             var btn = document.getElementById('toggleBtn');
+            var toggleIcon = document.getElementById('toggleIcon');
             var STORAGE_KEY = 'bb-menu-collapsed';
 
             function applyState(collapsed) {
                 if (collapsed) {
                     panel.classList.add('collapsed');
                     btn.setAttribute('aria-expanded', 'false');
+                    toggleIcon.textContent = '+';
                 } else {
                     panel.classList.remove('collapsed');
                     btn.setAttribute('aria-expanded', 'true');
+                    toggleIcon.textContent = '-';
                 }
             }
 
