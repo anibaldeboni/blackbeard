@@ -148,7 +148,7 @@
         .toggle-btn {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: flex-start;
             width: 100%;
             height: 36px;
             background: none;
@@ -156,7 +156,7 @@
             cursor: pointer;
             color: var(--accent);
             font-size: 14px;
-            padding: 0 12px;
+            padding: 0 18px;
             margin-bottom: 4px;
             transition: color 0.2s;
         }
@@ -172,11 +172,10 @@
         }
 
         .toggle-icon {
-            display: inline-block;
-            min-width: 1ch;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             line-height: 1;
-            font-size: 1.1rem;
-            font-weight: 700;
         }
 
         /* ── Service list ── */
@@ -287,7 +286,7 @@
     <!-- Floating service menu -->
     <nav class="panel" id="panel" aria-label="Services">
         <button class="toggle-btn" id="toggleBtn" aria-label="Toggle menu" title="Toggle menu">
-            <span class="toggle-icon" id="toggleIcon" aria-hidden="true">-</span>
+            <span class="toggle-icon" id="toggleIcon" aria-hidden="true"></span>
         </button>
         <div class="panel-divider"></div>
         <ul class="service-list" id="serviceList"></ul>
@@ -360,11 +359,13 @@
                 if (collapsed) {
                     panel.classList.add('collapsed');
                     btn.setAttribute('aria-expanded', 'false');
-                    toggleIcon.textContent = '+';
+                    // Ícone de expandir (Hamburger)
+                    toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
                 } else {
                     panel.classList.remove('collapsed');
                     btn.setAttribute('aria-expanded', 'true');
-                    toggleIcon.textContent = '-';
+                    // Ícone de recolher (X)
+                    toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
                 }
             }
 
